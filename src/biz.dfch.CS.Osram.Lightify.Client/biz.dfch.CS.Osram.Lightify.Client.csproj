@@ -182,6 +182,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDto.cs" />
+    <Compile Include="ClientGetDevice.cs" />
+    <Compile Include="ClientGetDevices.cs" />
     <Compile Include="CodeContracts.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Constants.cs" />

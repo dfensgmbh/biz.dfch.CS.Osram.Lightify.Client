@@ -126,15 +126,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return default(Group);
         }
 
-        public List<Device> GetDevices()
-        {
-            return default(List<Device>);
-        }
-
-        public Device GetDevice()
-        {
-            return default(Device);
-        }
     }
 }
 
