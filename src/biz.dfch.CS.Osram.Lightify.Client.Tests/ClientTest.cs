@@ -25,7 +25,7 @@ using Telerik.JustMock;
 namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 {
     [TestClass]
-    public class LoginTest
+    public class ClientTest
     {
         [TestMethod]
         [ExpectContractFailure(MessagePattern = "Precondition.+userName")]
