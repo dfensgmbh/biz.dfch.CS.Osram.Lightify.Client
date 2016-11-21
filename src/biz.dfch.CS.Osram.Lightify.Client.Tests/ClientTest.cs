@@ -106,5 +106,28 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             var result = sut.GetToken(userName, password, serialNumber);
             Assert.IsFalse(string.IsNullOrWhiteSpace(result));
         }
+
+        [TestMethod]
+        public void GetGroupsSucceeds()
+        {
+            var groupID = 1;
+            var name = "Arbitrary Name";
+
+            var input = new GroupResponse()
+            {
+
+            };
+            var json = input.SerializeObject();
+
+            var client = Mock.Create<RestCallExecutor>();
+            Mock.Arrange(() => client.Invoke(Arg.IsAny<HttpMethod>(), Arg.IsAny<string>(), Arg.IsAny<IDictionary<string, string>>(), Arg.IsAny<string>()))
+                .IgnoreInstance()
+                .Returns(json);
+            var uri = new Uri("https://eu.lightify-api.org.example.com/lightify/services/");
+            var sut = new Client(uri);
+
+            var result = sut.GetGroups();
+            Assert.IsFalse(null == result);
+        }
     }
 }

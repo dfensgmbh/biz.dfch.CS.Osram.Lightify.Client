@@ -184,11 +184,14 @@
     <Compile Include="BaseDto.cs" />
     <Compile Include="ClientGetDevice.cs" />
     <Compile Include="ClientGetDevices.cs" />
+    <Compile Include="ClientGetGroups.cs" />
     <Compile Include="CodeContracts.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="Model\Device.cs" />
-    <Compile Include="Model\Group.cs" />
+    <Compile Include="Model\GroupResponse.cs" />
+    <Compile Include="Model\Scenes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SessionRequest.cs" />
     <Compile Include="Model\SessionResponse.cs" />
