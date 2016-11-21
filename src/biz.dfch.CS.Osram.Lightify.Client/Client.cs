@@ -69,6 +69,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 Password = password,
                 SerialNumber = serialNumber
             };
+
             var body = sut.SerializeObject();
             var client = new RestCallExecutor();
             var requestUri = new Uri(baseUri, Constants.ApiSuffixes.SESSION);
@@ -80,6 +81,13 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             SessionResponse = response;
 
             return response.SecurityToken;
+        }
+
+        private T Invoke<T>(HttpMethod httpMethod, Uri requestUriSuffix, Dictionary<string, string> headers, string body) 
+            where T : BaseDto
+        {
+            var result = Invoke(httpMethod, requestUriSuffix, headers, body);
+            return BaseDto.DeserializeObject<T>(result);
         }
 
         private string Invoke(HttpMethod httpMethod, Uri requestUriSuffix, Dictionary<string, string> headers, string body)
