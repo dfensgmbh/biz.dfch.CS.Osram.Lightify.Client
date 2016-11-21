@@ -22,7 +22,7 @@ using System.Collections.Generic;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
-    public class Client
+    public partial class Client
     {
         private Uri BaseUri { get; set; }
 
