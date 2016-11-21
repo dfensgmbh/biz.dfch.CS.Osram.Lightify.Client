@@ -83,14 +83,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return response.SecurityToken;
         }
 
-        internal T Invoke<T>(HttpMethod httpMethod, Uri requestUriSuffix, Dictionary<string, string> headers, string body) 
+        internal T Invoke<T>(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers, string body) 
             where T : BaseDto
         {
             var result = Invoke(httpMethod, requestUriSuffix, headers, body);
             return BaseDto.DeserializeObject<T>(result);
         }
 
-        internal string Invoke(HttpMethod httpMethod, Uri requestUriSuffix, Dictionary<string, string> headers, string body)
+        internal string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers, string body)
         {
             // DFTODO - assert baseUri not null
             // DFTODO - assert username and password present
