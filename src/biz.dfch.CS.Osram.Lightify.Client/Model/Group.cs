@@ -22,7 +22,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace biz.dfch.CS.Osram.Lightify.Client
+namespace biz.dfch.CS.Osram.Lightify.Client.Model
 {
     public class Group
     {
