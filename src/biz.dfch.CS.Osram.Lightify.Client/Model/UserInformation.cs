@@ -21,18 +21,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace biz.dfch.CS.Osram.Lightify.Client
+namespace biz.dfch.CS.Osram.Lightify.Client.Model
 {
-    public class Constants
+    public class UserInformation
     {
-        public class ApiSuffixes
-        {
-            public const string SESSION = "/session";
-        }
+        public string UserId { get; set; }
 
-        public class HttpHeaders
-        {
-            public const string AUTHORIZATION = "Authorization";
-        }
+        public string Username { get; set; }
+
+        public string Password { get; set; }
+
+        public string SerialNumber { get; set; }
+
+        public string SecurityToken { get; set; }
     }
 }

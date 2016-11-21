@@ -26,12 +26,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
     {
         private Uri BaseUri { get; set; }
 
-        internal SessionResponse SessionResponse { get; set; }
-
-        public Client()
-        {
-            // N/A
-        }
+        internal UserInformation UserInformation { get; set; }
 
         public Client(Uri baseUri)
         {
@@ -41,22 +36,22 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             this.BaseUri = baseUri;
         }
 
-        public string GetToken(string userName, string password, string serialNumber)
+        public string GetToken(string username, string password, string serialNumber)
         {
-            Contract.Requires(!string.IsNullOrWhiteSpace(userName));
+            Contract.Requires(!string.IsNullOrWhiteSpace(username));
             Contract.Requires(!string.IsNullOrWhiteSpace(password));
             Contract.Requires(!string.IsNullOrWhiteSpace(serialNumber));
             Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
 
-            var result = GetToken(BaseUri, userName, password, serialNumber);
+            var result = GetToken(BaseUri, username, password, serialNumber);
             return result;
         }
 
-        public string GetToken(Uri baseUri, string userName, string password, string serialNumber)
+        public string GetToken(Uri baseUri, string username, string password, string serialNumber)
         {
             Contract.Requires(null != baseUri);
             Contract.Requires(baseUri.IsAbsoluteUri);
-            Contract.Requires(!string.IsNullOrWhiteSpace(userName));
+            Contract.Requires(!string.IsNullOrWhiteSpace(username));
             Contract.Requires(!string.IsNullOrWhiteSpace(password));
             Contract.Requires(!string.IsNullOrWhiteSpace(serialNumber));
             Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
@@ -65,7 +60,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             var sut = new SessionRequest
             {
-                Username = userName,
+                Username = username,
                 Password = password,
                 SerialNumber = serialNumber
             };
@@ -78,7 +73,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             var response = BaseDto.DeserializeObject<SessionResponse>(result);
 
-            SessionResponse = response;
+            UserInformation = new UserInformation()
+            {
+                UserId = response.UserId,
+                Username = username,
+                Password = password,
+                SerialNumber = serialNumber,
+                SecurityToken = response.SecurityToken
+            };
 
             return response.SecurityToken;
         }
@@ -92,14 +94,26 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         internal string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers, string body)
         {
-            // DFTODO - assert baseUri not null
-            // DFTODO - assert username and password present
-            // DFTODO - token refresh
+            Contract.Requires(!string.IsNullOrWhiteSpace(requestUriSuffix));
+            Contract.Requires(null == headers || (null != headers && !headers.ContainsKey(Constants.HttpHeaders.AUTHORIZATION)));
+            Contract.Requires(null != UserInformation);
+            
+            // DFTODO - token refresh, if necessary
 
-            // DFTODO - set authorization header
-            // DFTODO - create restcallexecutor
-            // DFTODO - call invoke method of rest call executor
-            return default(string);
+            if (null == headers)
+            {
+                headers = new Dictionary<string, string>();
+            }
+
+            headers.Add(Constants.HttpHeaders.AUTHORIZATION, UserInformation.SecurityToken);
+
+            var client = new RestCallExecutor();
+            var requestUri = new Uri(BaseUri, requestUriSuffix);
+
+            var result = client.Invoke(httpMethod, requestUri.AbsoluteUri, headers, body ?? "");
+            Contract.Assert(!string.IsNullOrWhiteSpace(result));
+
+            return result;
         }
 
         /// <summary>
