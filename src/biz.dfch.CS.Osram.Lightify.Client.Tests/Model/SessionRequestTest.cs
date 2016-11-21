@@ -33,6 +33,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests.Model
             };
             var result = sut.SerializeObject();
             Assert.IsTrue(result.Contains("\"username\""));
+            Assert.IsTrue(result.Contains("\"password\""));
+            Assert.IsTrue(result.Contains("\"serialNumber\""));
         }
     }
 }
