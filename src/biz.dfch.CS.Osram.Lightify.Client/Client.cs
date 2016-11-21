@@ -18,6 +18,7 @@ using System;
 using System.Diagnostics.Contracts;
 using biz.dfch.CS.Osram.Lightify.Client.Model;
 using biz.dfch.CS.Web.Utilities.Rest;
+using System.Collections.Generic;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
@@ -81,7 +82,47 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return response.SecurityToken;
         }
 
+        private string Invoke(HttpMethod httpMethod, Uri requestUriSuffix, Dictionary<string, string> headers, string body)
+        {
+            // DFTODO - assert baseUri not null
+            // DFTODO - assert username and password present
+            // DFTODO - token refresh
 
+            // DFTODO - set authorization header
+            // DFTODO - create restcallexecutor
+            // DFTODO - call invoke method of rest call executor
+            return default(string);
+        }
+
+        /// <summary>
+        /// Turns the lights of the specified group on
+        /// </summary>
+        public void TurnLightGroupOn()
+        {
+            
+            // DFTODO - set authorization header
+        }
+
+        /// <summary>
+        /// Turns the lights of the specified group off
+        /// </summary>
+        public void TurnLightGroupOff()
+        {
+            // DFTODO - set authorization header
+        }
+
+        public List<Device> GetDevices()
+        {
+            // DFTODO - set authorization header
+
+            return default(List<Device>);
+        }
+
+        public Device GetDevice()
+        {
+            // DFTODO - set authorization header
+            return default(Device);
+        }
     }
 }
 
