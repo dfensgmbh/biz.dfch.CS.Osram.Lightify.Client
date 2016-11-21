@@ -20,6 +20,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using biz.dfch.CS.Osram.Lightify.Client.Model;
 using biz.dfch.CS.Web.Utilities.Rest;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
