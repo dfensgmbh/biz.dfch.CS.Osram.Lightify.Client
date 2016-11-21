@@ -182,13 +182,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDto.cs" />
+    <Compile Include="ClientGetApiVersion.cs" />
     <Compile Include="ClientGetDevice.cs" />
     <Compile Include="ClientGetDevices.cs" />
+    <Compile Include="ClientGetGateway.cs" />
     <Compile Include="ClientGetGroups.cs" />
     <Compile Include="CodeContracts.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Model\ApiVersion.cs" />
     <Compile Include="Model\Device.cs" />
+    <Compile Include="Model\Gateway.cs" />
     <Compile Include="Model\Group.cs" />
     <Compile Include="Model\UserInformation.cs" />
     <Compile Include="Model\GroupResponse.cs" />
