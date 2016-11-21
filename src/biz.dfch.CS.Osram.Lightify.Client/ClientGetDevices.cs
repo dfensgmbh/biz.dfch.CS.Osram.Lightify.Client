@@ -28,6 +28,27 @@ namespace biz.dfch.CS.Osram.Lightify.Client
     {
         public ICollection<Device> GetDevices()
         {
+            Contract.Requires(null != SessionResponse && !string.IsNullOrWhiteSpace(SessionResponse.SecurityToken), Constants.Messages.CLIENT_NOT_LOGGED_IN);
+            Contract.Ensures(null != Contract.Result<ICollection<Device>>());
+
+            return default(ICollection<Device>);
+        }
+
+        public ICollection<Device> GetDevices(Group group)
+        {
+            Contract.Requires(null != SessionResponse && !string.IsNullOrWhiteSpace(SessionResponse.SecurityToken), Constants.Messages.CLIENT_NOT_LOGGED_IN);
+            Contract.Requires(null != group);
+            Contract.Ensures(null != Contract.Result<ICollection<Device>>());
+
+            return default(ICollection<Device>);
+        }
+
+        public ICollection<Device> GetDevices(long groupId)
+        {
+            Contract.Requires(null != SessionResponse && !string.IsNullOrWhiteSpace(SessionResponse.SecurityToken), Constants.Messages.CLIENT_NOT_LOGGED_IN);
+            Contract.Requires(0 < groupId);
+            Contract.Ensures(null != Contract.Result<ICollection<Device>>());
+
             return default(ICollection<Device>);
         }
     }

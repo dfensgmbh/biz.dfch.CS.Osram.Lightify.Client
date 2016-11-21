@@ -20,10 +20,82 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+ using Newtonsoft.Json;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Model
 {
-    public class Device
+    /*
+     * 
     {
+    "deviceId": 1,
+    "deviceType": "LIGHT",
+    "manufacturer": "OSRAM",
+    "modelName": "Classic A60 RGBW",
+    "name": "A60RGBW 01",
+    "groupList": [ 1 ],
+    "bmpClusters": ["onOff", "Level", "Color", "Temperature" ],
+    "online": 1,
+    "on": 1,
+    "brightnessLevel": 1,
+    "hue": 0, "saturation": 0,
+    "temperature": 2702,
+    "firmwareVersion": "01020412",
+    "color": "FFFFFF"
+    },
+     *
+     */
+
+    public class Device : BaseDto
+    {
+        [JsonProperty("deviceId")]
+        public long DeviceId { get; set; }
+
+        [JsonProperty("deviceType")]
+        public string DeviceType { get; set; }
+
+        [JsonProperty("manufacturer")]
+        public string Manufacturer { get; set; }
+
+        [JsonProperty("modelName")]
+        public string ModelName { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("groupList")]
+        public IList<long> GroupList { get; set; }
+
+        [JsonProperty("bmpClusters")]
+        public IList<string> BmpClusters { get; set; }
+
+        [JsonProperty("online")]
+        public long Online { get; set; }
+
+        [JsonProperty("on")]
+        public long On { get; set; }
+
+        [JsonProperty("brightnessLevel")]
+        public long BrightnessLevel { get; set; }
+
+        [JsonProperty("hue")]
+        public long Hue { get; set; }
+
+        [JsonProperty("saturation")]
+        public long Saturation { get; set; }
+
+        [JsonProperty("temperature")]
+        public long Temperature { get; set; }
+
+        [JsonProperty("firmwareVersion")]
+        public string FirmwareVersion { get; set; }
+
+        [JsonProperty("color")]
+        public string Color { get; set; }
+
+        public Device()
+        {
+            GroupList = new List<long>();
+            BmpClusters = new List<string>();
+        }
     }
 }
