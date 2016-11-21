@@ -130,14 +130,9 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
         }
 
-        public List<Group> GetGroups()
+        public Model.GroupResponse GetGroup()
         {
-            return default(List<Group>);
-        }
-
-        public Group GetGroup()
-        {
-            return default(Group);
+            return default(Model.GroupResponse);
         }
 
     }

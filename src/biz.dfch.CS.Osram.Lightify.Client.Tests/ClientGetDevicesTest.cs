@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,17 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace biz.dfch.CS.Osram.Lightify.Client.Model
+namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 {
-    public class Group
+    [TestClass]
+    public class ClientGetDevicesTest
     {
+        public static readonly Uri Uri = new Uri("https://eu.lightify-api.org.example.com/lightify/services/");
+
+        [TestMethod]
+        public void GetDevicesSucceeds()
+        {
+            var sut = new Client(Uri);
+
+            var result = sut.GetDevices();
+            Assert.IsNotNull(result);
+        }
     }
 }
