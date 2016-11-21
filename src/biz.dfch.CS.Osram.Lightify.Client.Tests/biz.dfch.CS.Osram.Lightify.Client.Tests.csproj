@@ -201,7 +201,7 @@
     <Compile Include="CodeContractsTest.cs" />
     <Compile Include="Model\SessionResponseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LoginTest.cs" />
+    <Compile Include="ClientTest.cs" />
     <Compile Include="Model\SessionRequestTest.cs" />
   </ItemGroup>
   <ItemGroup>
