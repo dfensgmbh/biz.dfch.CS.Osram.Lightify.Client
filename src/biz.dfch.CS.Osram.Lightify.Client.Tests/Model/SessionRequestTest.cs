@@ -32,6 +32,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests.Model
                 Password = "ArbitraryPassword",
                 SerialNumber = "ArbitrarySerialNumber"
             };
+
             var result = sut.SerializeObject();
             Assert.IsTrue(result.Contains("\"username\""));
             Assert.IsTrue(result.Contains("\"password\""));
