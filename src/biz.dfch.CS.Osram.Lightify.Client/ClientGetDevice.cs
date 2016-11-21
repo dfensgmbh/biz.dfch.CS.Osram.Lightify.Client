@@ -29,7 +29,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client
     {
         public Device GetDevice(long id)
         {
-            Contract.Requires(null != SessionResponse && !string.IsNullOrWhiteSpace(SessionResponse.SecurityToken), Constants.Messages.CLIENT_NOT_LOGGED_IN);
             Contract.Requires(0 < id);
 
             var requestUri = string.Format("device?idx={0}", id);
@@ -51,7 +50,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public Device GetDevice(string name)
         {
-            Contract.Requires(null != SessionResponse && !string.IsNullOrWhiteSpace(SessionResponse.SecurityToken), Constants.Messages.CLIENT_NOT_LOGGED_IN);
             Contract.Requires(!string.IsNullOrWhiteSpace(name));
 
             return GetDevice(name, false);
@@ -59,7 +57,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public Device GetDevice(string name, bool ignoreCase)
         {
-            Contract.Requires(null != SessionResponse && !string.IsNullOrWhiteSpace(SessionResponse.SecurityToken), Constants.Messages.CLIENT_NOT_LOGGED_IN);
             Contract.Requires(!string.IsNullOrWhiteSpace(name));
 
             var devices = GetDevices();

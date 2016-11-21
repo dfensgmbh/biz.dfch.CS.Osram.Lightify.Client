@@ -31,8 +31,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public List<Group> GetGroups()
         {
-            var uri = new Uri(BaseUri, Constants.ApiSuffixes.GROUPS);
-            var result = Invoke(HttpMethod.Get, uri, null, null);
+            var result = Invoke(HttpMethod.Get, Constants.ApiSuffixes.GROUPS, null, null);
             Contract.Assert(!string.IsNullOrWhiteSpace(result));
 
             var response = BaseDto.DeserializeObject<ICollection<GroupResponse>>(result);
