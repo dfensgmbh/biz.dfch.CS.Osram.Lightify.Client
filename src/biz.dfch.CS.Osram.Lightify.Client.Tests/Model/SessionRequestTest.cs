@@ -16,6 +16,7 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using biz.dfch.CS.Osram.Lightify.Client.Model;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Tests.Model
 {
