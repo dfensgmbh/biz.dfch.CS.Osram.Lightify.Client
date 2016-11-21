@@ -1,7 +1,7 @@
-﻿using System;
+﻿using biz.dfch.CS.Osram.Lightify.Client.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace biz.dfch.CS.Osram.Lightify.Client.Model.Tests
+namespace biz.dfch.CS.Osram.Lightify.Client.Tests.Model
 {
     [TestClass]
     public class SessionRequestTest

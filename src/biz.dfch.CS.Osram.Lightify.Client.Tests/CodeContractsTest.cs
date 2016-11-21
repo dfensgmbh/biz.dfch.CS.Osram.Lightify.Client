@@ -1,5 +1,4 @@
-﻿using System;
-using biz.dfch.CS.Testing.Attributes;
+﻿using biz.dfch.CS.Testing.Attributes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Tests

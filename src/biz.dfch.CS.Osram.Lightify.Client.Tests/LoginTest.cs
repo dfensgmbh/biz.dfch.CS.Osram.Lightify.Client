@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using biz.dfch.CS.Osram.Lightify.Client.Model;
 using biz.dfch.CS.Testing.Attributes;
+using biz.dfch.CS.Web.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Telerik.JustMock;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 {
@@ -63,6 +67,18 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetTokenSucceeds()
         {
+            var userId = "arbitraryUser";
+            var securityToken = "validSecurityToken";
+            var input = new SessionResponse
+            {
+                UserId = userId,
+                SecurityToken = securityToken
+            };
+            var json = input.SerializeObject();
+            
+            var client = Mock.Create<RestCallExecutor>();
+            Mock.Arrange(() => client.Invoke(Arg.IsAny<HttpMethod>(), Arg.IsAny<string>(), Arg.IsAny<IDictionary<string, string>>(), Arg.IsAny<string>()))
+                .Returns(json);
             var uri = new Uri("https://eu.lightify-api.org.example.com/lightify/services/session");
             var sut = new Login(uri);
 
