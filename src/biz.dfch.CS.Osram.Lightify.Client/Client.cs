@@ -99,8 +99,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// </summary>
         public void TurnLightGroupOn()
         {
-            
-            // DFTODO - set authorization header
         }
 
         /// <summary>
@@ -108,19 +106,25 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// </summary>
         public void TurnLightGroupOff()
         {
-            // DFTODO - set authorization header
+        }
+
+        public List<Group> GetGroups()
+        {
+            return default(List<Group>);
+        }
+
+        public Group GetGroup()
+        {
+            return default(Group);
         }
 
         public List<Device> GetDevices()
         {
-            // DFTODO - set authorization header
-
             return default(List<Device>);
         }
 
         public Device GetDevice()
         {
-            // DFTODO - set authorization header
             return default(Device);
         }
     }
