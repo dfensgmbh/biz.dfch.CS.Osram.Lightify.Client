@@ -183,7 +183,8 @@
   <ItemGroup>
     <Compile Include="BaseDto.cs" />
     <Compile Include="CodeContracts.cs" />
-    <Compile Include="Login.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SessionRequest.cs" />
     <Compile Include="Model\SessionResponse.cs" />

@@ -21,23 +21,23 @@ using biz.dfch.CS.Web.Utilities.Rest;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
-    public class Login
+    public class Client
     {
-        private Uri Uri { get; set; }
+        private Uri BaseUri { get; set; }
 
         internal SessionResponse SessionResponse { get; set; }
 
-        public Login()
+        public Client()
         {
             // N/A
         }
 
-        public Login(Uri uri)
+        public Client(Uri baseUri)
         {
-            Contract.Requires(null != uri);
-            Contract.Requires(uri.IsAbsoluteUri);
+            Contract.Requires(null != baseUri);
+            Contract.Requires(baseUri.IsAbsoluteUri);
 
-            this.Uri = uri;
+            this.BaseUri = baseUri;
         }
 
         public string GetToken(string userName, string password, string serialNumber)
@@ -47,18 +47,20 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             Contract.Requires(!string.IsNullOrWhiteSpace(serialNumber));
             Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
 
-            var result = GetToken(Uri, userName, password, serialNumber);
+            var result = GetToken(BaseUri, userName, password, serialNumber);
             return result;
         }
 
-        public string GetToken(Uri uri, string userName, string password, string serialNumber)
+        public string GetToken(Uri baseUri, string userName, string password, string serialNumber)
         {
-            Contract.Requires(null != uri);
-            Contract.Requires(uri.IsAbsoluteUri);
+            Contract.Requires(null != baseUri);
+            Contract.Requires(baseUri.IsAbsoluteUri);
             Contract.Requires(!string.IsNullOrWhiteSpace(userName));
             Contract.Requires(!string.IsNullOrWhiteSpace(password));
             Contract.Requires(!string.IsNullOrWhiteSpace(serialNumber));
             Contract.Ensures(!string.IsNullOrWhiteSpace(Contract.Result<string>()));
+
+            this.BaseUri = baseUri;
 
             var sut = new SessionRequest
             {
@@ -68,7 +70,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             };
             var body = sut.SerializeObject();
             var client = new RestCallExecutor();
-            var result = client.Invoke(HttpMethod.Post, uri.AbsoluteUri, null, body);
+            var requestUri = new Uri(baseUri, Constants.ApiSuffixes.SESSION);
+            var result = client.Invoke(HttpMethod.Post, requestUri.AbsoluteUri, null, body);
             Contract.Assert(!string.IsNullOrWhiteSpace(result));
 
             var response = BaseDto.DeserializeObject<SessionResponse>(result);
@@ -77,6 +80,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             return response.SecurityToken;
         }
+
+
     }
 }
 

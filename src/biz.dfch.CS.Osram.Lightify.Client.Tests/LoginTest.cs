@@ -31,7 +31,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [ExpectContractFailure(MessagePattern = "Precondition.+userName")]
         public void GetTokenWithNullUsernameThrowsContractException()
         {
-            var sut = new Login();
+            var sut = new Client();
 
             var userName = default(string);
             var password = default(string);
@@ -44,7 +44,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [ExpectContractFailure(MessagePattern = "Precondition.+password")]
         public void GetTokenWithNullPasswordThrowsContractException()
         {
-            var sut = new Login();
+            var sut = new Client();
 
             var userName = "ArbitraryUser";
             var password = default(string);
@@ -57,7 +57,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [ExpectContractFailure(MessagePattern = "Precondition.+serialNumber")]
         public void GetTokenWithNullSerialNumberThrowsContractException()
         {
-            var sut = new Login();
+            var sut = new Client();
 
             var userName = "ArbitraryUser";
             var password = "ArbitraryPassword";
@@ -70,7 +70,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [ExpectContractFailure(MessagePattern = "Precondition.+uri")]
         public void GetTokenWithEmptyUriThrowsContractException()
         {
-            var sut = new Login();
+            var sut = new Client();
 
             var userName = "ArbitraryUser";
             var password = "ArbitraryPassword";
@@ -94,23 +94,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             
             var client = Mock.Create<RestCallExecutor>();
             Mock.Arrange(() => client.Invoke(Arg.IsAny<HttpMethod>(), Arg.IsAny<string>(), Arg.IsAny<IDictionary<string, string>>(), Arg.IsAny<string>()))
+                .IgnoreInstance()
                 .Returns(json);
-            var uri = new Uri("https://eu.lightify-api.org.example.com/lightify/services/session");
-            var sut = new Login(uri);
-
-            var userName = "ArbitraryUser";
-            var password = "ArbitraryPassword";
-            var serialNumber = "ArbitrarySerialNumber";
-
-            var result = sut.GetToken(userName, password, serialNumber);
-            Assert.IsFalse(string.IsNullOrWhiteSpace(result));
-        }
-
-        [TestMethod]
-        public void GetTokenSucceeds2()
-        {
-            var uri = new Uri("https://eu.lightify-api.org/lightify/services/session");
-            var sut = new Login(uri);
+            var uri = new Uri("https://eu.lightify-api.org.example.com/lightify/services/");
+            var sut = new Client(uri);
 
             var userName = "ArbitraryUser";
             var password = "ArbitraryPassword";
