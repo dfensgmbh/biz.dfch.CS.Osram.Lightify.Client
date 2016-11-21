@@ -67,7 +67,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         }
 
         [TestMethod]
-        [ExpectContractFailure(MessagePattern = "Precondition.+uri")]
+        [ExpectContractFailure(MessagePattern = "Precondition.+baseUri")]
         public void GetTokenWithEmptyUriThrowsContractException()
         {
             var sut = new Client();
