@@ -16,11 +16,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using biz.dfch.CS.Osram.Lightify.Client.Model;
 using biz.dfch.CS.Testing.Attributes;
 using biz.dfch.CS.Web.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Telerik.JustMock;
+using HttpMethod = biz.dfch.CS.Web.Utilities.Rest.HttpMethod;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 {
@@ -277,6 +279,49 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
             // Act
             var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, queryParams, null, null);
+
+            // Assert
+            Assert.IsNotNull(responseAsString);
+            Assert.IsFalse(string.IsNullOrWhiteSpace(responseAsString));
+
+            Mock.Assert(restCallExecutor);
+        }
+
+        [TestMethod]
+        public void InvokeRefreshesTokenIfCallToApiFails()
+        {
+            // Arrange
+            var client = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
+
+            client.UserInformation = new UserInformation()
+            {
+                UserId = TestConstants.USER_ID,
+                Username = TestConstants.USERNAME,
+                Password = TestConstants.PASSWORD,
+                SerialNumber = TestConstants.SERIAL_NUMBER,
+                SecurityToken = TestConstants.SECURITY_TOKEN
+            };
+
+            var restCallExecutor = Mock.Create<RestCallExecutor>();
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICES)), _authorizationHeaders, Arg.AnyString))
+                .IgnoreInstance()
+                .Throws<HttpRequestException>()
+                .InSequence()
+                .OccursOnce();
+
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Post, Arg.Matches<string>(s => s.EndsWith(Constants.ApiOperation.SESSION)), Arg.IsAny<Dictionary<string, string>>(), Arg.AnyString))
+                .IgnoreInstance()
+                .Returns(_sessionResponse.SerializeObject())
+                .OccursOnce();
+
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICES)), _authorizationHeaders, Arg.AnyString))
+                .IgnoreInstance()
+                .Returns(new Device().SerializeObject)
+                .InSequence()
+                .OccursOnce();
+
+            // Act
+            var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiOperation.DEVICES, null, null);
 
             // Assert
             Assert.IsNotNull(responseAsString);

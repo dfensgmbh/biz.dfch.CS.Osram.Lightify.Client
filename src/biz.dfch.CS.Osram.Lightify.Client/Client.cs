@@ -131,7 +131,18 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             var restCallExecutor = new RestCallExecutor();
             var requestUri = new Uri(BaseUri, requestUriSuffix);
 
-            var result = restCallExecutor.Invoke(httpMethod, requestUri.AbsoluteUri, headers, body ?? "");
+            string result;
+            try
+            {
+                result = restCallExecutor.Invoke(httpMethod, requestUri.AbsoluteUri, headers, body ?? "");
+            }
+            catch (System.Net.Http.HttpRequestException ex)
+            {
+                var sessionResponse = GetToken(UserInformation.Username, UserInformation.Password, UserInformation.SerialNumber);
+                Contract.Assert(null != sessionResponse);
+                result = restCallExecutor.Invoke(httpMethod, requestUri.AbsoluteUri, headers, body ?? "");
+            }
+
             Contract.Assert(!string.IsNullOrWhiteSpace(result));
 
             return result;
