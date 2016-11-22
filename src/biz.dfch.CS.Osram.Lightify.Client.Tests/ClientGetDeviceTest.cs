@@ -82,12 +82,42 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         }
 
         [TestMethod]
+        public void GetDeviceByIdWithInconsistentResponseReturnsNull()
+        {
+            var id = 42;
+
+            var response = new Device
+            {
+                DeviceId = 1,
+                Name = "arbitaryName"
+            };
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICE)), Arg.IsAny<Dictionary<string, string>>(), Arg.IsAny<string>()))
+                .IgnoreInstance()
+                .Returns(response.SerializeObject())
+                .OccursOnce();
+
+            var result = Sut.GetDevice(id);
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
         public void GetDeviceByNameSucceeds()
         {
             var name = "arbitaryName";
-            var sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
-            var result = sut.GetDevice(name);
+            var response = new Device
+            {
+                DeviceId = 1,
+                Name = name
+            };
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICES)), Arg.IsAny<Dictionary<string, string>>(), Arg.IsAny<string>()))
+                .IgnoreInstance()
+                .Returns(response.SerializeObject())
+                .OccursOnce();
+
+            var result = Sut.GetDevice(name);
         }
 
         [TestMethod]
@@ -96,7 +126,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             var name = "CaseSensitiveName";
             var sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
-            var result = sut.GetDevice(name);
+            var result = Sut.GetDevice(name);
         }
     }
 }
