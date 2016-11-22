@@ -198,7 +198,6 @@
     <Compile Include="Model\Gateway.cs" />
     <Compile Include="Model\Group.cs" />
     <Compile Include="Model\UserInformation.cs" />
-    <Compile Include="Model\GroupResponse.cs" />
     <Compile Include="Model\Scenes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SessionRequest.cs" />

@@ -326,7 +326,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             var groupID = 1;
             var name = "Arbitrary Name";
 
-            var input = new GroupResponse()
+            var input = new Group()
             {
 
             };

@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Model
 {
-    public class Scenes
+    public class Scenes : BaseDto
     {
     }
 }
