@@ -85,5 +85,57 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual(responseOperation.ReturnCode, result.ReturnCode);
         }
+
+        public void SetLevelGroupSucceeds()
+        {
+            var groupId = 1L;
+            var group = new Group
+            {
+                GroupId = groupId,
+                Name = "group1"
+            };
+            var responseOperation = new OperationResponse
+            {
+                ReturnCode = 0
+            };
+
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
+                .IgnoreInstance()
+                .Returns(responseOperation.SerializeObject)
+                .OccursOnce();
+
+            var result = Sut.SetLevelGroup(group, 0.1);
+
+            Mock.Assert(RestCallExecutor);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(responseOperation.ReturnCode, result.ReturnCode);
+        }
+
+        public void SetLevelGroupWithTimeSucceeds()
+        {
+            var groupId = 1L;
+            var group = new Group
+            {
+                GroupId = groupId,
+                Name = "group1"
+            };
+            var responseOperation = new OperationResponse
+            {
+                ReturnCode = 0
+            };
+
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
+                .IgnoreInstance()
+                .Returns(responseOperation.SerializeObject)
+                .OccursOnce();
+
+            var result = Sut.SetLevelGroup(group, 0.1);
+
+            Mock.Assert(RestCallExecutor);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(responseOperation.ReturnCode, result.ReturnCode);
+        }
     }
 }
