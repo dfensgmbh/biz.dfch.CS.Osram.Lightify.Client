@@ -77,18 +77,13 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupLevel(Group group, float level)
         {
-            var queryParams = new Dictionary<string, object>
-            {
-                {Constants.QueryParameter.IDX, group.GroupId},
-                {Constants.QueryParameter.LEVEL, level}
-            };
-
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
-            return 0 == result.ReturnCode;
+            return SetGroupLevel(group.GroupId, level);
         }
 
         public bool SetGroupLevel(long groupId, float level)
         {
+            Contract.Requires(1.000 > level && 0 < level);
+
             var queryParams = new Dictionary<string, object>
             {
                 {Constants.QueryParameter.IDX, groupId},
@@ -101,19 +96,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupLevel(Group group, float level, long time)
         {
-            var queryParams = new Dictionary<string, object>
-            {
-                {Constants.QueryParameter.IDX, group.GroupId},
-                {Constants.QueryParameter.LEVEL, level},
-                {Constants.QueryParameter.TIME, time}
-            };
-
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
-            return 0 == result.ReturnCode;
+            return SetGroupLevel(group.GroupId, level, time);
         }
 
         public bool SetGroupLevel(long groupId, float level, long time)
         {
+            Contract.Requires(1.000 > level && 0 < level);
+            Contract.Requires(1000 > time && 0 <= time);
+
             var queryParams = new Dictionary<string, object>
             {
                 {Constants.QueryParameter.IDX, groupId},
@@ -144,7 +134,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
             Contract.Requires(0 < groupId);
             Contract.Requires(0 < saturation && 1.000 > saturation);
-            Contract.Requires(1000 > time);
+            Contract.Requires(1000 > time && 0 <= time);
 
             var queryParams = new Dictionary<string, object>
             {
