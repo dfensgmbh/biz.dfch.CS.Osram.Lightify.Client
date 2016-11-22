@@ -127,6 +127,13 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return 0 == result.ReturnCode;
         }
 
+        public bool SetGroupSaturation(Group group, float saturation)
+        {
+            Contract.Requires(null != group);
+
+            return SetGroupSaturation(group.GroupId, saturation);
+        }
+
         public bool SetGroupSaturation(long groupId, float saturation)
         {
             Contract.Requires(0 < groupId);
@@ -140,6 +147,13 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
             return result.ReturnCode == 0;
+        }
+
+        public bool SetGroupSaturation(Group group, float saturation, long time)
+        {
+            Contract.Requires(null != group);
+
+            return SetGroupSaturation(group.GroupId, saturation, time);
         }
 
         public bool SetGroupSaturation(long groupId, float saturation, long time)
@@ -158,18 +172,9 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return result.ReturnCode == 0;
         }
 
-        public bool SetGroupSaturation(Group group, float saturation)
+        public bool SetGroupCTemp(Group group, long ctemp)
         {
-            Contract.Requires(null != group);
-
-            return SetGroupSaturation(group.GroupId, saturation);
-        }
-
-        public bool SetGroupSaturation(Group group, float saturation, long time)
-        {
-            Contract.Requires(null != group);
-
-            return SetGroupSaturation(group.GroupId, saturation, time);
+            return SetGroupCTemp(group.GroupId, ctemp);
         }
 
         public bool SetGroupCTemp(long groupId, long ctemp)
@@ -187,6 +192,11 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return result.ReturnCode == 0;
         }
 
+        public bool SetGroupCTemp(Group group, long ctemp, long time)
+        {
+            return SetGroupCTemp(group.GroupId, ctemp, time);
+        }
+
         public bool SetGroupCTemp(long groupId, long ctemp, long time)
         {
             Contract.Requires(0 < groupId);
@@ -202,16 +212,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
             return result.ReturnCode == 0;
-        }
-
-        public bool SetGroupCTemp(Group group, long ctemp)
-        {
-            return SetGroupCTemp(group.GroupId, ctemp);
-        }
-
-        public bool SetGroupCTemp(Group group, long ctemp, long time)
-        {
-            return SetGroupCTemp(group.GroupId, ctemp, time);
         }
     }
 }
