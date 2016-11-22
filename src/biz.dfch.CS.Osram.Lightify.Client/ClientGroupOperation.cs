@@ -20,8 +20,8 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
- using biz.dfch.CS.Osram.Lightify.Client.Model;
- using biz.dfch.CS.Web.Utilities.Rest;
+using biz.dfch.CS.Osram.Lightify.Client.Model;
+using biz.dfch.CS.Web.Utilities.Rest;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
@@ -93,14 +93,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             Contract.Requires(0 < groupId);
             Contract.Requires(1.000 >= level && 0 <= level);
 
-            var queryParams = new Dictionary<string, object>
-            {
-                {Constants.QueryParameter.IDX, groupId},
-                {Constants.QueryParameter.LEVEL, level}
-            };
-
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
-            return 0 == result.ReturnCode;
+            return SetGroupLevel(groupId, level, 0);
         }
 
         public bool SetGroupLevel(Group group, float level, long time)
@@ -139,14 +132,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             Contract.Requires(0 < groupId);
             Contract.Requires(0 <= saturation && 1.000 >= saturation);
 
-            var queryParams = new Dictionary<string, object>
-            {
-                {Constants.QueryParameter.IDX, groupId},
-                {Constants.QueryParameter.SATURATION, saturation}
-            };
-
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
-            return result.ReturnCode == 0;
+            return SetGroupSaturation(groupId, saturation, 0);
         }
 
         public bool SetGroupSaturation(Group group, float saturation, long time)
@@ -184,14 +170,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             Contract.Requires(0 < groupId);
             Contract.Requires(1000 <= ctemp && 8000 >= ctemp);
 
-            var queryParams = new Dictionary<string, object>
-            {
-                {Constants.QueryParameter.IDX, groupId},
-                {Constants.QueryParameter.CTEMP, ctemp}
-            };
-
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
-            return result.ReturnCode == 0;
+            return SetGroupCTemp(groupId, ctemp, 0);
         }
 
         public bool SetGroupCTemp(Group group, long ctemp, long time)
@@ -216,6 +195,26 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
             return result.ReturnCode == 0;
+        }
+
+        public bool SetGroupColor(Group group, string hexColor)
+        {
+            return SetGroupColor(group.GroupId, hexColor);
+        }
+
+        public bool SetGroupColor(long groupId, string hexColor)
+        {
+            return false;
+        }
+
+        public bool SetGroupColor(Group group, string hexColor, long time)
+        {
+            return SetGroupColor(group.GroupId, hexColor, time);
+        }
+
+        public bool SetGroupColor(long groupId, string hexColor, long time)
+        {
+            return false;
         }
     }
 }

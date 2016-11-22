@@ -212,5 +212,49 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.IsNotNull(result);
             Assert.IsTrue(result);
         }
+
+        [TestMethod]
+        public void SetGroupColorSucceeds()
+        {
+            var group = new Group
+            {
+                GroupId = TestConstants.GROUP_ID,
+                Name = TestConstants.GROUP_NAME
+            };
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
+                .IgnoreInstance()
+                .Returns(_successOperationResponse.SerializeObject)
+                .OccursOnce();
+
+            string hexColor = "FF0000";
+            var result = Sut.SetGroupColor(group, hexColor);
+
+            Mock.Assert(RestCallExecutor);
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void SetGroupColorWithTimeSucceeds()
+        {
+            var group = new Group
+            {
+                GroupId = TestConstants.GROUP_ID,
+                Name = TestConstants.GROUP_NAME
+            };
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
+                .IgnoreInstance()
+                .Returns(_successOperationResponse.SerializeObject)
+                .OccursOnce();
+
+            string hexColor = "FF0000";
+            var result = Sut.SetGroupColor(group, hexColor, 100);
+
+            Mock.Assert(RestCallExecutor);
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result);
+        }
     }
 }
