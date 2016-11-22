@@ -27,6 +27,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Model
     public class ApiVersion : BaseDto
     {
         [JsonProperty("apiversion")]
-        public string Version { get; set; }
+        public Version Version { get; set; }
     }
 }
