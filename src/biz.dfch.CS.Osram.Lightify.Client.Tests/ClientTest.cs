@@ -27,6 +27,17 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
     [TestClass]
     public class ClientTest
     {
+        private SessionResponse _sessionResponse = new SessionResponse
+            {
+                UserId = TestConstants.USER_ID,
+                SecurityToken = TestConstants.SECURITY_TOKEN
+            };
+
+        private Dictionary<string, string> _authorizationHeaders = new Dictionary<string, string>()
+            {
+                {Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
+            };
+
         [TestMethod]
         [ExpectContractFailure(MessagePattern = "Precondition.+username")]
         public void GetTokenWithNullUsernameThrowsContractException()
@@ -82,17 +93,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void GetTokenSucceeds()
         {
             // Arrange
-            var input = new SessionResponse
-            {
-                UserId = TestConstants.USER_ID,
-                SecurityToken = TestConstants.SECURITY_TOKEN
-            };
-            var json = input.SerializeObject();
-            
             var restCallExecutor = Mock.Create<RestCallExecutor>();
             Mock.Arrange(() => restCallExecutor.Invoke(Arg.IsAny<HttpMethod>(), Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.SESSION)), Arg.IsAny<IDictionary<string, string>>(), Arg.AnyString))
                 .IgnoreInstance()
-                .Returns(json)
+                .Returns(_sessionResponse.SerializeObject())
                 .OccursOnce();
 
             var sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
@@ -110,17 +114,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void GetTokenSetsUserInformation()
         {
             // Arrange
-            var input = new SessionResponse
-            {
-                UserId = TestConstants.USER_ID,
-                SecurityToken = TestConstants.SECURITY_TOKEN
-            };
-            var json = input.SerializeObject();
-
             var restCallExecutor = Mock.Create<RestCallExecutor>();
             Mock.Arrange(() => restCallExecutor.Invoke(Arg.IsAny<HttpMethod>(), Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.SESSION)), Arg.IsAny<IDictionary<string, string>>(), Arg.AnyString))
                 .IgnoreInstance()
-                .Returns(json)
+                .Returns(_sessionResponse.SerializeObject())
                 .OccursOnce();
 
             var sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
@@ -148,7 +145,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             var client = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
             // Act
-            client.Invoke(HttpMethod.Get, null, null, "");
+            client.Invoke(HttpMethod.Get, null, null, null);
 
             // Assert
         }
@@ -161,7 +158,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             var client = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
             // Act
-            client.Invoke(HttpMethod.Get, "", null, "");
+            client.Invoke(HttpMethod.Get, "", null, null);
 
             // Assert
         }
@@ -182,13 +179,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 SecurityToken = TestConstants.SECURITY_TOKEN
             };
 
-            var headers = new Dictionary<string, string>()
-            {
-                {Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
-            };
-
             // Act
-            client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, headers, "");
+            client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, _authorizationHeaders, null);
 
             // Assert
         }
@@ -208,22 +200,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 SecurityToken = TestConstants.SECURITY_TOKEN
             };
 
-            var input = new SessionResponse
-            {
-                UserId = TestConstants.USER_ID,
-                SecurityToken = TestConstants.SECURITY_TOKEN
-            };
-            var json = input.SerializeObject();
-
-            var headers = new Dictionary<string, string>()
-            {
-                {Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
-            };
-
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.SESSION)), headers, ""))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.SESSION)), _authorizationHeaders, ""))
                 .IgnoreInstance()
-                .Returns(json)
+                .Returns(_sessionResponse.SerializeObject())
                 .OccursOnce();
 
             // Act
@@ -251,26 +231,52 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 SecurityToken = TestConstants.SECURITY_TOKEN
             };
 
-            var input = new SessionResponse
-            {
-                UserId = TestConstants.USER_ID,
-                SecurityToken = TestConstants.SECURITY_TOKEN
-            };
-            var json = input.SerializeObject();
-
-            var headers = new Dictionary<string, string>()
-            {
-                {Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
-            };
-
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.SESSION)), headers, Arg.AnyString))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.SESSION)), _authorizationHeaders, Arg.AnyString))
                 .IgnoreInstance()
-                .Returns(json)
+                .Returns(_sessionResponse.SerializeObject())
                 .OccursOnce();
 
             // Act
-            var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, null, "");
+            var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, null, null);
+
+            // Assert
+            Assert.IsNotNull(responseAsString);
+            Assert.IsFalse(string.IsNullOrWhiteSpace(responseAsString));
+
+            Mock.Assert(restCallExecutor);
+        }
+
+        [TestMethod]
+        public void InvokeWithQueryParametersCallsRestExecutorWithUriContainingQueryParameters()
+        {
+            // Arrange
+            var client = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
+
+            client.UserInformation = new UserInformation()
+            {
+                UserId = TestConstants.USER_ID,
+                Username = TestConstants.USERNAME,
+                Password = TestConstants.PASSWORD,
+                SerialNumber = TestConstants.SERIAL_NUMBER,
+                SecurityToken = TestConstants.SECURITY_TOKEN
+            };
+
+            var queryParams = new Dictionary<string, object>()
+            {
+                {Constants.QueryParameter.IDX, TestConstants.IDX_VALUE},
+                {Constants.QueryParameter.ON_OFF, true}
+            };
+
+            var restCallExecutor = Mock.Create<RestCallExecutor>();
+            var queryString = string.Format("?{0}={1}&{2}={3}", Constants.QueryParameter.IDX, TestConstants.IDX_VALUE, Constants.QueryParameter.ON_OFF, true.ToString().ToLower());
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.EndsWith(queryString)), _authorizationHeaders, Arg.AnyString))
+                .IgnoreInstance()
+                .Returns(_sessionResponse.SerializeObject())
+                .OccursOnce();
+
+            // Act
+            var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, queryParams, null, null);
 
             // Assert
             Assert.IsNotNull(responseAsString);
@@ -294,26 +300,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 SecurityToken = TestConstants.SECURITY_TOKEN
             };
 
-            var input = new SessionResponse
-            {
-                UserId = TestConstants.USER_ID,
-                SecurityToken = TestConstants.SECURITY_TOKEN
-            };
-            var json = input.SerializeObject();
-
-            var headers = new Dictionary<string, string>()
-            {
-                {Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
-            };
-
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.SESSION)), headers, Arg.AnyString))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.SESSION)), _authorizationHeaders, Arg.AnyString))
                 .IgnoreInstance()
-                .Returns(json)
+                .Returns(_sessionResponse.SerializeObject())
                 .OccursOnce();
 
             // Act
-            var sessionResponse = client.Invoke<SessionResponse>(HttpMethod.Get, Constants.ApiOperation.SESSION, null, "");
+            var sessionResponse = client.Invoke<SessionResponse>(HttpMethod.Get, Constants.ApiOperation.SESSION, null, null);
 
             // Assert
             Assert.IsNotNull(sessionResponse);
