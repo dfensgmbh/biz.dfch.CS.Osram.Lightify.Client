@@ -180,6 +180,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             // Assert
         }
 
+        [TestMethod]
         public void SetDeviceLevelSucceeds()
         {
             // Arrange
@@ -203,6 +204,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Mock.Assert(RestCallExecutor);
         }
 
+        [TestMethod]
         public void SetDeviceLevelWithTimeSucceeds()
         {
             // Arrange
@@ -225,5 +227,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
             Mock.Assert(RestCallExecutor);
         }
+
+
     }
 }

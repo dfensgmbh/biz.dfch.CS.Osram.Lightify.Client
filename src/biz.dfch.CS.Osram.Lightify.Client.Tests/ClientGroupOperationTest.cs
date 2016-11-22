@@ -87,6 +87,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.IsTrue(result);
         }
 
+        [TestMethod]
         public void SetGroupLevelSucceeds()
         {
             var group = new Group
@@ -107,6 +108,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.IsTrue(result);
         }
 
+        [TestMethod]
         public void SetGroupLevelWithTimeSucceeds()
         {
             var group = new Group
@@ -127,6 +129,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.IsTrue(result);
         }
 
+        [TestMethod]
         public void SetGroupSaturationSucceeds()
         {
             var group = new Group
@@ -147,6 +150,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.IsTrue(result);
         }
 
+        [TestMethod]
         public void SetGroupSaturationWithTimeSucceeds()
         {
             var group = new Group
@@ -167,6 +171,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.IsTrue(result);
         }
 
+        [TestMethod]
         public void SetGroupCTempSucceeds()
         {
             var group = new Group
@@ -187,6 +192,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.IsTrue(result);
         }
 
+        [TestMethod]
         public void SetGroupCTempWithTimeSucceeds()
         {
             var group = new Group
