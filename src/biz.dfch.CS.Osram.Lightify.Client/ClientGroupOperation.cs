@@ -71,5 +71,51 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
         }
+
+        public OperationResponse SetLevelGroup(Group group, double level)
+        {
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, group.GroupId},
+                {Constants.QueryParameter.LEVEL, level}
+            };
+
+            return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+        }
+
+        public OperationResponse SetLevelGroup(long groupId, double level)
+        {
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, groupId},
+                {Constants.QueryParameter.LEVEL, level}
+            };
+
+            return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+        }
+
+        public OperationResponse SetLevelGroup(Group group, double level, long time)
+        {
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, group.GroupId},
+                {Constants.QueryParameter.LEVEL, level},
+                {Constants.QueryParameter.TIME, time}
+            };
+
+            return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+        }
+
+        public OperationResponse SetLevelGroup(long groupId, double level, long time)
+        {
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, groupId},
+                {Constants.QueryParameter.LEVEL, level},
+                {Constants.QueryParameter.TIME, time}
+            };
+
+            return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+        }
     }
 }
