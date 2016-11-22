@@ -101,8 +101,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             if (null != queryParams)
             {
-                var filterString = UriHelper.CreateQueryString(queryParams);
-                requestUriSuffix = string.Format("{0}?{1}", requestUriSuffix, filterString);
+                var queryString = UriHelper.CreateQueryString(queryParams);
+                requestUriSuffix = string.Format("{0}?{1}", requestUriSuffix, queryString);
             }
 
             return Invoke(httpMethod, requestUriSuffix, headers, body);

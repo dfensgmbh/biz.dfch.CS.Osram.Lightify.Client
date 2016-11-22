@@ -265,7 +265,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             var queryParams = new Dictionary<string, object>()
             {
                 {Constants.QueryParameter.IDX, TestConstants.IDX_VALUE},
-                {Constants.QueryParameter.ON_OFF, true}
+                {Constants.QueryParameter.ON_OFF, "true"}
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
