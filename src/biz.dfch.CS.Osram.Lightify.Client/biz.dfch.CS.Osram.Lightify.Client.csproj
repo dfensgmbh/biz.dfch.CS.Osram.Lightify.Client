@@ -197,6 +197,7 @@
     <Compile Include="CodeContracts.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="General\UriHelper.cs" />
     <Compile Include="Model\ApiVersion.cs" />
     <Compile Include="Model\Device.cs" />
     <Compile Include="Model\Gateway.cs" />

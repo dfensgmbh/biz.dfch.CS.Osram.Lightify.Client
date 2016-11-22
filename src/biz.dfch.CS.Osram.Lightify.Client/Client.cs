@@ -19,6 +19,7 @@ using System.Diagnostics.Contracts;
 using biz.dfch.CS.Osram.Lightify.Client.Model;
 using biz.dfch.CS.Web.Utilities.Rest;
 using System.Collections.Generic;
+using biz.dfch.CS.Osram.Lightify.Client.General;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
@@ -96,9 +97,15 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         internal string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers,
             Dictionary<string, object> queryParams, string body)
         {
-            // DFTODO - @rufer7 - implement and write tests
-            // DFTODO - @rufer7 - query parameter extraction
-            return default(string);
+            Contract.Requires(!string.IsNullOrWhiteSpace(requestUriSuffix));
+
+            if (null != queryParams)
+            {
+                var filterString = UriHelper.CreateQueryString(queryParams);
+                requestUriSuffix = string.Format("{0}?{1}", requestUriSuffix, filterString);
+            }
+
+            return Invoke(httpMethod, requestUriSuffix, headers, body);
         }
 
         internal T Invoke<T>(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers, string body) 

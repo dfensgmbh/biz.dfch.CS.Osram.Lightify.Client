@@ -21,19 +21,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace biz.dfch.CS.Osram.Lightify.Client.Tests
+namespace biz.dfch.CS.Osram.Lightify.Client.General
 {
-    public class TestConstants
+    public static class UriHelper
     {
-        public static readonly Uri OSRAM_LIGHTIFY_BASE_URI = new Uri("https://eu.lightify-api.org.example.com/lightify/services/");
+        public const string QUERY_SEPARATOR = "&";
 
-        public const string USER_ID = "arbitrary.user@example.com";
-        public const string SECURITY_TOKEN = "ValidSecurityToken";
-        public const string USERNAME = "ArbitraryUser";
-        public const string PASSWORD = "ArbitraryPassword";
-        public const string SERIAL_NUMBER = "OSR42424242";
-        public const string GATEWAY_VERSION = "1.1.3.22-1.2.0.68";
-        
-        public const long IDX_VALUE = 42;
+        public static string CreateQueryString(IDictionary<string, object> queryParameters)
+        {
+            Contract.Requires(null != queryParameters);
+            Contract.Requires(queryParameters.Count > 0);
+
+            var queryString = string.Empty;
+            var separator = string.Empty;
+
+            foreach (var parameter in queryParameters)
+            {
+                queryString += string.Format("{0}{1}={2}", separator, parameter.Key, parameter.Value);
+                separator = QUERY_SEPARATOR;
+            }
+
+            return queryString;
+        }
     }
 }

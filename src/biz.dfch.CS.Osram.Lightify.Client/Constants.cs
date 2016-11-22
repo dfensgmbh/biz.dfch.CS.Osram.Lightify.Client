@@ -38,7 +38,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         public static class QueryParameter
         {
             public const string IDX = "idx";
-            public const string TURN_ON_OFF = "onoff";
+            public const string ON_OFF = "onoff";
         }
 
         public static class Messages
