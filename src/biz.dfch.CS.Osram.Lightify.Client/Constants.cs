@@ -44,6 +44,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         public static class Messages
         {
             public const string CLIENT_NOT_LOGGED_IN = "Perform getToken before using the client.";
+            public const string GET_DEVICES_DUPLICATE_NAME_ERROR = "Duplicate name found.";
         }
 
         public class HttpHeaders

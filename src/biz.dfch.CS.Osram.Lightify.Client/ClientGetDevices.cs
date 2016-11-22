@@ -18,9 +18,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using biz.dfch.CS.Osram.Lightify.Client.Model;
+using HttpMethod = biz.dfch.CS.Web.Utilities.Rest.HttpMethod;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
@@ -30,7 +32,19 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
             Contract.Ensures(null != Contract.Result<ICollection<Device>>());
 
-            return default(ICollection<Device>);
+            var requestUri = string.Format("{0}", Constants.ApiOperation.DEVICES);
+
+            try
+            {
+                var json = Invoke(HttpMethod.Get, requestUri, null, null);
+                var result = BaseDto.DeserializeObject<List<Device>>(json);
+                
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return default(ICollection<Device>);
+            }
         }
 
         public ICollection<Device> GetDevices(Group group)
@@ -38,7 +52,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             Contract.Requires(null != group);
             Contract.Ensures(null != Contract.Result<ICollection<Device>>());
 
-            return default(ICollection<Device>);
+            return GetDevices(group.GroupId);
         }
 
         public ICollection<Device> GetDevices(long groupId)
@@ -46,7 +60,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             Contract.Requires(0 < groupId);
             Contract.Ensures(null != Contract.Result<ICollection<Device>>());
 
-            return default(ICollection<Device>);
+            var results = GetDevices();
+            var matchingDevices = results.Where(e => e.GroupList.Contains(groupId));
+
+            return matchingDevices.ToList();
         }
     }
 }

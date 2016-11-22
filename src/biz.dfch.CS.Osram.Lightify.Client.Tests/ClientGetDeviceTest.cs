@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using biz.dfch.CS.Osram.Lightify.Client.Model;
 using biz.dfch.CS.Testing.Attributes;
 using biz.dfch.CS.Web.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using Telerik.JustMock;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Tests
@@ -106,27 +102,120 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         {
             var name = "arbitaryName";
 
-            var response = new Device
+            var devices = new List<Device>
             {
-                DeviceId = 1,
-                Name = name
+                new Device
+                {
+                    DeviceId = 1,
+                    Name = name
+                }
+                ,
+                new Device
+                {
+                    DeviceId = 2,
+                    Name = "otherName"
+                }
             };
 
             Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICES)), Arg.IsAny<Dictionary<string, string>>(), Arg.IsAny<string>()))
                 .IgnoreInstance()
-                .Returns(response.SerializeObject())
+                .Returns(JsonConvert.SerializeObject(devices))
                 .OccursOnce();
 
             var result = Sut.GetDevice(name);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(devices[0].DeviceId, result.DeviceId);
+            Assert.AreEqual(devices[0].Name, result.Name);
         }
 
         [TestMethod]
         public void GetDeviceByNameCaseSensitiveSucceeds()
         {
-            var name = "CaseSensitiveName";
-            var sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
+            var name = "arbitaryName";
+
+            var devices = new List<Device>
+            {
+                new Device
+                {
+                    DeviceId = 1,
+                    Name = name.ToUpper()
+                }
+                ,
+                new Device
+                {
+                    DeviceId = 2,
+                    Name = "otherName"
+                }
+            };
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICES)), Arg.IsAny<Dictionary<string, string>>(), Arg.IsAny<string>()))
+                .IgnoreInstance()
+                .Returns(JsonConvert.SerializeObject(devices))
+                .OccursOnce();
+
+            var result = Sut.GetDevice(name, ignoreCase: true);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(devices[0].DeviceId, result.DeviceId);
+            Assert.AreEqual(name.ToUpper(), result.Name);
+        }
+
+        [TestMethod]
+        public void GetDeviceByNameCaseSensitiveReturnsNull()
+        {
+            var name = "arbitaryName";
+
+            var devices = new List<Device>
+            {
+                new Device
+                {
+                    DeviceId = 1,
+                    Name = name.ToUpper()
+                }
+                ,
+                new Device
+                {
+                    DeviceId = 2,
+                    Name = "otherName"
+                }
+            };
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICES)), Arg.IsAny<Dictionary<string, string>>(), Arg.IsAny<string>()))
+                .IgnoreInstance()
+                .Returns(JsonConvert.SerializeObject(devices))
+                .OccursOnce();
+
+            var result = Sut.GetDevice(name, ignoreCase: false);
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "devicesMatchingName.Count")]
+        public void GetDeviceByNameWithDuplicateNameThrowsContractException()
+        {
+            var name = "arbitaryName";
+
+            var devices = new List<Device>
+            {
+                new Device
+                {
+                    DeviceId = 1,
+                    Name = name
+                }
+                ,
+                new Device
+                {
+                    DeviceId = 2,
+                    Name = name
+                }
+            };
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICES)), Arg.IsAny<Dictionary<string, string>>(), Arg.IsAny<string>()))
+                .IgnoreInstance()
+                .Returns(JsonConvert.SerializeObject(devices))
+                .OccursOnce();
 
             var result = Sut.GetDevice(name);
+            Assert.IsNull(result);
         }
     }
 }

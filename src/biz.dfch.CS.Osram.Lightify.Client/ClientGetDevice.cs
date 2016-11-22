@@ -67,7 +67,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             var devicesMatchingName = devices.Where(e => e.Name.Equals(name, comparisonType));
             // ReSharper disable once PossibleMultipleEnumeration
-            Contract.Assert(1 >= devicesMatchingName.Count());
+            Contract.Assert(1 >= devicesMatchingName.Count(), Constants.Messages.GET_DEVICES_DUPLICATE_NAME_ERROR);
 
             // ReSharper disable once PossibleMultipleEnumeration
             return devicesMatchingName.FirstOrDefault();
