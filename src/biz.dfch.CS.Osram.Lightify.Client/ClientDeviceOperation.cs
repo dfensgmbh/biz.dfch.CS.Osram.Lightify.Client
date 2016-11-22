@@ -14,7 +14,9 @@
  * limitations under the License.
  */
  
-﻿using System;
+﻿using biz.dfch.CS.Osram.Lightify.Client.Model;
+using biz.dfch.CS.Web.Utilities.Rest;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -25,5 +27,101 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 {
     public partial class Client
     {
+        /// <summary>
+        /// Turns the specified device on
+        /// </summary>
+        public bool TurnDeviceOn(Device device)
+        {
+            Contract.Requires(null != device);
+
+            return TurnDeviceOn(device.DeviceId);
+        }
+
+        /// <summary>
+        /// Turns the specified device on
+        /// </summary>
+        public bool TurnDeviceOn(long id)
+        {
+            Contract.Requires(0 < id);
+
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, id},
+                {Constants.QueryParameter.ON_OFF, 1}
+            };
+
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.DEVICE_SET, queryParams, null, null);
+            return 0 == result.ReturnCode;
+        }
+
+        /// <summary>
+        /// Turns the specified device off
+        /// </summary>
+        public bool TurnDeviceOff(Device device)
+        {
+            Contract.Requires(null != device);
+
+            return TurnDeviceOff(device.DeviceId);
+        }
+
+        /// <summary>
+        /// Turns the specified device off
+        /// </summary>
+        public bool TurnDeviceOff(long id)
+        {
+            Contract.Requires(0 < id);
+
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, id},
+                {Constants.QueryParameter.ON_OFF, 1}
+            };
+
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.DEVICE_SET, queryParams, null, null);
+            return 0 == result.ReturnCode;
+        }
+
+        public bool SetDeviceLevel(Device device, float level)
+        {
+            Contract.Requires(null != device);
+
+            return SetDeviceLevel(device.DeviceId, level);
+        }
+
+        public bool SetDeviceLevel(long id, float level)
+        {
+            Contract.Requires(0 < id);
+
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, id},
+                {Constants.QueryParameter.LEVEL, level}
+            };
+
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.DEVICE_SET, queryParams, null, null);
+            return 0 == result.ReturnCode;
+        }
+
+        public bool SetDeviceLevel(Device device, float level, long time)
+        {
+            Contract.Requires(null != device);
+
+            return SetDeviceLevel(device.DeviceId, level, time);
+        }
+
+        public bool SetDeviceLevel(long id, float level, long time)
+        {
+            Contract.Requires(0 < id);
+
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, id},
+                {Constants.QueryParameter.LEVEL, level},
+                {Constants.QueryParameter.TIME, time}
+            };
+
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
+            return 0 == result.ReturnCode;
+        }
     }
 }
