@@ -62,7 +62,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Contract.Assert(null != device);
 
             // Act
-            if (device.On == 0)
+            if (device.On == 1)
             {
                 Contract.Assert(Client.TurnDeviceOff(device));
             }
