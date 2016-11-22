@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,32 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-﻿using System;
+
+using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace biz.dfch.CS.Osram.Lightify.Client
+namespace biz.dfch.CS.Osram.Lightify.Client.Model
 {
-    public class Constants
+    public class Scenes
     {
-        public static class ApiSuffixes
-        {
-            public const string SESSION = "/session";
-            public const string GROUPS = "/groups";
-        }
-
-        public static class Messages
-        {
-            public const string CLIENT_NOT_LOGGED_IN = "Perform getToken before using the client.";
-        }
-
-        public class HttpHeaders
-        {
-            public const string AUTHORIZATION = "Authorization";
-        }
     }
 }

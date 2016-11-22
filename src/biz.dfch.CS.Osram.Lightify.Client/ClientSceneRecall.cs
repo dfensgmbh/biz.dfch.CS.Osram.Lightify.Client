@@ -23,22 +23,7 @@ using System.Threading.Tasks;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
-    public class Constants
+    public partial class Client
     {
-        public static class ApiSuffixes
-        {
-            public const string SESSION = "/session";
-            public const string GROUPS = "/groups";
-        }
-
-        public static class Messages
-        {
-            public const string CLIENT_NOT_LOGGED_IN = "Perform getToken before using the client.";
-        }
-
-        public class HttpHeaders
-        {
-            public const string AUTHORIZATION = "Authorization";
-        }
     }
 }

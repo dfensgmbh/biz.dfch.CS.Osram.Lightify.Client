@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,32 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using biz.dfch.CS.Osram.Lightify.Client.Model;
+using biz.dfch.CS.Web.Utilities.Rest;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
-    public class Constants
+    public partial class Client
     {
-        public static class ApiSuffixes
-        {
-            public const string SESSION = "/session";
-            public const string GROUPS = "/groups";
-        }
+        internal ICollection<GroupResponse> Groups { get; set; }
 
-        public static class Messages
+        public List<Group> GetGroups()
         {
-            public const string CLIENT_NOT_LOGGED_IN = "Perform getToken before using the client.";
-        }
+            var result = Invoke(HttpMethod.Get, Constants.ApiSuffixes.GROUPS, null, null);
+            Contract.Assert(!string.IsNullOrWhiteSpace(result));
 
-        public class HttpHeaders
-        {
-            public const string AUTHORIZATION = "Authorization";
+            var response = BaseDto.DeserializeObject<ICollection<GroupResponse>>(result);
+            var groups = new List<Group>();
+            foreach (var group in response)
+            {
+                var test = group.GroupId;
+            }
+            return default(List<Group>);
         }
     }
 }

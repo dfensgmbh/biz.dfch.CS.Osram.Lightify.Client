@@ -21,24 +21,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace biz.dfch.CS.Osram.Lightify.Client
+namespace biz.dfch.CS.Osram.Lightify.Client.Model
 {
-    public class Constants
+    public class UserInformation
     {
-        public static class ApiSuffixes
-        {
-            public const string SESSION = "/session";
-            public const string GROUPS = "/groups";
-        }
+        public string UserId { get; set; }
 
-        public static class Messages
-        {
-            public const string CLIENT_NOT_LOGGED_IN = "Perform getToken before using the client.";
-        }
+        public string Username { get; set; }
 
-        public class HttpHeaders
-        {
-            public const string AUTHORIZATION = "Authorization";
-        }
+        public string Password { get; set; }
+
+        public string SerialNumber { get; set; }
+
+        public string SecurityToken { get; set; }
     }
 }

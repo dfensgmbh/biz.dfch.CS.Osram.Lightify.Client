@@ -20,25 +20,22 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+ using Newtonsoft.Json;
 
-namespace biz.dfch.CS.Osram.Lightify.Client
+namespace biz.dfch.CS.Osram.Lightify.Client.Model
 {
-    public class Constants
+    public class GroupResponse : BaseDto
     {
-        public static class ApiSuffixes
-        {
-            public const string SESSION = "/session";
-            public const string GROUPS = "/groups";
-        }
+        [JsonProperty("groupId")]
+        public int GroupId { get; set; }
 
-        public static class Messages
-        {
-            public const string CLIENT_NOT_LOGGED_IN = "Perform getToken before using the client.";
-        }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        public class HttpHeaders
-        {
-            public const string AUTHORIZATION = "Authorization";
-        }
+        [JsonProperty("devices")]
+        public List<int> Devices { get; set; }
+
+        [JsonProperty("scenes")]
+        public Scenes Scenes { get; set; }
     }
 }
