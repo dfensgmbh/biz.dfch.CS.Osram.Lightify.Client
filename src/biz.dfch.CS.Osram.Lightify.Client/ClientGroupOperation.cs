@@ -20,6 +20,8 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+ using biz.dfch.CS.Osram.Lightify.Client.Model;
+ using biz.dfch.CS.Web.Utilities.Rest;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
@@ -28,15 +30,46 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// <summary>
         /// Turns the lights of the specified group on
         /// </summary>
-        public void TurnLightGroupOn()
+        public OperationResponse TurnLightGroupOn(Group group)
         {
+            return TurnLightGroupOn(group.GroupId);
+        }
+
+        /// <summary>
+        /// Turns the lights of the specified group id on
+        /// </summary>
+
+        public OperationResponse TurnLightGroupOn(long id)
+        {
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, id},
+                {Constants.QueryParameter.ON_OFF, 1}
+            };
+
+            return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+        }
+
+        /// <summary>
+        /// Turns the lights of the specified group id off
+        /// </summary>
+        public OperationResponse TurnLightGroupOff(Group group)
+        {
+            return TurnLightGroupOff(group.GroupId);
         }
 
         /// <summary>
         /// Turns the lights of the specified group off
         /// </summary>
-        public void TurnLightGroupOff()
+        public OperationResponse TurnLightGroupOff(long id)
         {
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, id},
+                {Constants.QueryParameter.ON_OFF, 1}
+            };
+
+            return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
         }
     }
 }
