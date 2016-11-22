@@ -30,7 +30,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetDevicesSucceeds()
         {
-            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
+            var sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
             var result = sut.GetDevices();
             Assert.IsNotNull(result);

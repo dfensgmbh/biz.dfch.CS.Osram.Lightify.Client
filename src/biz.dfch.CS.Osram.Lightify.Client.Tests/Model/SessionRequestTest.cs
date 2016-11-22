@@ -27,9 +27,9 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests.Model
         {
             var sut = new SessionRequest
             {
-                Username = Constants.USERNAME,
-                Password = Constants.PASSWORD,
-                SerialNumber = Constants.SERIAL_NUMBER
+                Username = TestConstants.USERNAME,
+                Password = TestConstants.PASSWORD,
+                SerialNumber = TestConstants.SERIAL_NUMBER
             };
 
             var result = sut.SerializeObject();

@@ -25,12 +25,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 {
     public class Constants
     {
-        public static class ApiSuffixes
+        public static class ApiOperation
         {
-            public const string GATEWAY = "/gateway";
-            public const string GROUPS = "/groups";
-            public const string SESSION = "/session";
-            public const string VERSION = "/version";
+            public const string GATEWAY = "gateway";
+            public const string GROUPS = "groups";
+            public const string SESSION = "session";
+            public const string VERSION = "version";
+            public const string DEVICE = "device";
+            public const string DEVICES = "devices";
         }
 
         public static class QueryParameter

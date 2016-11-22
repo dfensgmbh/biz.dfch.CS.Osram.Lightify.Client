@@ -207,7 +207,7 @@
     <Compile Include="ClientGetGatewayTest.cs" />
     <Compile Include="ClientGetGroupTest.cs" />
     <Compile Include="CodeContractsTest.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="TestConstants.cs" />
     <Compile Include="Model\ApiVersionTest.cs" />
     <Compile Include="Model\SessionResponseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  
-﻿using System;
+ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -36,19 +36,19 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             // Arrange
             // DFTODO - replace with object -> serialize
             var apiVersionAsJson = "{\"apiversion\":\"1.0.0\"}";
-            var client = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
+            var client = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
             client.UserInformation = new UserInformation()
             {
-                UserId = Constants.USER_ID,
-                Username = Constants.USERNAME,
-                Password = Constants.PASSWORD,
-                SerialNumber = Constants.SERIAL_NUMBER,
-                SecurityToken = Constants.SECURITY_TOKEN
+                UserId = TestConstants.USER_ID,
+                Username = TestConstants.USERNAME,
+                Password = TestConstants.PASSWORD,
+                SerialNumber = TestConstants.SERIAL_NUMBER,
+                SecurityToken = TestConstants.SECURITY_TOKEN
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.VERSION);
+            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.VERSION);
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), Arg.AnyString))
                 .IgnoreInstance()
                 .Returns(apiVersionAsJson)

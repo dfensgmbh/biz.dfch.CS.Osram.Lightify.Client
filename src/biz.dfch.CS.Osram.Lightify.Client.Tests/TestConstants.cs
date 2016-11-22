@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 {
-    public class Constants
+    public class TestConstants
     {
         public static readonly Uri OSRAM_LIGHTIFY_BASE_URI = new Uri("https://eu.lightify-api.org.example.com/lightify/services/");
 
