@@ -80,7 +80,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupLevel(long groupId, float level)
         {
-            Contract.Requires(1.000 > level && 0 < level);
+            Contract.Requires(1.000 >= level && 0 <= level);
 
             var queryParams = new Dictionary<string, object>
             {
@@ -99,8 +99,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupLevel(long groupId, float level, long time)
         {
-            Contract.Requires(1.000 > level && 0 < level);
-            Contract.Requires(1000 > time && 0 <= time);
+            Contract.Requires(1.000 >= level && 0 <= level);
+            Contract.Requires(1000 >= time && 0 <= time);
 
             var queryParams = new Dictionary<string, object>
             {
@@ -116,7 +116,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         public bool SetGroupSaturation(long groupId, float saturation)
         {
             Contract.Requires(0 < groupId);
-            Contract.Requires(0 < saturation && 1.000 > saturation);
+            Contract.Requires(0 <= saturation && 1.000 >= saturation);
 
             var queryParams = new Dictionary<string, object>
             {
@@ -131,8 +131,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         public bool SetGroupSaturation(long groupId, float saturation, long time)
         {
             Contract.Requires(0 < groupId);
-            Contract.Requires(0 < saturation && 1.000 > saturation);
-            Contract.Requires(1000 > time && 0 <= time);
+            Contract.Requires(0 <= saturation && 1.000 >= saturation);
+            Contract.Requires(1000 >= time && 0 <= time);
 
             var queryParams = new Dictionary<string, object>
             {
@@ -152,6 +152,48 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         public bool SetGroupSaturation(Group group, float saturation, long time)
         {
             return SetGroupSaturation(group.GroupId, saturation, time);
+        }
+
+        public bool SetGroupCTemp(long groupId, long ctemp)
+        {
+            Contract.Requires(0 < groupId);
+            Contract.Requires(1000 <= ctemp && 8000 >= ctemp);
+
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, groupId},
+                {Constants.QueryParameter.CTEMP, ctemp}
+            };
+
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            return result.ReturnCode == 0;
+        }
+
+        public bool SetGroupCTemp(long groupId, long ctemp, long time)
+        {
+            Contract.Requires(0 < groupId);
+            Contract.Requires(1000 <= ctemp && 8000 >= ctemp);
+            Contract.Requires(1000 >= time && 0 <= time);
+
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, groupId},
+                {Constants.QueryParameter.CTEMP, ctemp},
+                {Constants.QueryParameter.TIME, time}
+            };
+
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            return result.ReturnCode == 0;
+        }
+
+        public bool SetGroupCTemp(Group group, long ctemp)
+        {
+            return SetGroupCTemp(group.GroupId, ctemp);
+        }
+
+        public bool SetGroupCTemp(Group group, long ctemp, long time)
+        {
+            return SetGroupCTemp(group.GroupId, ctemp, time);
         }
     }
 }
