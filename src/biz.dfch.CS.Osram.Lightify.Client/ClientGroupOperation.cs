@@ -40,13 +40,13 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// <summary>
         /// Turns the lights of the specified group on
         /// </summary>
-        public bool TurnLightGroupOn(long id)
+        public bool TurnLightGroupOn(long groupId)
         {
-            Contract.Requires(0 < id);
+            Contract.Requires(0 < groupId);
 
             var queryParams = new Dictionary<string, object>
             {
-                {Constants.QueryParameter.IDX, id},
+                {Constants.QueryParameter.IDX, groupId},
                 {Constants.QueryParameter.ON_OFF, 1}
             };
 
@@ -67,13 +67,13 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// <summary>
         /// Turns the lights of the specified group off
         /// </summary>
-        public bool TurnLightGroupOff(long id)
+        public bool TurnLightGroupOff(long groupId)
         {
-            Contract.Requires(0 < id);
+            Contract.Requires(0 < groupId);
 
             var queryParams = new Dictionary<string, object>
             {
-                {Constants.QueryParameter.IDX, id},
+                {Constants.QueryParameter.IDX, groupId},
                 {Constants.QueryParameter.ON_OFF, 1}
             };
 
