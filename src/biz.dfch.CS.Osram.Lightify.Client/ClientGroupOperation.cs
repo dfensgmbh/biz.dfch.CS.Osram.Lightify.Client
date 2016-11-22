@@ -76,7 +76,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             var queryParams = new Dictionary<string, object>
             {
                 {Constants.QueryParameter.IDX, groupId},
-                {Constants.QueryParameter.ON_OFF, 1}
+                {Constants.QueryParameter.ON_OFF, 0}
             };
 
             var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
