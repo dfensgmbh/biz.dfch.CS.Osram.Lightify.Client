@@ -204,7 +204,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupColor(long groupId, string hexColor)
         {
-            return false;
+            return SetGroupColor(groupId, hexColor, 0);
         }
 
         public bool SetGroupColor(Group group, string hexColor, long time)
@@ -214,7 +214,23 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupColor(long groupId, string hexColor, long time)
         {
-            return false;
+            Contract.Requires(0 < groupId);
+            if (hexColor.Contains("#"))
+            {
+                hexColor = hexColor.Replace("#", "");
+            }
+            Contract.Assert(hexColor.All("0123456789abcdefABCDEF".Contains));
+            Contract.Assert(hexColor.Length == 6);
+
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, groupId},
+                {Constants.QueryParameter.COLOR, hexColor},
+                {Constants.QueryParameter.TIME, time}
+            };
+
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
+            return result.ReturnCode == 0;
         }
     }
 }
