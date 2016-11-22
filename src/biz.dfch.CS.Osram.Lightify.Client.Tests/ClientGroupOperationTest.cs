@@ -90,7 +90,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.AreEqual(responseOperation.ReturnCode, result.ReturnCode);
         }
 
-        public void SetLevelGroupSucceeds()
+        public void SetGroupLevelSucceeds()
         {
             var groupId = 1L;
             var group = new Group
@@ -116,7 +116,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.AreEqual(responseOperation.ReturnCode, result.ReturnCode);
         }
 
-        public void SetLevelGroupWithTimeSucceeds()
+        public void SetGroupLevelWithTimeSucceeds()
         {
             var groupId = 1L;
             var group = new Group

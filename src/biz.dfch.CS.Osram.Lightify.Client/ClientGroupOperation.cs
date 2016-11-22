@@ -36,7 +36,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         }
 
         /// <summary>
-        /// Turns the lights of the specified group id on
+        /// Turns the lights of the specified group on
         /// </summary>
 
         public OperationResponse TurnLightGroupOn(long id)
@@ -51,7 +51,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         }
 
         /// <summary>
-        /// Turns the lights of the specified group id off
+        /// Turns the lights of the specified group off
         /// </summary>
         public OperationResponse TurnLightGroupOff(Group group)
         {
@@ -72,7 +72,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
         }
 
-        public OperationResponse SetLevelGroup(Group group, float level)
+        public OperationResponse SetGroupLevel(Group group, float level)
         {
             var queryParams = new Dictionary<string, object>
             {
@@ -83,7 +83,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
         }
 
-        public OperationResponse SetLevelGroup(long groupId, float level)
+        public OperationResponse SetGroupLevel(long groupId, float level)
         {
             var queryParams = new Dictionary<string, object>
             {
@@ -94,7 +94,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
         }
 
-        public OperationResponse SetLevelGroup(Group group, float level, long time)
+        public OperationResponse SetGroupLevel(Group group, float level, long time)
         {
             var queryParams = new Dictionary<string, object>
             {
@@ -106,7 +106,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
         }
 
-        public OperationResponse SetLevelGroup(long groupId, float level, long time)
+        public OperationResponse SetGroupLevel(long groupId, float level, long time)
         {
             var queryParams = new Dictionary<string, object>
             {
