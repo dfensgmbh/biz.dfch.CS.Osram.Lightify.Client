@@ -23,7 +23,8 @@ using System.Threading.Tasks;
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using biz.dfch.CS.Web.Utilities.Rest;
 using biz.dfch.CS.Osram.Lightify.Client.Model;
-using Telerik.JustMock;
+﻿using biz.dfch.CS.Testing.Attributes;
+﻿using Telerik.JustMock;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 {
@@ -60,6 +61,18 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         }
 
         [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+id")]
+        public void TurnDeviceOnWithInvalidIdThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.TurnDeviceOn(0);
+
+            // Assert
+        }
+
+        [TestMethod]
         public void TurnDeviceOnSucceeds()
         {
             // Arrange
@@ -84,6 +97,18 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         }
 
         [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+id")]
+        public void TurnDeviceOffWithInvalidIdThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.TurnDeviceOff(0);
+
+            // Assert
+        }
+
+        [TestMethod]
         public void TurnDeviceOffSucceeds()
         {
             // Arrange
@@ -105,6 +130,42 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.IsTrue(result);
 
             Mock.Assert(RestCallExecutor);
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+id")]
+        public void SetDeviceLevelWithInvalidIdThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceLevel(0, 1.000f);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+level")]
+        public void SetDeviceLevelWithLevelLowerZeroThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceLevel(1, -0.001f);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+level")]
+        public void SetDeviceLevelWithLevelHigher1ThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceLevel(1, 1.001f);
+
+            // Assert
         }
 
         public void SetDeviceLevelSucceeds()
