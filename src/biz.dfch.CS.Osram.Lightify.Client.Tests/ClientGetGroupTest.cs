@@ -25,8 +25,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 }
             };
             var groupId = 1L;
-            var suffix = string.Format("{0}/{1}", Lightify.Client.Constants.ApiOperation.GROUPS, groupId);
-            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, suffix);
 
             var response = @"
                             {
@@ -40,7 +38,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             }";
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), ""))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(response)
                 .OccursOnce();
@@ -96,17 +94,13 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 		
 	            }
             }";
-            var suffix = string.Format("{0}/{1}", Lightify.Client.Constants.ApiOperation.GROUPS, 1L);
-
-            var requestUriFirstMock = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.GROUPS);
-            var requestUriSecondMock = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, suffix);
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUriFirstMock.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), ""))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(responseFirstMock)
                 .InSequence();
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUriSecondMock.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), ""))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(responseSecondMock)
                 .InSequence();
