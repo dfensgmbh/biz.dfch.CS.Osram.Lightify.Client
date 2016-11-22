@@ -69,7 +69,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 Name = "arbitaryName"
             };
 
-            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICE)), Arg.IsAny<Dictionary<string, string>>(), Arg.IsAny<string>()))
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICES)), Arg.IsAny<Dictionary<string, string>>(), Arg.IsAny<string>()))
                 .IgnoreInstance()
                 .Returns(response.SerializeObject())
                 .OccursOnce();
@@ -88,7 +88,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 Name = "arbitaryName"
             };
 
-            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICE)), Arg.IsAny<Dictionary<string, string>>(), Arg.IsAny<string>()))
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICES)), Arg.IsAny<Dictionary<string, string>>(), Arg.IsAny<string>()))
                 .IgnoreInstance()
                 .Returns(response.SerializeObject())
                 .OccursOnce();
