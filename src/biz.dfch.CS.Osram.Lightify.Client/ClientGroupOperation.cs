@@ -197,35 +197,30 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return result.ReturnCode == 0;
         }
 
-        public bool SetGroupColor(Group group, string hexColor)
+        public bool SetGroupColor(Group group, string hexColorCode)
         {
-            return SetGroupColor(group.GroupId, hexColor);
+            return SetGroupColor(group.GroupId, hexColorCode);
         }
 
-        public bool SetGroupColor(long groupId, string hexColor)
+        public bool SetGroupColor(long groupId, string hexColorCode)
         {
-            return SetGroupColor(groupId, hexColor, 0);
+            return SetGroupColor(groupId, hexColorCode, 0);
         }
 
-        public bool SetGroupColor(Group group, string hexColor, long time)
+        public bool SetGroupColor(Group group, string hexColorCode, long time)
         {
-            return SetGroupColor(group.GroupId, hexColor, time);
+            return SetGroupColor(group.GroupId, hexColorCode, time);
         }
 
-        public bool SetGroupColor(long groupId, string hexColor, long time)
+        public bool SetGroupColor(long groupId, string hexColorCode, long time)
         {
             Contract.Requires(0 < groupId);
-            if (hexColor.Contains("#"))
-            {
-                hexColor = hexColor.Replace("#", "");
-            }
-            Contract.Assert(hexColor.All("0123456789abcdefABCDEF".Contains));
-            Contract.Assert(hexColor.Length == 6);
+            Contract.Requires(Regex.IsMatch(hexColorCode, "^[A-Fa-f0-9]{6}$"));
 
             var queryParams = new Dictionary<string, object>
             {
                 {Constants.QueryParameter.IDX, groupId},
-                {Constants.QueryParameter.COLOR, hexColor},
+                {Constants.QueryParameter.COLOR, hexColorCode},
                 {Constants.QueryParameter.TIME, time}
             };
 

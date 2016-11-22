@@ -397,5 +397,101 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
             Mock.Assert(RestCallExecutor);
         }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+device")]
+        public void SetDeviceColorWithNullDeviceThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceColor(null, TestConstants.SAMPLE_COLOR, 0);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+id")]
+        public void SetDeviceColorWithInvalidIdThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceColor(0, TestConstants.SAMPLE_COLOR, 0);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+hexColorCode")]
+        public void SetDeviceColorWithInvalidColorThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceColor(TestConstants.DEVICE_ID, "", 0);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+hexColorCode")]
+        public void SetDeviceColorWithInvalidColorThrowsContractException2()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceColor(TestConstants.DEVICE_ID, "ABCDEFG", 0);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+hexColorCode")]
+        public void SetDeviceColorWithInvalidColorThrowsContractExceptio3()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceColor(TestConstants.DEVICE_ID, "ABCDEI", 0);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+time")]
+        public void SetDeviceColorWithTimeLessThanZeroThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceColor(TestConstants.DEVICE_ID, TestConstants.SAMPLE_COLOR, -1);
+
+            // Assert
+        }
+
+        [TestMethod]
+        public void SetDeviceColorSucceeds()
+        {
+            // Arrange
+            var device = new Device
+            {
+                DeviceId = TestConstants.DEVICE_ID,
+            };
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICE_SET)), Arg.IsAny<Dictionary<string, string>>(), ""))
+                .IgnoreInstance()
+                .Returns(_successOperationResponse.SerializeObject)
+                .OccursOnce();
+
+            // Act
+            var result = Sut.SetDeviceColor(device, TestConstants.SAMPLE_COLOR, 42);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result);
+
+            Mock.Assert(RestCallExecutor);
+        }
     }
 }

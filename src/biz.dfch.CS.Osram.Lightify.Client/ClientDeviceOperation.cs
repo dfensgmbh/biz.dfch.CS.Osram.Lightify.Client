@@ -21,7 +21,8 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
+﻿using System.Threading.Tasks;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
@@ -193,6 +194,37 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             {
                 {Constants.QueryParameter.IDX, id},
                 {Constants.QueryParameter.CTEMP, ctemp},
+                {Constants.QueryParameter.TIME, time}
+            };
+
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.DEVICE_SET, queryParams, null, null);
+            return result.ReturnCode == 0;
+        }
+
+        public bool SetDeviceColor(Device device, string hexColorCode)
+        {
+            return SetDeviceColor(device.DeviceId, hexColorCode);
+        }
+
+        public bool SetDeviceColor(long id, string hexColorCode)
+        {
+            return SetDeviceColor(id, hexColorCode, 0);
+        }
+
+        public bool SetDeviceColor(Device device, string hexColorCode, long time)
+        {
+            return SetDeviceColor(device.DeviceId, hexColorCode, time);
+        }
+
+        public bool SetDeviceColor(long id, string hexColorCode, long time)
+        {
+            Contract.Requires(0 < id);
+            Contract.Requires(Regex.IsMatch(hexColorCode, "^[A-Fa-f0-9]{6}$"));
+
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, id},
+                {Constants.QueryParameter.COLOR, hexColorCode},
                 {Constants.QueryParameter.TIME, time}
             };
 
