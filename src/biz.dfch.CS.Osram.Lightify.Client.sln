@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "biz.dfch.CS.Osram.Lightify.Client", "biz.dfch.CS.Osram.Lightify.Client\biz.dfch.CS.Osram.Lightify.Client.csproj", "{48D20E07-0796-424C-8605-ED963949B27B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "biz.dfch.CS.Osram.Lightify.Client.Tests", "biz.dfch.CS.Osram.Lightify.Client.Tests\biz.dfch.CS.Osram.Lightify.Client.Tests.csproj", "{B37A6C1C-3827-4938-BB4F-C77E2400AE51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Release", "Release", "{24E025F5-40AE-4958-B1E5-2ABA07644540}"
+	ProjectSection(SolutionItems) = preProject
+		AssemblyVersion.cs = AssemblyVersion.cs
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48D20E07-0796-424C-8605-ED963949B27B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48D20E07-0796-424C-8605-ED963949B27B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48D20E07-0796-424C-8605-ED963949B27B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48D20E07-0796-424C-8605-ED963949B27B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B37A6C1C-3827-4938-BB4F-C77E2400AE51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B37A6C1C-3827-4938-BB4F-C77E2400AE51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B37A6C1C-3827-4938-BB4F-C77E2400AE51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B37A6C1C-3827-4938-BB4F-C77E2400AE51}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
