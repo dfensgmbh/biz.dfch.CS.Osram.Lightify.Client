@@ -61,12 +61,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             var id = 0;
             var sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
-            var response = "";
-            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICE)), Arg.IsAny<Dictionary<string, string>>(), Arg.IsAny<string>()))
-                .IgnoreInstance()
-                .Returns(response)
-                .OccursOnce();
-
             var result = sut.GetDevice(id);
         }
             
@@ -74,9 +68,19 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void GetDeviceByIdSucceeds()
         {
             var id = 42;
-            var sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
-            var result = sut.GetDevice(id);
+            var response = new Device
+            {
+                DeviceId = id,
+                Name = "arbitaryName"
+            };
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICE)), Arg.IsAny<Dictionary<string, string>>(), Arg.IsAny<string>()))
+                .IgnoreInstance()
+                .Returns(response.SerializeObject())
+                .OccursOnce();
+
+            var result = Sut.GetDevice(id);
         }
 
         [TestMethod]
