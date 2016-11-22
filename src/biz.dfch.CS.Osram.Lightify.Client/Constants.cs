@@ -33,7 +33,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public static class Messages
         {
-            public const string CLIENT_NOT_LOGGED_IN = "Perform login before using the client.";
+            public const string CLIENT_NOT_LOGGED_IN = "Perform getToken before using the client.";
         }
 
         public class HttpHeaders

@@ -96,7 +96,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(requestUriSuffix));
             Contract.Requires(null == headers || (null != headers && !headers.ContainsKey(Constants.HttpHeaders.AUTHORIZATION)));
-            Contract.Requires(null != UserInformation);
+            Contract.Requires(null != UserInformation, Constants.Messages.CLIENT_NOT_LOGGED_IN);
             
             // DFTODO - token refresh, if necessary
 
@@ -115,26 +115,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             return result;
         }
-
-        /// <summary>
-        /// Turns the lights of the specified group on
-        /// </summary>
-        public void TurnLightGroupOn()
-        {
-        }
-
-        /// <summary>
-        /// Turns the lights of the specified group off
-        /// </summary>
-        public void TurnLightGroupOff()
-        {
-        }
-
-        public Model.GroupResponse GetGroup()
-        {
-            return default(Model.GroupResponse);
-        }
-
     }
 }
 
