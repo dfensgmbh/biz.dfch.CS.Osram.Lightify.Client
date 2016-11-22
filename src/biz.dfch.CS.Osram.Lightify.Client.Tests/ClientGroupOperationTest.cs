@@ -103,7 +103,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(_successOperationResponse.SerializeObject)
                 .OccursOnce();
 
-            var result = Sut.SetGroupLevel(group, 0.1);
+            var result = Sut.SetGroupLevel(group, 0.1f);
 
             Mock.Assert(RestCallExecutor);
             Assert.IsNotNull(result);
@@ -124,7 +124,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(_successOperationResponse.SerializeObject)
                 .OccursOnce();
 
-            var result = Sut.SetGroupLevel(group, 0.1);
+            var result = Sut.SetGroupLevel(group, 0.1f);
 
             Mock.Assert(RestCallExecutor);
             Assert.IsNotNull(result);
