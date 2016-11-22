@@ -33,7 +33,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         public bool TurnLightGroupOn(Group group)
         {
             return TurnLightGroupOn(group.GroupId);
-            
         }
 
         /// <summary>
