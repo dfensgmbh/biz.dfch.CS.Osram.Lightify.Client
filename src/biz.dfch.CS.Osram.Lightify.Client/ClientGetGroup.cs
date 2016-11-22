@@ -38,7 +38,17 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public Group GetGroupByName(string name)
         {
-            throw new NotImplementedException();
+            var groups = GetGroups();
+            long requestedGroupId = 0;
+            foreach (Group group in groups)
+            {
+                if (group.Name.Equals(name))
+                {
+                    requestedGroupId = group.GroupId;
+                    break;
+                }
+            }
+            return GetGroupById(requestedGroupId);
         }
     }
 }
