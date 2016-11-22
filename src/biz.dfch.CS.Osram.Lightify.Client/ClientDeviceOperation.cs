@@ -84,6 +84,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         public bool SetDeviceLevel(Device device, float level)
         {
             Contract.Requires(null != device);
+            Contract.Requires(0.000 <= level && 1.000 >= level);
 
             return SetDeviceLevel(device.DeviceId, level);
         }
@@ -91,6 +92,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         public bool SetDeviceLevel(long id, float level)
         {
             Contract.Requires(0 < id);
+            Contract.Requires(0.000 <= level && 1.000 >= level);
 
             var queryParams = new Dictionary<string, object>
             {
@@ -105,6 +107,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         public bool SetDeviceLevel(Device device, float level, long time)
         {
             Contract.Requires(null != device);
+            Contract.Requires(0.000 <= level && 1.000 >= level);
+            Contract.Requires(0 <= time);
 
             return SetDeviceLevel(device.DeviceId, level, time);
         }
@@ -112,6 +116,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         public bool SetDeviceLevel(long id, float level, long time)
         {
             Contract.Requires(0 < id);
+            Contract.Requires(0.000 <= level && 1.000 >= level);
+            Contract.Requires(0 <= time);
 
             var queryParams = new Dictionary<string, object>
             {
