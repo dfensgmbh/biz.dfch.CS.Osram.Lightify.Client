@@ -202,6 +202,7 @@
     <Compile Include="Model\Device.cs" />
     <Compile Include="Model\Gateway.cs" />
     <Compile Include="Model\Group.cs" />
+    <Compile Include="Model\OperationResponse.cs" />
     <Compile Include="Model\UserInformation.cs" />
     <Compile Include="Model\Scenes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

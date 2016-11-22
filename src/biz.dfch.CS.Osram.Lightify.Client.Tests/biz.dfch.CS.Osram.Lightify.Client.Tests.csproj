@@ -215,6 +215,7 @@
     <Compile Include="ClientTest.cs" />
     <Compile Include="Model\SessionRequestTest.cs" />
     <Compile Include="ClientGetGroupsTest.cs" />
+    <Compile Include="ClientGroupOperationTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\biz.dfch.CS.Osram.Lightify.Client\biz.dfch.CS.Osram.Lightify.Client.csproj">
