@@ -36,6 +36,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         }
 
         [TestMethod]
+        [TestCategory("SkipOnTeamCity")]
         public void GetTokenSucceeds()
         {
             // Arrange
@@ -49,6 +50,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         }
 
         [TestMethod]
+        [TestCategory("SkipOnTeamCity")]
         public void TurnDeviceOnAndOffSucceeds()
         {
             // Arrange
@@ -76,6 +78,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         }
 
         [TestMethod]
+        [TestCategory("SkipOnTeamCity")]
         public void TurnGroupOnAndOffSucceeds()
         {
             // Arrange
