@@ -326,7 +326,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.IsTrue(typeof(SessionResponse) == sessionResponse.GetType());
             Assert.IsFalse(string.IsNullOrWhiteSpace(sessionResponse.UserId));
             Assert.IsFalse(string.IsNullOrWhiteSpace(sessionResponse.SecurityToken));
-
             Mock.Assert(restCallExecutor);
         }
     }
