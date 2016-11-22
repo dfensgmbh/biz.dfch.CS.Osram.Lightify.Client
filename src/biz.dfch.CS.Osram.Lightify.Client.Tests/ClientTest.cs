@@ -145,7 +145,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             var client = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
             // Act
-            client.Invoke(HttpMethod.Get, null, null, "");
+            client.Invoke(HttpMethod.Get, null, null, null);
 
             // Assert
         }
@@ -158,7 +158,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             var client = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
             // Act
-            client.Invoke(HttpMethod.Get, "", null, "");
+            client.Invoke(HttpMethod.Get, "", null, null);
 
             // Assert
         }
@@ -180,7 +180,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             };
 
             // Act
-            client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, _authorizationHeaders, "");
+            client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, _authorizationHeaders, null);
 
             // Assert
         }
@@ -238,7 +238,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .OccursOnce();
 
             // Act
-            var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, null, "");
+            var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, null, null);
 
             // Assert
             Assert.IsNotNull(responseAsString);
@@ -276,7 +276,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .OccursOnce();
 
             // Act
-            var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, null, "");
+            var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, queryParams, null, null);
 
             // Assert
             Assert.IsNotNull(responseAsString);
@@ -307,7 +307,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .OccursOnce();
 
             // Act
-            var sessionResponse = client.Invoke<SessionResponse>(HttpMethod.Get, Constants.ApiOperation.SESSION, null, "");
+            var sessionResponse = client.Invoke<SessionResponse>(HttpMethod.Get, Constants.ApiOperation.SESSION, null, null);
 
             // Assert
             Assert.IsNotNull(sessionResponse);

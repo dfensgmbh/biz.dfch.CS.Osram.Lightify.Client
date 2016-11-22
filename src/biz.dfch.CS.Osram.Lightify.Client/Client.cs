@@ -86,16 +86,16 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return response.SecurityToken;
         }
 
-        internal T Invoke<T>(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers,
-            Dictionary<string, object> queryParams, string body)
+        internal T Invoke<T>(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, object> queryParams, 
+            Dictionary<string, string> headers, string body)
             where T : BaseDto
         {
-            var result = Invoke(httpMethod, requestUriSuffix, headers, queryParams, body);
+            var result = Invoke(httpMethod, requestUriSuffix, queryParams, headers, body);
             return BaseDto.DeserializeObject<T>(result);
         }
 
-        internal string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers,
-            Dictionary<string, object> queryParams, string body)
+        internal string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, object> queryParams, 
+            Dictionary<string, string> headers, string body)
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(requestUriSuffix));
 
