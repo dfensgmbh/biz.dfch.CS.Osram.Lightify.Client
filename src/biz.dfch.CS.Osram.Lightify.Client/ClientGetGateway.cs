@@ -15,6 +15,7 @@
  */
  
 ﻿using biz.dfch.CS.Osram.Lightify.Client.Model;
+using biz.dfch.CS.Web.Utilities.Rest;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -28,7 +29,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
     {
         public Gateway GetGateway()
         {
-            return default(Gateway);
+            return Invoke<Gateway>(HttpMethod.Get, Constants.ApiSuffixes.GATEWAY, null, null);
         }
     }
 }

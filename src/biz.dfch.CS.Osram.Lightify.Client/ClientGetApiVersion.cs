@@ -15,6 +15,7 @@
  */
  
 ﻿using biz.dfch.CS.Osram.Lightify.Client.Model;
+using biz.dfch.CS.Web.Utilities.Rest;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -26,9 +27,11 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 {
     public partial class Client
     {
-        public ApiVersion GetApiVersion()
+        public Version GetApiVersion()
         {
-            return default(ApiVersion);
+            var apiVersion = Invoke<ApiVersion>(HttpMethod.Get, Constants.ApiSuffixes.VERSION, null, null);
+
+            return apiVersion.Version;
         }
     }
 }

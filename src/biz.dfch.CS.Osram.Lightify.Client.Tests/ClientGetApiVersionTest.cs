@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright 2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,24 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-using System;
+ 
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using biz.dfch.CS.Osram.Lightify.Client.Model;
-using biz.dfch.CS.Web.Utilities.Rest;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Telerik.JustMock;
+using biz.dfch.CS.Web.Utilities.Rest;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 {
     [TestClass]
-    public class ClientGetGroupsTest
+    public class ClientGetApiVersionTest
     {
         [TestMethod]
-        public void GetGroupsSucceeds()
+        public void GetApiVersionReturnsVersionOfOsramLightifyApi()
         {
-            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
-            sut.UserInformation = new UserInformation()
+            // Arrange
+            var apiVersionAsJson = "{\"apiversion\":\"1.0.0\"}";
+            var client = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
+
+            client.UserInformation = new UserInformation()
             {
                 UserId = Constants.USER_ID,
                 Username = Constants.USERNAME,
@@ -39,38 +46,22 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 SecurityToken = Constants.SECURITY_TOKEN
             };
 
-            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.GROUPS);
-
-            string response = @"
-                [{
-	                ""groupId"": 1,
-	                ""name"": ""First and Second"",
-	                ""devices"": [2,
-	                1],
-	                ""scenes"": {
-		
-	                }
-                },
-                {
-	                ""groupId"": 2,
-	                ""name"": ""Third Lamp"",
-	                ""devices"": [3],
-	                ""scenes"": {
-		
-	                }
-                }]";
-
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), ""))
+            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.VERSION);
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), Arg.AnyString))
                 .IgnoreInstance()
-                .Returns(response)
+                .Returns(apiVersionAsJson)
                 .OccursOnce();
 
-            var result = sut.GetGroups();
+            // Act
+            var apiVersion = client.GetApiVersion();
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count);
-            
+            // Assert
+            Assert.IsNotNull(apiVersion);
+            Assert.AreEqual(1, apiVersion.Major);
+            Assert.AreEqual(0, apiVersion.Minor);
+            Assert.AreEqual(0, apiVersion.Build);
+
             Mock.Assert(restCallExecutor);
         }
     }
