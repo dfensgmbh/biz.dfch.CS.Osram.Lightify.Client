@@ -44,6 +44,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             public const string TIME = "time";
             public const string SATURATION = "saturation";
             public const string CTEMP = "ctemp";
+            public const string COLOR = "color";
         }
 
         public static class Messages
