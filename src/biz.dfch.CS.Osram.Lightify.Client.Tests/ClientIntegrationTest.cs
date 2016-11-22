@@ -52,6 +52,9 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void TurnDeviceOnAndOffSucceeds()
         {
             // Arrange
+            Client.GetToken(IntegrationTestEnvironment.Username,
+                IntegrationTestEnvironment.Password, IntegrationTestEnvironment.SerialNumber);
+
             var devices = Client.GetDevices();
             Contract.Assert(null != devices);
 
@@ -59,10 +62,17 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Contract.Assert(null != device);
 
             // Act
+            if (device.On == 0)
+            {
+                Contract.Assert(Client.TurnDeviceOff(device));
+            }
             var succeeded = Client.TurnDeviceOn(device);
+
+            device = Client.GetDevice(device.DeviceId);
 
             // Assert
             Assert.IsTrue(succeeded);
+            Assert.AreEqual(1, device.On);
         }
 
         [TestMethod]
