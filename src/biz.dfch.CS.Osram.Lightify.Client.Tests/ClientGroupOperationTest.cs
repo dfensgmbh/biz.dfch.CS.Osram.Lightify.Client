@@ -13,6 +13,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public Client Sut;
         public RestCallExecutor RestCallExecutor;
 
+        private OperationResponse _successOperationResponse;
+
         [TestInitialize]
         public void TestInitialize()
         {
@@ -30,6 +32,11 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             };
 
             RestCallExecutor = Mock.Create<RestCallExecutor>();
+
+            _successOperationResponse = new OperationResponse
+            {
+                ReturnCode = 0
+            };
         }
 
         [TestMethod]
@@ -42,14 +49,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 GroupId = groupId,
                 Name = "group1"
             };
-            var responseOperation = new OperationResponse
-            {
-                ReturnCode = 0
-            };
 
             Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
-                .Returns(responseOperation.SerializeObject)
+                .Returns(_successOperationResponse.SerializeObject)
                 .OccursOnce();
 
             // Act
@@ -58,7 +61,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             // Assert
             Mock.Assert(RestCallExecutor);
             Assert.IsNotNull(result);
-            Assert.AreEqual(responseOperation.ReturnCode, result.ReturnCode);
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
@@ -71,14 +74,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 GroupId = groupId,
                 Name = "group1"
             };
-            var responseOperation = new OperationResponse
-            {
-                ReturnCode = 0
-            };
 
             Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
-                .Returns(responseOperation.SerializeObject)
+                .Returns(_successOperationResponse.SerializeObject)
                 .OccursOnce();
 
             // Act
@@ -87,10 +86,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             // Assert
             Mock.Assert(RestCallExecutor);
             Assert.IsNotNull(result);
-            Assert.AreEqual(responseOperation.ReturnCode, result.ReturnCode);
+            Assert.IsTrue(result);
         }
 
-        public void SetLevelGroupSucceeds()
+        public void SetGroupLevelSucceeds()
         {
             var groupId = 1L;
             var group = new Group
@@ -98,25 +97,20 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 GroupId = groupId,
                 Name = "group1"
             };
-            var responseOperation = new OperationResponse
-            {
-                ReturnCode = 0
-            };
-
 
             Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
-                .Returns(responseOperation.SerializeObject)
+                .Returns(_successOperationResponse.SerializeObject)
                 .OccursOnce();
 
-            var result = Sut.SetLevelGroup(group, 0.1);
+            var result = Sut.SetGroupLevel(group, 0.1f);
 
             Mock.Assert(RestCallExecutor);
             Assert.IsNotNull(result);
-            Assert.AreEqual(responseOperation.ReturnCode, result.ReturnCode);
+            Assert.IsTrue(result);
         }
 
-        public void SetLevelGroupWithTimeSucceeds()
+        public void SetGroupLevelWithTimeSucceeds()
         {
             var groupId = 1L;
             var group = new Group
@@ -124,22 +118,17 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 GroupId = groupId,
                 Name = "group1"
             };
-            var responseOperation = new OperationResponse
-            {
-                ReturnCode = 0
-            };
-
 
             Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
-                .Returns(responseOperation.SerializeObject)
+                .Returns(_successOperationResponse.SerializeObject)
                 .OccursOnce();
 
-            var result = Sut.SetLevelGroup(group, 0.1);
+            var result = Sut.SetGroupLevel(group, 0.1f);
 
             Mock.Assert(RestCallExecutor);
             Assert.IsNotNull(result);
-            Assert.AreEqual(responseOperation.ReturnCode, result.ReturnCode);
+            Assert.IsTrue(result);
         }
 
 

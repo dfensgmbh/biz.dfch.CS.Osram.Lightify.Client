@@ -30,16 +30,17 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// <summary>
         /// Turns the lights of the specified group on
         /// </summary>
-        public OperationResponse TurnLightGroupOn(Group group)
+        public bool TurnLightGroupOn(Group group)
         {
             return TurnLightGroupOn(group.GroupId);
+            
         }
 
         /// <summary>
-        /// Turns the lights of the specified group id on
+        /// Turns the lights of the specified group on
         /// </summary>
 
-        public OperationResponse TurnLightGroupOn(long id)
+        public bool TurnLightGroupOn(long id)
         {
             var queryParams = new Dictionary<string, object>
             {
@@ -47,13 +48,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.ON_OFF, 1}
             };
 
-            return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            return 0 == result.ReturnCode;
         }
 
         /// <summary>
-        /// Turns the lights of the specified group id off
+        /// Turns the lights of the specified group off
         /// </summary>
-        public OperationResponse TurnLightGroupOff(Group group)
+        public bool TurnLightGroupOff(Group group)
         {
             return TurnLightGroupOff(group.GroupId);
         }
@@ -61,7 +63,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// <summary>
         /// Turns the lights of the specified group off
         /// </summary>
-        public OperationResponse TurnLightGroupOff(long id)
+        public bool TurnLightGroupOff(long id)
         {
             var queryParams = new Dictionary<string, object>
             {
@@ -69,10 +71,11 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.ON_OFF, 1}
             };
 
-            return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            return 0 == result.ReturnCode;
         }
 
-        public OperationResponse SetLevelGroup(Group group, float level)
+        public bool SetGroupLevel(Group group, float level)
         {
             var queryParams = new Dictionary<string, object>
             {
@@ -80,10 +83,11 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.LEVEL, level}
             };
 
-            return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            return 0 == result.ReturnCode;
         }
 
-        public OperationResponse SetLevelGroup(long groupId, float level)
+        public bool SetGroupLevel(long groupId, float level)
         {
             var queryParams = new Dictionary<string, object>
             {
@@ -91,10 +95,11 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.LEVEL, level}
             };
 
-            return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            return 0 == result.ReturnCode;
         }
 
-        public OperationResponse SetLevelGroup(Group group, float level, long time)
+        public bool SetGroupLevel(Group group, float level, long time)
         {
             var queryParams = new Dictionary<string, object>
             {
@@ -103,10 +108,11 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.TIME, time}
             };
 
-            return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            return 0 == result.ReturnCode;
         }
 
-        public OperationResponse SetLevelGroup(long groupId, float level, long time)
+        public bool SetGroupLevel(long groupId, float level, long time)
         {
             var queryParams = new Dictionary<string, object>
             {
@@ -115,7 +121,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.TIME, time}
             };
 
-            return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            return 0 == result.ReturnCode;
         }
 
         public bool SetGroupSaturation(long groupId, float saturation)
