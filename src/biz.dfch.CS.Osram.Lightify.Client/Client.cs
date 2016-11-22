@@ -89,8 +89,16 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             Dictionary<string, object> queryParams, string body)
             where T : BaseDto
         {
-            var result = Invoke(httpMethod, requestUriSuffix, headers, body);
+            var result = Invoke(httpMethod, requestUriSuffix, headers, queryParams, body);
             return BaseDto.DeserializeObject<T>(result);
+        }
+
+        internal string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers,
+            Dictionary<string, object> queryParams, string body)
+        {
+            // DFTODO - @rufer7 - implement and write tests
+            // DFTODO - @rufer7 - query parameter extraction
+            return default(string);
         }
 
         internal T Invoke<T>(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers, string body) 
@@ -98,12 +106,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
             var result = Invoke(httpMethod, requestUriSuffix, headers, body);
             return BaseDto.DeserializeObject<T>(result);
-        }
-
-        internal string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers,
-            Dictionary<string, object> queryParams, string body)
-        {
-            return default(string);
         }
 
         internal string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers, string body)
