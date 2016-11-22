@@ -94,14 +94,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             Contract.Requires(0 < id);
             Contract.Requires(0.000 <= level && 1.000 >= level);
 
-            var queryParams = new Dictionary<string, object>
-            {
-                {Constants.QueryParameter.IDX, id},
-                {Constants.QueryParameter.LEVEL, level}
-            };
-
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.DEVICE_SET, queryParams, null, null);
-            return 0 == result.ReturnCode;
+            return SetDeviceLevel(id, level, 0);
         }
 
         public bool SetDeviceLevel(Device device, float level, long time)
@@ -126,8 +119,85 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.TIME, time}
             };
 
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.DEVICE_SET, queryParams, null, null);
             return 0 == result.ReturnCode;
+        }
+
+        public bool SetDeviceSaturation(Device device, float saturation)
+        {
+            Contract.Requires(null != device);
+
+            return SetDeviceSaturation(device.DeviceId, saturation);
+        }
+
+        public bool SetDeviceSaturation(long id, float saturation)
+        {
+            Contract.Requires(0 < id);
+            Contract.Requires(0 <= saturation && 1.000 >= saturation);
+
+            return SetDeviceSaturation(id, saturation, 0);
+        }
+
+        public bool SetDeviceSaturation(Device device, float saturation, long time)
+        {
+            Contract.Requires(null != device);
+
+            return SetDeviceSaturation(device.DeviceId, saturation, time);
+        }
+
+        public bool SetDeviceSaturation(long id, float saturation, long time)
+        {
+            Contract.Requires(0 < id);
+            Contract.Requires(0 <= saturation && 1.000 >= saturation);
+            Contract.Requires(0 <= time);
+
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, id},
+                {Constants.QueryParameter.SATURATION, saturation}
+            };
+
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.DEVICE_SET, queryParams, null, null);
+            return result.ReturnCode == 0;
+        }
+
+        public bool SetDeviceCTemp(Device device, long ctemp)
+        {
+            Contract.Requires(null != device);
+
+            return SetDeviceCTemp(device.DeviceId, ctemp);
+        }
+
+        public bool SetDeviceCTemp(long deviceId, long ctemp)
+        {
+            Contract.Requires(0 < deviceId);
+            Contract.Requires(1000 <= ctemp && 8000 >= ctemp);
+
+            return SetDeviceCTemp(deviceId, ctemp, 0);
+        }
+
+        public bool SetDeviceCTemp(Device device, long ctemp, long time)
+        {
+            Contract.Requires(null != device);
+
+            return SetDeviceCTemp(device.DeviceId, ctemp, time);
+        }
+
+        public bool SetDeviceCTemp(long deviceId, long ctemp, long time)
+        {
+            Contract.Requires(0 < deviceId);
+            Contract.Requires(1000 <= ctemp && 8000 >= ctemp);
+            Contract.Requires(0 <= time);
+
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, deviceId},
+                {Constants.QueryParameter.CTEMP, ctemp},
+                {Constants.QueryParameter.TIME, time}
+            };
+
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.DEVICE_SET, queryParams, null, null);
+            return result.ReturnCode == 0;
         }
     }
 }
