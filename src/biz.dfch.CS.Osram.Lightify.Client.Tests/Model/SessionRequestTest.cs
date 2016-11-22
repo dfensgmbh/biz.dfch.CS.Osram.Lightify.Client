@@ -25,6 +25,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests.Model
         [TestMethod]
         public void SerialisationSucceeds()
         {
+            // Arrange
             var sut = new SessionRequest
             {
                 Username = TestConstants.USERNAME,
@@ -32,7 +33,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests.Model
                 SerialNumber = TestConstants.SERIAL_NUMBER
             };
 
+            // Act
             var result = sut.SerializeObject();
+
+            // Assert
             Assert.IsTrue(result.Contains("\"username\""));
             Assert.IsTrue(result.Contains("\"password\""));
             Assert.IsTrue(result.Contains("\"serialNumber\""));

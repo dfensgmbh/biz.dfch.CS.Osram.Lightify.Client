@@ -55,6 +55,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetDevicesSucceeds()
         {
+            // Arrange
             var name = "arbitraryName";
 
             var devices = new List<Device>
@@ -77,8 +78,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(JsonConvert.SerializeObject(devices))
                 .OccursOnce();
 
+            // Act
             var result = (List<Device>) Sut.GetDevices();
 
+            // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(devices.Count, result.Count);
             Assert.AreEqual(devices[0].DeviceId, result[0].DeviceId);
@@ -88,7 +91,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetDevicesByGroupIdSucceeds()
         {
-
+            // Arrange
             var group1 = new Group {GroupId = 1};
 
             var name = "arbitraryName";
@@ -122,8 +125,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(JsonConvert.SerializeObject(devices))
                 .OccursOnce();
 
+            // Act
             var result = (List<Device>) Sut.GetDevices(group1);
 
+            // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Count);
             Assert.AreEqual(devices[0].DeviceId, result[0].DeviceId);
@@ -133,7 +138,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetDevicesByInexistentGroupIdReturnsEmptyList()
         {
-
+            // Arrange
             var name = "arbitraryName";
 
             var devices = new List<Device>
@@ -165,7 +170,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(JsonConvert.SerializeObject(devices))
                 .OccursOnce();
 
+            // Act
             var result = (List<Device>) Sut.GetDevices(42);
+
+            // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(0, result.Count);
         }

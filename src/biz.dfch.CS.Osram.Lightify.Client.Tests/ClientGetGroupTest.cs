@@ -16,7 +16,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-        
             Sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI)
             {
                 UserInformation = new UserInformation()
@@ -35,6 +34,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetGroupByIdSucceeds()
         {
+            // Arrange
             var groupId = 1L;
             var responseGroup = new Group
             {
@@ -42,14 +42,15 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 Name = "group1"
             };
 
-
             Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(responseGroup.SerializeObject)
                 .OccursOnce();
 
+            // Act
             var result = Sut.GetGroup(1);
 
+            // Assert
             Mock.Assert(RestCallExecutor);
             Assert.IsNotNull(result);
             Assert.AreEqual(responseGroup.GroupId, result.GroupId);
@@ -58,6 +59,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetGroupByNameSucceeds()
         {
+            // Arrange
             var groups = new List<Group>();
             groups.Add(new Group
             {
@@ -79,8 +81,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(groups[1].SerializeObject)
                 .InSequence();
 
+            // Act
             var result = Sut.GetGroup("testgroup");
 
+            // Assert
             Mock.Assert(RestCallExecutor);
             Assert.IsNotNull(result);
         }

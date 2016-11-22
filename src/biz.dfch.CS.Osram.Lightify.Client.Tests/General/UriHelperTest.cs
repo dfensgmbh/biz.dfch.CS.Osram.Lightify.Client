@@ -55,10 +55,45 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests.General
         }
 
         [TestMethod]
+        [ExpectContractFailure(MessagePattern = ".+null != parameter.Value")]
+        public void CreateQueryStringWithDictionaryContainingNullValueThrowsContractException()
+        {
+            // Arrange
+            var emptyQueryParameters = new Dictionary<string, object>()
+            {
+                {Constants.QueryParameter.IDX, null}
+            };
+
+            // Act
+            UriHelper.CreateQueryString(emptyQueryParameters);
+
+            // Assert
+        }
+
+        [TestMethod]
         public void CreateQueryStringReturnsQueryParametersAsString()
         {
             // Arrange
-            var expectedQueryString = string.Format("?{0}={1}&{2}=true", Constants.QueryParameter.IDX, TestConstants.IDX_VALUE, Constants.QueryParameter.ON_OFF);
+            var expectedQueryString = string.Format("{0}={1}&{2}=true", Constants.QueryParameter.IDX, TestConstants.IDX_VALUE, Constants.QueryParameter.ON_OFF);
+
+            var queryParameters = new Dictionary<string, object>()
+            {
+                {Constants.QueryParameter.IDX, TestConstants.IDX_VALUE},
+                {Constants.QueryParameter.ON_OFF, "true"}
+            };
+
+            // Act
+            var queryString = UriHelper.CreateQueryString(queryParameters);
+
+            // Assert
+            Assert.AreEqual(expectedQueryString, queryString);
+        }
+
+        [TestMethod]
+        public void CreateQueryStringReturnsQueryParametersAsString2()
+        {
+            // Arrange
+            var expectedQueryString = string.Format("{0}={1}&{2}=true", Constants.QueryParameter.IDX, TestConstants.IDX_VALUE, Constants.QueryParameter.ON_OFF);
 
             var queryParameters = new Dictionary<string, object>()
             {

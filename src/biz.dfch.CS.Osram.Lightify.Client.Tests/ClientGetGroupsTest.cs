@@ -29,6 +29,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetGroupsSucceeds()
         {
+            // Arrange
             var sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
             sut.UserInformation = new UserInformation()
             {
@@ -57,8 +58,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(Newtonsoft.Json.JsonConvert.SerializeObject(groups))
                 .OccursOnce();
 
+            // Act
             var result = sut.GetGroups();
 
+            // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Count);
             

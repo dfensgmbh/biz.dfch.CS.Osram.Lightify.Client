@@ -35,6 +35,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void TurnLightGroupOnSucceeds()
         {
+            // Arrange
             var groupId = 1L;
             var group = new Group
             {
@@ -46,14 +47,15 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 ReturnCode = 0
             };
 
-
             Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(responseOperation.SerializeObject)
                 .OccursOnce();
 
+            // Act
             var result = Sut.TurnLightGroupOn(group);
 
+            // Assert
             Mock.Assert(RestCallExecutor);
             Assert.IsNotNull(result);
             Assert.AreEqual(responseOperation.ReturnCode, result.ReturnCode);
@@ -62,6 +64,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void TurnLightGroupOffSucceeds()
         {
+            // Arrange
             var groupId = 1L;
             var group = new Group
             {
@@ -73,14 +76,15 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 ReturnCode = 0
             };
 
-
             Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(responseOperation.SerializeObject)
                 .OccursOnce();
 
+            // Act
             var result = Sut.TurnLightGroupOff(group);
 
+            // Assert
             Mock.Assert(RestCallExecutor);
             Assert.IsNotNull(result);
             Assert.AreEqual(responseOperation.ReturnCode, result.ReturnCode);

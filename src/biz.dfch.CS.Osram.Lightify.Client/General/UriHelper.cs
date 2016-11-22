@@ -37,7 +37,18 @@ namespace biz.dfch.CS.Osram.Lightify.Client.General
 
             foreach (var parameter in queryParameters)
             {
-                queryString += string.Format("{0}{1}={2}", separator, parameter.Key, parameter.Value);
+                Contract.Assert(null != parameter.Key);
+                Contract.Assert(null != parameter.Value);
+
+                if (parameter.Value is bool)
+                {
+                    queryString += string.Format("{0}{1}={2}", separator, parameter.Key, parameter.Value.ToString().ToLower());
+                }
+                else
+                {
+                    queryString += string.Format("{0}{1}={2}", separator, parameter.Key, parameter.Value);
+                }
+
                 separator = QUERY_SEPARATOR;
             }
 
