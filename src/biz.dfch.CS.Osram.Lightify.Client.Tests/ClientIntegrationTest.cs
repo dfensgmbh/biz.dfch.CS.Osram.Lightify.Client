@@ -102,5 +102,31 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.IsTrue(succeededOff);
             Assert.IsTrue(succeededOn);
         }
+
+        [TestMethod]
+        [TestCategory("SkipOnTeamCity")]
+        public void SetColorSucceeds()
+        {
+            // Arrange
+            Client.GetToken(IntegrationTestEnvironment.Username, IntegrationTestEnvironment.Password,
+                IntegrationTestEnvironment.SerialNumber);
+
+            var groups = Client.GetGroups();
+            Contract.Assert(null != groups);
+
+            var firstGroup = groups.FirstOrDefault();
+            Contract.Assert(null != firstGroup);
+
+            Client.TurnLightGroupOn(firstGroup);
+
+            // Act
+            var succeededColorChange = Client.SetGroupColor(firstGroup, "FF0000");
+            var succeededColorTimedChange = Client.SetGroupColor(firstGroup, "0000FF", 100);
+            System.Threading.Thread.Sleep(10000);
+            // Assert
+            Assert.IsTrue(succeededColorChange);
+            Assert.IsTrue(succeededColorTimedChange);
+            Client.TurnLightGroupOff(firstGroup);
+        }
     }
 }
