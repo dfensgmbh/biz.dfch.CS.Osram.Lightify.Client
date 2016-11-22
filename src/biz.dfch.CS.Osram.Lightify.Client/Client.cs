@@ -85,11 +85,25 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return response.SecurityToken;
         }
 
+        internal T Invoke<T>(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers,
+            Dictionary<string, object> queryParams, string body)
+            where T : BaseDto
+        {
+            var result = Invoke(httpMethod, requestUriSuffix, headers, body);
+            return BaseDto.DeserializeObject<T>(result);
+        }
+
         internal T Invoke<T>(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers, string body) 
             where T : BaseDto
         {
             var result = Invoke(httpMethod, requestUriSuffix, headers, body);
             return BaseDto.DeserializeObject<T>(result);
+        }
+
+        internal string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers,
+            Dictionary<string, object> queryParams, string body)
+        {
+            return default(string);
         }
 
         internal string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers, string body)
@@ -98,7 +112,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             Contract.Requires(null == headers || (null != headers && !headers.ContainsKey(Constants.HttpHeaders.AUTHORIZATION)));
             Contract.Requires(null != UserInformation, Constants.Messages.CLIENT_NOT_LOGGED_IN);
             
-            // DFTODO - token refresh, if necessary
+            // DFTODO - @rufer7 - token refresh, if necessary
 
             if (null == headers)
             {
