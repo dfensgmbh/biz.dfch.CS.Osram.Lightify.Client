@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using biz.dfch.CS.Osram.Lightify.Client.Model;
 using biz.dfch.CS.Web.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -50,7 +51,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 }]";
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, null, null))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(response)
                 .OccursOnce();
