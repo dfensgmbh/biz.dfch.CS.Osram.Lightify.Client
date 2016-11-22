@@ -41,6 +41,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             public const string ON_OFF = "onoff";
             public const string LEVEL = "level";
             public const string TIME = "time";
+            public const string SATURATION = "saturation";
         }
 
         public static class Messages

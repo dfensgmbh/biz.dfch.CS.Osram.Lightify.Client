@@ -43,11 +43,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void TurnLightGroupOnSucceeds()
         {
             // Arrange
-            var groupId = 1L;
             var group = new Group
             {
-                GroupId = groupId,
-                Name = "group1"
+                GroupId = TestConstants.GROUP_ID,
+                Name = TestConstants.GROUP_NAME
             };
 
             Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
@@ -68,11 +67,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void TurnLightGroupOffSucceeds()
         {
             // Arrange
-            var groupId = 1L;
             var group = new Group
             {
-                GroupId = groupId,
-                Name = "group1"
+                GroupId = TestConstants.GROUP_ID,
+                Name = TestConstants.GROUP_NAME
             };
 
             Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
@@ -91,11 +89,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
         public void SetGroupLevelSucceeds()
         {
-            var groupId = 1L;
             var group = new Group
             {
-                GroupId = groupId,
-                Name = "group1"
+                GroupId = TestConstants.GROUP_ID,
+                Name = TestConstants.GROUP_NAME
             };
 
             Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
@@ -112,11 +109,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
         public void SetGroupLevelWithTimeSucceeds()
         {
-            var groupId = 1L;
             var group = new Group
             {
-                GroupId = groupId,
-                Name = "group1"
+                GroupId = TestConstants.GROUP_ID,
+                Name = TestConstants.GROUP_NAME
             };
 
             Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
