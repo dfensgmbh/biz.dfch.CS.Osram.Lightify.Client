@@ -72,7 +72,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
         }
 
-        public OperationResponse SetLevelGroup(Group group, double level)
+        public OperationResponse SetLevelGroup(Group group, float level)
         {
             var queryParams = new Dictionary<string, object>
             {
@@ -83,7 +83,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
         }
 
-        public OperationResponse SetLevelGroup(long groupId, double level)
+        public OperationResponse SetLevelGroup(long groupId, float level)
         {
             var queryParams = new Dictionary<string, object>
             {
@@ -94,7 +94,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
         }
 
-        public OperationResponse SetLevelGroup(Group group, double level, long time)
+        public OperationResponse SetLevelGroup(Group group, float level, long time)
         {
             var queryParams = new Dictionary<string, object>
             {
@@ -106,7 +106,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
         }
 
-        public OperationResponse SetLevelGroup(long groupId, double level, long time)
+        public OperationResponse SetLevelGroup(long groupId, float level, long time)
         {
             var queryParams = new Dictionary<string, object>
             {
