@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using biz.dfch.CS.Osram.Lightify.Client.Model;
 using biz.dfch.CS.Web.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 using Telerik.JustMock;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Tests
@@ -26,8 +25,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 }
             };
             var groupId = 1L;
-            var suffix = string.Format("{0}/{1}", Constants.ApiOperation.GROUPS, groupId);
-            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, suffix);
 
             var response = @"
                             {
@@ -41,12 +38,12 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             }";
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), ""))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(response)
                 .OccursOnce();
 
-            var result = sut.GetGroupById(1);
+            var result = sut.GetGroup(1);
 
             Mock.Assert(restCallExecutor);
             Assert.IsNotNull(result);
@@ -98,36 +95,17 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 	            }
             }";
 
-            var groups = new List<Group>();
-            groups.Add(new Group
-            {
-                GroupId = 1,
-                Name = "testgroup1"
-            });
-            groups.Add(new Group
-            {
-                GroupId = 2,
-                Name = "testgroup2"
-            });
-
-            // var groupsAsJson = JsonConvert.SerializeObject(groups);
-
-            var suffix = string.Format("{0}/{1}", Constants.ApiOperation.GROUPS, 1L);
-
-            var requestUriFirstMock = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Constants.ApiOperation.GROUPS);
-            var requestUriSecondMock = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, suffix);
-
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUriFirstMock.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), ""))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(responseFirstMock)
                 .InSequence();
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUriSecondMock.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), ""))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(responseSecondMock)
                 .InSequence();
 
-            var result = sut.GetGroupByName("testgroup");
+            var result = sut.GetGroup("testgroup");
 
             Mock.Assert(restCallExecutor);
             Assert.IsNotNull(result);
