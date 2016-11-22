@@ -190,6 +190,7 @@
     <Compile Include="ClientGetDevice.cs" />
     <Compile Include="ClientGetDevices.cs" />
     <Compile Include="ClientGetGateway.cs" />
+    <Compile Include="ClientGetGroup.cs" />
     <Compile Include="ClientGetGroups.cs" />
     <Compile Include="ClientGroupOperation.cs" />
     <Compile Include="ClientSceneRecall.cs" />
