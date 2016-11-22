@@ -23,13 +23,13 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests.Model
     public class SessionRequestTest
     {
         [TestMethod]
-        public void SerializationSucceeds()
+        public void SerialisationSucceeds()
         {
             var sut = new SessionRequest
             {
-                Username = "ArbitraryUsername",
-                Password = "ArbitraryPassword",
-                SerialNumber = "ArbitrarySerialNumber"
+                Username = Constants.USERNAME,
+                Password = Constants.PASSWORD,
+                SerialNumber = Constants.SERIAL_NUMBER
             };
 
             var result = sut.SerializeObject();

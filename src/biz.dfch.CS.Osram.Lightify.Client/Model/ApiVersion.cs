@@ -20,11 +20,13 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Model
 {
     public class ApiVersion : BaseDto
     {
-
+        [JsonProperty("apiversion")]
+        public Version Version { get; set; }
     }
 }

@@ -28,14 +28,12 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
     [TestClass]
     public class ClientGetDeviceTest
     {
-        public static readonly Uri Uri = new Uri("https://eu.lightify-api.org.example.com/lightify/services/");
-
         [TestMethod]
         [ExpectContractFailure(MessagePattern = "id")]
         public void GetDeviceWithInvalidIdThrowsContractException()
         {
             var id = 0;
-            var sut = new Client(Uri);
+            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             var result = sut.GetDevice(id);
         }
@@ -44,7 +42,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void GetDeviceByIdSucceeds()
         {
             var id = 42;
-            var sut = new Client(Uri);
+            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             var result = sut.GetDevice(id);
         }
@@ -53,7 +51,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void GetDeviceByNameSucceeds()
         {
             var name = "arbitaryName";
-            var sut = new Client(Uri);
+            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             var result = sut.GetDevice(name);
         }
@@ -62,7 +60,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void GetDeviceByNameCaseSensitiveSucceeds()
         {
             var name = "CaseSensitiveName";
-            var sut = new Client(Uri);
+            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             var result = sut.GetDevice(name);
         }

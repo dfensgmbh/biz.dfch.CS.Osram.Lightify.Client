@@ -27,20 +27,12 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
     [TestClass]
     public class ClientTest
     {
-        private static readonly Uri OSRAM_LIGHTIFY_BASE_URI = new Uri("https://eu.lightify-api.org.example.com/lightify/services/");
-
-        private const string USER_ID = "arbitraryUser";
-        private const string SECURITY_TOKEN = "validSecurityToken";
-        private const string USERNAME = "ArbitraryUser";
-        private const string PASSWORD = "ArbitraryPassword";
-        private const string SERIAL_NUMBER = "ArbitrarySerialNumber";
-
         [TestMethod]
         [ExpectContractFailure(MessagePattern = "Precondition.+username")]
         public void GetTokenWithNullUsernameThrowsContractException()
         {
             // Arrange
-            var sut = new Client(OSRAM_LIGHTIFY_BASE_URI);
+            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             var username = default(string);
             var password = default(string);
@@ -57,9 +49,9 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void GetTokenWithNullPasswordThrowsContractException()
         {
             // Arrange
-            var sut = new Client(OSRAM_LIGHTIFY_BASE_URI);
+            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
-            var username = "ArbitraryUser";
+            var username = Constants.USERNAME;
             var password = default(string);
             var serialNumber = default(string);
 
@@ -74,10 +66,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void GetTokenWithNullSerialNumberThrowsContractException()
         {
             // Arrange
-            var sut = new Client(OSRAM_LIGHTIFY_BASE_URI);
+            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
-            var username = "ArbitraryUser";
-            var password = "ArbitraryPassword";
+            var username = Constants.USERNAME;
+            var password = Constants.PASSWORD;
             var serialNumber = default(string);
 
             // Act
@@ -92,8 +84,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             // Arrange
             var input = new SessionResponse
             {
-                UserId = USER_ID,
-                SecurityToken = SECURITY_TOKEN
+                UserId = Constants.USER_ID,
+                SecurityToken = Constants.SECURITY_TOKEN
             };
             var json = input.SerializeObject();
             
@@ -101,11 +93,11 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Mock.Arrange(() => restCallExecutor.Invoke(Arg.IsAny<HttpMethod>(), Arg.IsAny<string>(), Arg.IsAny<IDictionary<string, string>>(), Arg.IsAny<string>()))
                 .IgnoreInstance()
                 .Returns(json);
-            
-            var sut = new Client(OSRAM_LIGHTIFY_BASE_URI);
+
+            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             // Act
-            var result = sut.GetToken(USERNAME, PASSWORD, SERIAL_NUMBER);
+            var result = sut.GetToken(Constants.USERNAME, Constants.PASSWORD, Constants.SERIAL_NUMBER);
 
             // Assert
             Assert.IsFalse(string.IsNullOrWhiteSpace(result));
@@ -119,8 +111,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             // Arrange
             var input = new SessionResponse
             {
-                UserId = USER_ID,
-                SecurityToken = SECURITY_TOKEN
+                UserId = Constants.USER_ID,
+                SecurityToken = Constants.SECURITY_TOKEN
             };
             var json = input.SerializeObject();
 
@@ -129,19 +121,19 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .IgnoreInstance()
                 .Returns(json);
 
-            var sut = new Client(OSRAM_LIGHTIFY_BASE_URI);
+            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             // Act
-            var result = sut.GetToken(USERNAME, PASSWORD, SERIAL_NUMBER);
+            var result = sut.GetToken(Constants.USERNAME, Constants.PASSWORD, Constants.SERIAL_NUMBER);
             
             // Assert
             Assert.IsFalse(string.IsNullOrWhiteSpace(result));
             Assert.IsNotNull(sut.UserInformation);
-            Assert.AreEqual(USER_ID, sut.UserInformation.UserId);
-            Assert.AreEqual(USERNAME, sut.UserInformation.Username);
-            Assert.AreEqual(PASSWORD, sut.UserInformation.Password);
-            Assert.AreEqual(SERIAL_NUMBER, sut.UserInformation.SerialNumber);
-            Assert.AreEqual(SECURITY_TOKEN, sut.UserInformation.SecurityToken);
+            Assert.AreEqual(Constants.USER_ID, sut.UserInformation.UserId);
+            Assert.AreEqual(Constants.USERNAME, sut.UserInformation.Username);
+            Assert.AreEqual(Constants.PASSWORD, sut.UserInformation.Password);
+            Assert.AreEqual(Constants.SERIAL_NUMBER, sut.UserInformation.SerialNumber);
+            Assert.AreEqual(Constants.SECURITY_TOKEN, sut.UserInformation.SecurityToken);
 
             Mock.Assert(restCallExecutor);
         }
@@ -151,7 +143,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void InvokeWithNullRequestUriSuffixThrowsContractException()
         {
             // Arrange
-            var client = new Client(OSRAM_LIGHTIFY_BASE_URI);
+            var client = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             // Act
             client.Invoke(HttpMethod.Get, null, null, "");
@@ -164,7 +156,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void InvokeWithEmptyRequestUriSuffixThrowsContractException()
         {
             // Arrange
-            var client = new Client(OSRAM_LIGHTIFY_BASE_URI);
+            var client = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             // Act
             client.Invoke(HttpMethod.Get, "", null, "");
@@ -177,24 +169,24 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void InvokeWithHeadersContainingAuthorizationHeaderThrowsContractException()
         {
             // Arrange
-            var client = new Client(OSRAM_LIGHTIFY_BASE_URI);
+            var client = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             client.UserInformation = new UserInformation()
             {
-                UserId = USER_ID,
-                Username = USERNAME,
-                Password = PASSWORD,
-                SerialNumber = SERIAL_NUMBER,
-                SecurityToken = SECURITY_TOKEN
+                UserId = Constants.USER_ID,
+                Username = Constants.USERNAME,
+                Password = Constants.PASSWORD,
+                SerialNumber = Constants.SERIAL_NUMBER,
+                SecurityToken = Constants.SECURITY_TOKEN
             };
 
             var headers = new Dictionary<string, string>()
             {
-                {Constants.HttpHeaders.AUTHORIZATION, SECURITY_TOKEN}
+                {Lightify.Client.Constants.HttpHeaders.AUTHORIZATION, Constants.SECURITY_TOKEN}
             };
 
             // Act
-            client.Invoke(HttpMethod.Get, Constants.ApiSuffixes.SESSION, headers, "");
+            client.Invoke(HttpMethod.Get, Lightify.Client.Constants.ApiSuffixes.SESSION, headers, "");
 
             // Assert
         }
@@ -203,37 +195,37 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void InvokeWithNullBodyCallsRestExecutorWithEmptyBody()
         {
             // Arrange
-            var client = new Client(OSRAM_LIGHTIFY_BASE_URI);
+            var client = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             client.UserInformation = new UserInformation()
             {
-                UserId = USER_ID,
-                Username = USERNAME,
-                Password = PASSWORD,
-                SerialNumber = SERIAL_NUMBER,
-                SecurityToken = SECURITY_TOKEN
+                UserId = Constants.USER_ID,
+                Username = Constants.USERNAME,
+                Password = Constants.PASSWORD,
+                SerialNumber = Constants.SERIAL_NUMBER,
+                SecurityToken = Constants.SECURITY_TOKEN
             };
 
             var input = new SessionResponse
             {
-                UserId = USER_ID,
-                SecurityToken = SECURITY_TOKEN
+                UserId = Constants.USER_ID,
+                SecurityToken = Constants.SECURITY_TOKEN
             };
             var json = input.SerializeObject();
 
             var headers = new Dictionary<string, string>()
             {
-                {Constants.HttpHeaders.AUTHORIZATION, SECURITY_TOKEN}
+                {Lightify.Client.Constants.HttpHeaders.AUTHORIZATION, Constants.SECURITY_TOKEN}
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(OSRAM_LIGHTIFY_BASE_URI, Constants.ApiSuffixes.SESSION);
+            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.SESSION);
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, ""))
                 .IgnoreInstance()
                 .Returns(json);
 
             // Act
-            var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiSuffixes.SESSION, null, null);
+            var responseAsString = client.Invoke(HttpMethod.Get, Lightify.Client.Constants.ApiSuffixes.SESSION, null, null);
 
             // Assert
             Assert.IsNotNull(responseAsString);
@@ -246,37 +238,37 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void InvokeCallsRestExecutorWithAuthorizationHeaderAndReturnsResponseAsString()
         {
             // Arrange
-            var client = new Client(OSRAM_LIGHTIFY_BASE_URI);
+            var client = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             client.UserInformation = new UserInformation()
             {
-                UserId = USER_ID,
-                Username = USERNAME,
-                Password = PASSWORD,
-                SerialNumber = SERIAL_NUMBER,
-                SecurityToken = SECURITY_TOKEN
+                UserId = Constants.USER_ID,
+                Username = Constants.USERNAME,
+                Password = Constants.PASSWORD,
+                SerialNumber = Constants.SERIAL_NUMBER,
+                SecurityToken = Constants.SECURITY_TOKEN
             };
 
             var input = new SessionResponse
             {
-                UserId = USER_ID,
-                SecurityToken = SECURITY_TOKEN
+                UserId = Constants.USER_ID,
+                SecurityToken = Constants.SECURITY_TOKEN
             };
             var json = input.SerializeObject();
 
             var headers = new Dictionary<string, string>()
             {
-                {Constants.HttpHeaders.AUTHORIZATION, SECURITY_TOKEN}
+                {Lightify.Client.Constants.HttpHeaders.AUTHORIZATION, Constants.SECURITY_TOKEN}
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(OSRAM_LIGHTIFY_BASE_URI, Constants.ApiSuffixes.SESSION);
+            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.SESSION);
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.IsAny<string>()))
                 .IgnoreInstance()
                 .Returns(json);
 
             // Act
-            var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiSuffixes.SESSION, null, "");
+            var responseAsString = client.Invoke(HttpMethod.Get, Lightify.Client.Constants.ApiSuffixes.SESSION, null, "");
 
             // Assert
             Assert.IsNotNull(responseAsString);
@@ -289,37 +281,37 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void GenericInvokeCallsRestExecutorWithAuthorizationHeaderAndReturnsResponseAsSpecifiedObject()
         {
             // Arrange
-            var client = new Client(OSRAM_LIGHTIFY_BASE_URI);
+            var client = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
             client.UserInformation = new UserInformation()
             {
-                UserId = USER_ID,
-                Username = USERNAME,
-                Password = PASSWORD,
-                SerialNumber = SERIAL_NUMBER,
-                SecurityToken = SECURITY_TOKEN
+                UserId = Constants.USER_ID,
+                Username = Constants.USERNAME,
+                Password = Constants.PASSWORD,
+                SerialNumber = Constants.SERIAL_NUMBER,
+                SecurityToken = Constants.SECURITY_TOKEN
             };
 
             var input = new SessionResponse
             {
-                UserId = USER_ID,
-                SecurityToken = SECURITY_TOKEN
+                UserId = Constants.USER_ID,
+                SecurityToken = Constants.SECURITY_TOKEN
             };
             var json = input.SerializeObject();
 
             var headers = new Dictionary<string, string>()
             {
-                {Constants.HttpHeaders.AUTHORIZATION, SECURITY_TOKEN}
+                {Lightify.Client.Constants.HttpHeaders.AUTHORIZATION, Constants.SECURITY_TOKEN}
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(OSRAM_LIGHTIFY_BASE_URI, Constants.ApiSuffixes.SESSION);
+            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.SESSION);
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.IsAny<string>()))
                 .IgnoreInstance()
                 .Returns(json);
 
             // Act
-            var sessionResponse = client.Invoke<SessionResponse>(HttpMethod.Get, Constants.ApiSuffixes.SESSION, null, "");
+            var sessionResponse = client.Invoke<SessionResponse>(HttpMethod.Get, Lightify.Client.Constants.ApiSuffixes.SESSION, null, "");
 
             // Assert
             Assert.IsNotNull(sessionResponse);

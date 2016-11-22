@@ -1,7 +1,4 @@
-﻿
-
-using biz.dfch.CS.Osram.Lightify.Client.Model;
-/**
+﻿/**
 * Copyright 2016 d-fens GmbH
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +13,7 @@ using biz.dfch.CS.Osram.Lightify.Client.Model;
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,5 +36,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Model
 
         [JsonProperty("scenes")]
         public Scenes Scenes { get; set; }
+
+        public Group()
+        {
+            Devices = new List<long>();
+        }
     }
 }
