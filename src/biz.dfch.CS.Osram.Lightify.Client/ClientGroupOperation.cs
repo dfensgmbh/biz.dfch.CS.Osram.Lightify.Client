@@ -19,10 +19,11 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
+﻿using System.Threading.Tasks;
 using biz.dfch.CS.Osram.Lightify.Client.Model;
 using biz.dfch.CS.Web.Utilities.Rest;
-using System.Text.RegularExpressions;
+﻿using Group = biz.dfch.CS.Osram.Lightify.Client.Model.Group;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
