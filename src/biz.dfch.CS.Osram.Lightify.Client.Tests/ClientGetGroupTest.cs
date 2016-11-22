@@ -10,25 +10,17 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
     [TestClass]
     public class ClientGetGroupTest
     {
-        private static readonly Uri OSRAM_LIGHTIFY_BASE_URI = new Uri("https://eu.lightify-api.org.example.com/lightify/services/");
-
-        private const string USER_ID = "arbitraryUser";
-        private const string SECURITY_TOKEN = "validSecurityToken";
-        private const string USERNAME = "ArbitraryUser";
-        private const string PASSWORD = "ArbitraryPassword";
-        private const string SERIAL_NUMBER = "ArbitrarySerialNumber";
-
         [TestMethod]
         public void GetGroupByIdSucceeds()
         {
-            var sut = new Client(OSRAM_LIGHTIFY_BASE_URI);
+            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
             sut.UserInformation = new UserInformation()
             {
-                UserId = USER_ID,
-                Username = USERNAME,
-                Password = PASSWORD,
-                SerialNumber = SERIAL_NUMBER,
-                SecurityToken = SECURITY_TOKEN
+                UserId = Constants.USER_ID,
+                Username = Constants.USERNAME,
+                Password = Constants.PASSWORD,
+                SerialNumber = Constants.SERIAL_NUMBER,
+                SecurityToken = Constants.SECURITY_TOKEN
             };
             var groupId = 1L;
 
@@ -59,14 +51,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetGroupByNameSucceeds()
         {
-            var sut = new Client(OSRAM_LIGHTIFY_BASE_URI);
+            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
             sut.UserInformation = new UserInformation()
             {
-                UserId = USER_ID,
-                Username = USERNAME,
-                Password = PASSWORD,
-                SerialNumber = SERIAL_NUMBER,
-                SecurityToken = SECURITY_TOKEN
+                UserId = Constants.USER_ID,
+                Username = Constants.USERNAME,
+                Password = Constants.PASSWORD,
+                SerialNumber = Constants.SERIAL_NUMBER,
+                SecurityToken = Constants.SECURITY_TOKEN
             };
 
             string response = @"
