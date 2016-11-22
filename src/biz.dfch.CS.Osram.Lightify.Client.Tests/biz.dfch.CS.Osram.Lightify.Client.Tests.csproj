@@ -207,6 +207,7 @@
     <Compile Include="ClientGetDevicesTest.cs" />
     <Compile Include="ClientGetGatewayTest.cs" />
     <Compile Include="ClientGetGroupTest.cs" />
+    <Compile Include="ClientIntegrationTest.cs" />
     <Compile Include="CodeContractsTest.cs" />
     <Compile Include="General\UriHelperTest.cs" />
     <Compile Include="TestConstants.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Model\SessionRequestTest.cs" />
     <Compile Include="ClientGetGroupsTest.cs" />
     <Compile Include="ClientGroupOperationTest.cs" />
+    <Compile Include="IntegrationTestEnvironment.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\biz.dfch.CS.Osram.Lightify.Client\biz.dfch.CS.Osram.Lightify.Client.csproj">

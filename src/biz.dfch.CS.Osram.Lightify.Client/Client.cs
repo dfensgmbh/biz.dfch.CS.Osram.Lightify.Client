@@ -121,8 +121,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             Contract.Requires(null == headers || (null != headers && !headers.ContainsKey(Constants.HttpHeaders.AUTHORIZATION)));
             Contract.Requires(null != UserInformation, Constants.Messages.CLIENT_NOT_LOGGED_IN);
             
-            // DFTODO - @rufer7 - token refresh, if necessary
-
             if (null == headers)
             {
                 headers = new Dictionary<string, string>();
