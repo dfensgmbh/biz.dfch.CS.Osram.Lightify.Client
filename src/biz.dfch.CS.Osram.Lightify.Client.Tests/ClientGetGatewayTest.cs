@@ -55,7 +55,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             var restCallExecutor = Mock.Create<RestCallExecutor>();
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.GATEWAY)), Arg.IsAny<Dictionary<string, string>>(), Arg.AnyString))
                 .IgnoreInstance()
-                .Returns(gateway.SerializeObject()))
+                .Returns(gateway.SerializeObject())
                 .OccursOnce();
 
             // Act
