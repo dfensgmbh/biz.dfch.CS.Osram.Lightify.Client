@@ -27,7 +27,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 {
     public partial class Client
     {
-        public Group GetGroupById(long id)
+        public Group GetGroup(long id)
         {
             var suffix = string.Format("{0}/{1}", Constants.ApiOperation.GROUPS, id);
             var response = Invoke(HttpMethod.Get, suffix, null, null);
@@ -36,7 +36,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return BaseDto.DeserializeObject<Group>(response);
         }
 
-        public Group GetGroupByName(string name)
+        public Group GetGroup(string name)
         {
             var groups = GetGroups();
             long requestedGroupId = 0;
@@ -48,7 +48,12 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                     break;
                 }
             }
-            return GetGroupById(requestedGroupId);
+            return GetGroup(requestedGroupId);
+        }
+
+        public Group GetGroup(Group group)
+        {
+            return GetGroup(group.GroupId);
         }
     }
 }
