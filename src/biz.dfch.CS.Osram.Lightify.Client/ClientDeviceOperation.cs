@@ -213,6 +213,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetDeviceColor(Device device, string hexColorCode, long time)
         {
+            Contract.Requires(null != device);
+
             return SetDeviceColor(device.DeviceId, hexColorCode, time);
         }
 
@@ -220,6 +222,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
             Contract.Requires(0 < id);
             Contract.Requires(Regex.IsMatch(hexColorCode, "^[A-Fa-f0-9]{6}$"));
+            Contract.Requires(0 <= time);
 
             var queryParams = new Dictionary<string, object>
             {

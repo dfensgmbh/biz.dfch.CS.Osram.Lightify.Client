@@ -211,6 +211,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupColor(Group group, string hexColorCode, long time)
         {
+            Contract.Requires(null != group);
+
             return SetGroupColor(group.GroupId, hexColorCode, time);
         }
 
@@ -218,6 +220,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
             Contract.Requires(0 < groupId);
             Contract.Requires(Regex.IsMatch(hexColorCode, "^[A-Fa-f0-9]{6}$"));
+            Contract.Requires(0 <= time);
 
             var queryParams = new Dictionary<string, object>
             {
