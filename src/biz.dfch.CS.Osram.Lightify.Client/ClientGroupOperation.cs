@@ -20,8 +20,8 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
- using biz.dfch.CS.Osram.Lightify.Client.Model;
- using biz.dfch.CS.Web.Utilities.Rest;
+using biz.dfch.CS.Osram.Lightify.Client.Model;
+using biz.dfch.CS.Web.Utilities.Rest;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
@@ -213,5 +213,27 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
             return SetGroupCTemp(group.GroupId, ctemp, time);
         }
+
+        public bool SetGroupColor(Group group, string hexColor)
+        {
+            return SetGroupColor(group.GroupId, hexColor);
+        }
+
+        public bool SetGroupColor(long groupId, string hexColor)
+        {
+            return false;
+        }
+
+        public bool SetGroupColor(Group group, string hexColor, long time)
+        {
+            return SetGroupColor(group.GroupId, hexColor, time);
+        }
+
+        public bool SetGroupColor(long groupId, string hexColor, long time)
+        {
+            return false;
+        }
+
+
     }
 }
