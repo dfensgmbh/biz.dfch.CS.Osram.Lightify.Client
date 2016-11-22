@@ -27,21 +27,21 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Model
     /*
      * 
     {
-    "deviceId": 1,
-    "deviceType": "LIGHT",
-    "manufacturer": "OSRAM",
-    "modelName": "Classic A60 RGBW",
-    "name": "A60RGBW 01",
-    "groupList": [ 1 ],
-    "bmpClusters": ["onOff", "Level", "Color", "Temperature" ],
-    "online": 1,
-    "on": 1,
-    "brightnessLevel": 1,
-    "hue": 0, "saturation": 0,
-    "temperature": 2702,
-    "firmwareVersion": "01020412",
-    "color": "FFFFFF"
-    },
+        "deviceId": 1,
+        "deviceType": "LIGHT",
+        "manufacturer": "OSRAM",
+        "modelName": "Classic A60 RGBW",
+        "name": "A60RGBW 01",
+        "groupList": [ 1 ],
+        "bmpClusters": ["onOff", "Level", "Color", "Temperature" ],
+        "online": 1,
+        "on": 1,
+        "brightnessLevel": 1,
+        "hue": 0, "saturation": 0,
+        "temperature": 2702,
+        "firmwareVersion": "01020412",
+        "color": "FFFFFF"
+    }
      *
      */
 
