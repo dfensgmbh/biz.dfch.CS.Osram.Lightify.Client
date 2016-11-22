@@ -168,12 +168,12 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return SetDeviceCTemp(device.DeviceId, ctemp);
         }
 
-        public bool SetDeviceCTemp(long deviceId, long ctemp)
+        public bool SetDeviceCTemp(long id, long ctemp)
         {
-            Contract.Requires(0 < deviceId);
+            Contract.Requires(0 < id);
             Contract.Requires(1000 <= ctemp && 8000 >= ctemp);
 
-            return SetDeviceCTemp(deviceId, ctemp, 0);
+            return SetDeviceCTemp(id, ctemp, 0);
         }
 
         public bool SetDeviceCTemp(Device device, long ctemp, long time)
@@ -183,15 +183,15 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return SetDeviceCTemp(device.DeviceId, ctemp, time);
         }
 
-        public bool SetDeviceCTemp(long deviceId, long ctemp, long time)
+        public bool SetDeviceCTemp(long id, long ctemp, long time)
         {
-            Contract.Requires(0 < deviceId);
+            Contract.Requires(0 < id);
             Contract.Requires(1000 <= ctemp && 8000 >= ctemp);
             Contract.Requires(0 <= time);
 
             var queryParams = new Dictionary<string, object>
             {
-                {Constants.QueryParameter.IDX, deviceId},
+                {Constants.QueryParameter.IDX, id},
                 {Constants.QueryParameter.CTEMP, ctemp},
                 {Constants.QueryParameter.TIME, time}
             };
