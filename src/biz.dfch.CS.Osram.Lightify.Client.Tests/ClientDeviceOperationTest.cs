@@ -259,7 +259,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             // Arrange
 
             // Act
-            Sut.SetDeviceSaturation(TestConstants.DEVICE_ID, 0.500f, 0);
+            Sut.SetDeviceSaturation(TestConstants.DEVICE_ID, -0.001f, 0);
 
             // Assert
         }
