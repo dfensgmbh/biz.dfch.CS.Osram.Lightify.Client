@@ -46,7 +46,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.ON_OFF, 1}
             };
 
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
             return 0 == result.ReturnCode;
         }
 
@@ -69,7 +69,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.ON_OFF, 1}
             };
 
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
             return 0 == result.ReturnCode;
         }
 
@@ -81,7 +81,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.LEVEL, level}
             };
 
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
             return 0 == result.ReturnCode;
         }
 
@@ -93,7 +93,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.LEVEL, level}
             };
 
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
             return 0 == result.ReturnCode;
         }
 
@@ -106,7 +106,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.TIME, time}
             };
 
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
             return 0 == result.ReturnCode;
         }
 
@@ -119,7 +119,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.TIME, time}
             };
 
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
             return 0 == result.ReturnCode;
         }
 
@@ -134,7 +134,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.SATURATION, saturation}
             };
 
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
             return result.ReturnCode == 0;
         }
 
@@ -150,7 +150,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
                 {Constants.QueryParameter.SATURATION, saturation}
             };
 
-            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUP_SET, queryParams, null, null);
             return result.ReturnCode == 0;
         }
 

@@ -49,7 +49,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 Name = TestConstants.GROUP_NAME
             };
 
-            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.GROUP_SET)), Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(_successOperationResponse.SerializeObject)
                 .OccursOnce();
@@ -73,7 +73,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 Name = TestConstants.GROUP_NAME
             };
 
-            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.GROUP_SET)), Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(_successOperationResponse.SerializeObject)
                 .OccursOnce();
@@ -95,7 +95,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 Name = TestConstants.GROUP_NAME
             };
 
-            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.GROUP_SET)), Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(_successOperationResponse.SerializeObject)
                 .OccursOnce();
@@ -115,12 +115,12 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 Name = TestConstants.GROUP_NAME
             };
 
-            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.GROUP_SET)), Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(_successOperationResponse.SerializeObject)
                 .OccursOnce();
 
-            var result = Sut.SetGroupLevel(group, 0.1f);
+            var result = Sut.SetGroupLevel(group, 0.1f, 42);
 
             Mock.Assert(RestCallExecutor);
             Assert.IsNotNull(result);
