@@ -25,19 +25,17 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests.Model
         [TestMethod]
         public void DeserialiseSucceeds()
         {
-            var userId = "arbitraryUser";
-            var securityToken = "validSecurityToken";
             var input = new SessionResponse
             {
-                UserId = userId,
-                SecurityToken = securityToken
+                UserId = Constants.USER_ID,
+                SecurityToken = Constants.SECURITY_TOKEN
             };
             var json = input.SerializeObject();
 
             var sut = BaseDto.DeserializeObject<SessionResponse>(json);
 
-            Assert.AreEqual(userId, sut.UserId);
-            Assert.AreEqual(securityToken, sut.SecurityToken);
+            Assert.AreEqual(Constants.USER_ID, sut.UserId);
+            Assert.AreEqual(Constants.SECURITY_TOKEN, sut.SecurityToken);
         }
     }
 }

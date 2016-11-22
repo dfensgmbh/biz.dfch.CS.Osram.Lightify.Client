@@ -201,6 +201,7 @@
     <Compile Include="ClientGetDeviceTest.cs" />
     <Compile Include="ClientGetDevicesTest.cs" />
     <Compile Include="CodeContractsTest.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Model\SessionResponseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ClientTest.cs" />
