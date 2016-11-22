@@ -31,6 +31,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public const string SECURITY_TOKEN = "ValidSecurityToken";
         public const string USERNAME = "ArbitraryUser";
         public const string PASSWORD = "ArbitraryPassword";
-        public const string SERIAL_NUMBER = "ArbitrarySerialNumber";
+        public const string SERIAL_NUMBER = "OSR42424242";
+        public const string GATEWAY_VERSION = "1.1.3.22-1.2.0.68";
     }
 }

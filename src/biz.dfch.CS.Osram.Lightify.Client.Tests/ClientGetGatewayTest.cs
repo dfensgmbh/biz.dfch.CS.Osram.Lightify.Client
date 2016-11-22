@@ -30,17 +30,17 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
     [TestClass]
     public class ClientGetGatewayTest
     {
-        private const string gatewayAsJson = @"
-            {
-	            ""version"": ""1.1.3.22-1.2.0.68"",
-	            ""serialNumber"": ""OSR42424242"",
-	            ""online"": true
-            }";
-
         [TestMethod]
         public void GetGatewaySucceedsAndReturnsGateway()
         {
             // Arrange
+            var gateway = new Gateway()
+            {
+                Version = TestConstants.GATEWAY_VERSION,
+                SerialNumber = TestConstants.SERIAL_NUMBER,
+                Online = true
+            };
+
             var client = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
             client.UserInformation = new UserInformation()
@@ -53,20 +53,19 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Constants.ApiOperation.GATEWAY);
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), Arg.AnyString))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.GATEWAY)), Arg.IsAny<Dictionary<string, string>>(), Arg.AnyString))
                 .IgnoreInstance()
-                .Returns(gatewayAsJson)
+                .Returns(gateway.SerializeObject())
                 .OccursOnce();
 
             // Act
-            var gateway = client.GetGateway();
+            var result = client.GetGateway();
 
             // Assert
-            Assert.IsNotNull(gateway);
-            Assert.AreEqual("1.1.3.22-1.2.0.68", gateway.Version);
-            Assert.AreEqual("OSR42424242", gateway.SerialNumber);
-            Assert.IsTrue(gateway.Online);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(TestConstants.GATEWAY_VERSION, result.Version);
+            Assert.AreEqual(TestConstants.SERIAL_NUMBER, result.SerialNumber);
+            Assert.IsTrue(result.Online);
 
             Mock.Assert(restCallExecutor);
         }
