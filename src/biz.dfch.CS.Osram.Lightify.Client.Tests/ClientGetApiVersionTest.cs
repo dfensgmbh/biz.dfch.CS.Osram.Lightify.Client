@@ -34,6 +34,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void GetApiVersionReturnsVersionOfOsramLightifyApi()
         {
             // Arrange
+            // DFTODO - replace with object -> serialize
             var apiVersionAsJson = "{\"apiversion\":\"1.0.0\"}";
             var client = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
 
