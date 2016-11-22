@@ -182,11 +182,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDto.cs" />
+    <Compile Include="ClientDeviceOperation.cs" />
     <Compile Include="ClientGetApiVersion.cs" />
     <Compile Include="ClientGetDevice.cs" />
     <Compile Include="ClientGetDevices.cs" />
     <Compile Include="ClientGetGateway.cs" />
     <Compile Include="ClientGetGroups.cs" />
+    <Compile Include="ClientGroupOperation.cs" />
+    <Compile Include="ClientSceneRecall.cs" />
     <Compile Include="CodeContracts.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Constants.cs" />
