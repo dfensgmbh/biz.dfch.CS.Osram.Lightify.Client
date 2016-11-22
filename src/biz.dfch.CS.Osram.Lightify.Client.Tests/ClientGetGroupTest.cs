@@ -43,7 +43,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(response)
                 .OccursOnce();
 
-            var result = sut.GetGroupById(1);
+            var result = sut.GetGroup(1);
 
             Mock.Assert(restCallExecutor);
             Assert.IsNotNull(result);
@@ -105,7 +105,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(responseSecondMock)
                 .InSequence();
 
-            var result = sut.GetGroupByName("testgroup");
+            var result = sut.GetGroup("testgroup");
 
             Mock.Assert(restCallExecutor);
             Assert.IsNotNull(result);

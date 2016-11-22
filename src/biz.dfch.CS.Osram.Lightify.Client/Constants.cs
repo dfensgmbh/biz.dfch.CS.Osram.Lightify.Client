@@ -35,6 +35,12 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             public const string DEVICES = "devices";
         }
 
+        public static class QueryParameter
+        {
+            public const string IDX = "idx";
+            public const string TURN_ON_OFF = "onoff";
+        }
+
         public static class Messages
         {
             public const string CLIENT_NOT_LOGGED_IN = "Perform getToken before using the client.";

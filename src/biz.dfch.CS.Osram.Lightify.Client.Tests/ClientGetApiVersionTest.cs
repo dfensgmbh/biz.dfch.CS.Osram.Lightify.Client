@@ -34,7 +34,15 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void GetApiVersionReturnsVersionOfOsramLightifyApi()
         {
             // Arrange
-            var apiVersionAsJson = "{\"apiversion\":\"1.0.0\"}";
+            var major = 1;
+            var minor = 2;
+            var build = 3;
+            var version = new Version(major, minor, build, 0);
+            var apiVersionResponse = new ApiVersion()
+            {
+                Version = version
+            };
+
             var client = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
             client.UserInformation = new UserInformation()
@@ -47,20 +55,19 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.VERSION);
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), Arg.AnyString))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.VERSION)), Arg.IsAny<Dictionary<string, string>>(), Arg.AnyString))
                 .IgnoreInstance()
-                .Returns(apiVersionAsJson)
+                .Returns(apiVersionResponse.SerializeObject())
                 .OccursOnce();
 
             // Act
-            var apiVersion = client.GetApiVersion();
+            var result = client.GetApiVersion();
 
             // Assert
-            Assert.IsNotNull(apiVersion);
-            Assert.AreEqual(1, apiVersion.Major);
-            Assert.AreEqual(0, apiVersion.Minor);
-            Assert.AreEqual(0, apiVersion.Build);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(major, result.Major);
+            Assert.AreEqual(minor, result.Minor);
+            Assert.AreEqual(build, result.Build);
 
             Mock.Assert(restCallExecutor);
         }
