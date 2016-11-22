@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
-    public class ClientGetApiVersion
+    public partial class Client
     {
         public ApiVersion GetApiVersion()
         {

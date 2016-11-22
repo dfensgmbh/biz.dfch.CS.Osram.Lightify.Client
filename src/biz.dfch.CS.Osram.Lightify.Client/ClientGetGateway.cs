@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
-    public class ClientGetGateway
+    public partial class Client
     {
         public Gateway GetGateway()
         {
