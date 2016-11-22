@@ -22,6 +22,7 @@ using System.Text;
 using System.Threading.Tasks;
 using biz.dfch.CS.Osram.Lightify.Client.Model;
 using biz.dfch.CS.Web.Utilities.Rest;
+using System.Text.RegularExpressions;
 
 namespace biz.dfch.CS.Osram.Lightify.Client
 {
