@@ -39,29 +39,22 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 SecurityToken = TestConstants.SECURITY_TOKEN
             };
 
-            string response = @"
-                [{
-	                ""groupId"": 1,
-	                ""name"": ""First and Second"",
-	                ""devices"": [2,
-	                1],
-	                ""scenes"": {
-		
-	                }
-                },
-                {
-	                ""groupId"": 2,
-	                ""name"": ""Third Lamp"",
-	                ""devices"": [3],
-	                ""scenes"": {
-		
-	                }
-                }]";
+            var groups = new List<Group>();
+            groups.Add(new Group
+            {
+                GroupId = 1L,
+                Name = "group1"
+            });
+            groups.Add(new Group
+            {
+                GroupId = 2L,
+                Name = "group2"
+            });
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
-                .Returns(response)
+                .Returns(Newtonsoft.Json.JsonConvert.SerializeObject(groups))
                 .OccursOnce();
 
             var result = sut.GetGroups();
