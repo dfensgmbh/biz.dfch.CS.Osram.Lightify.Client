@@ -52,15 +52,20 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [ExpectContractFailure(MessagePattern = "id")]
         public void GetDeviceWithInvalidIdThrowsContractException()
         {
+            // Arrange
             var id = 0;
             var sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
+            // Act
             var result = sut.GetDevice(id);
+
+            // Assert
         }
             
         [TestMethod]
         public void GetDeviceByIdSucceeds()
         {
+            // Arrange
             var id = 42;
 
             var response = new Device
@@ -74,12 +79,16 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(response.SerializeObject())
                 .OccursOnce();
 
+            // Act
             var result = Sut.GetDevice(id);
+
+            // Assert
         }
 
         [TestMethod]
         public void GetDeviceByIdWithInconsistentResponseReturnsNull()
         {
+            // Arrange
             var id = 42;
 
             var response = new Device
@@ -93,13 +102,17 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(response.SerializeObject())
                 .OccursOnce();
 
+            // Act
             var result = Sut.GetDevice(id);
+
+            // Assert
             Assert.IsNull(result);
         }
 
         [TestMethod]
         public void GetDeviceByNameSucceeds()
         {
+            // Arrange
             var name = "arbitaryName";
 
             var devices = new List<Device>
@@ -122,7 +135,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(JsonConvert.SerializeObject(devices))
                 .OccursOnce();
 
+            // Act
             var result = Sut.GetDevice(name);
+
+            // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(devices[0].DeviceId, result.DeviceId);
             Assert.AreEqual(devices[0].Name, result.Name);
@@ -131,6 +147,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetDeviceByNameCaseSensitiveSucceeds()
         {
+            // Arrange
             var name = "arbitaryName";
 
             var devices = new List<Device>
@@ -153,7 +170,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(JsonConvert.SerializeObject(devices))
                 .OccursOnce();
 
+            // Act
             var result = Sut.GetDevice(name, ignoreCase: true);
+
+            // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(devices[0].DeviceId, result.DeviceId);
             Assert.AreEqual(name.ToUpper(), result.Name);
@@ -162,6 +182,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetDeviceByNameCaseSensitiveReturnsNull()
         {
+            // Arrange
             var name = "arbitaryName";
 
             var devices = new List<Device>
@@ -184,7 +205,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(JsonConvert.SerializeObject(devices))
                 .OccursOnce();
 
+            // Act
             var result = Sut.GetDevice(name, ignoreCase: false);
+
+            // Assert
             Assert.IsNull(result);
         }
 
@@ -192,6 +216,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [ExpectContractFailure(MessagePattern = "devicesMatchingName.Count")]
         public void GetDeviceByNameWithDuplicateNameThrowsContractException()
         {
+            // Arrange
             var name = "arbitaryName";
 
             var devices = new List<Device>
@@ -214,7 +239,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 .Returns(JsonConvert.SerializeObject(devices))
                 .OccursOnce();
 
+            // Act
             var result = Sut.GetDevice(name);
+
+            // Assert
             Assert.IsNull(result);
         }
     }

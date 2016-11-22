@@ -25,6 +25,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests.Model
         [TestMethod]
         public void DeserialiseSucceeds()
         {
+            // Arrange
             var input = new SessionResponse
             {
                 UserId = TestConstants.USER_ID,
@@ -32,8 +33,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests.Model
             };
             var json = input.SerializeObject();
 
+            // Act
             var sut = BaseDto.DeserializeObject<SessionResponse>(json);
 
+            // Assert
             Assert.AreEqual(TestConstants.USER_ID, sut.UserId);
             Assert.AreEqual(TestConstants.SECURITY_TOKEN, sut.SecurityToken);
         }
