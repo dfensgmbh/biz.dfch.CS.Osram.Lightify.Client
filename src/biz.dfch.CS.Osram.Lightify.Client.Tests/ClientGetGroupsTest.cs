@@ -66,9 +66,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
             var result = sut.GetGroups();
 
-            Mock.Assert(restCallExecutor);
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Count);
+            
+            Mock.Assert(restCallExecutor);
         }
     }
 }
