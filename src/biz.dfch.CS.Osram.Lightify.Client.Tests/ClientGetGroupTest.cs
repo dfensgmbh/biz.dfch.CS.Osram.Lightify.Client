@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using biz.dfch.CS.Osram.Lightify.Client.Model;
 using biz.dfch.CS.Web.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using Telerik.JustMock;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Tests
@@ -96,6 +97,21 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 		
 	            }
             }";
+
+            var groups = new List<Group>();
+            groups.Add(new Group
+            {
+                GroupId = 1,
+                Name = "testgroup1"
+            });
+            groups.Add(new Group
+            {
+                GroupId = 2,
+                Name = "testgroup2"
+            });
+
+            // var groupsAsJson = JsonConvert.SerializeObject(groups);
+
             var suffix = string.Format("{0}/{1}", Constants.ApiOperation.GROUPS, 1L);
 
             var requestUriFirstMock = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Constants.ApiOperation.GROUPS);
