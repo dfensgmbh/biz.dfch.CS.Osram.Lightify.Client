@@ -33,6 +33,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             public const string VERSION = "version";
             public const string DEVICE = "device";
             public const string DEVICES = "devices";
+            public const string GROUPSET = "group/set";
         }
 
         public static class QueryParameter
