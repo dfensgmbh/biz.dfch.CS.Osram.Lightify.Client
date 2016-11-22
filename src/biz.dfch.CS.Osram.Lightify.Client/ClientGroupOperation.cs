@@ -174,6 +174,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupCTemp(Group group, long ctemp)
         {
+            Contract.Requires(null != group);
+
             return SetGroupCTemp(group.GroupId, ctemp);
         }
 
@@ -194,6 +196,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupCTemp(Group group, long ctemp, long time)
         {
+            Contract.Requires(null != group);
+
             return SetGroupCTemp(group.GroupId, ctemp, time);
         }
 
