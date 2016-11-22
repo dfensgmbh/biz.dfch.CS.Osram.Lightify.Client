@@ -117,5 +117,46 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             return Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
         }
+
+        public bool SetGroupSaturation(long groupId, float saturation)
+        {
+            Contract.Requires(0 < groupId);
+            Contract.Requires(0 < saturation && 1.000 > saturation);
+
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, groupId},
+                {Constants.QueryParameter.SATURATION, saturation}
+            };
+
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            return result.ReturnCode == 0;
+        }
+
+        public bool SetGroupSaturation(long groupId, float saturation, long time)
+        {
+            Contract.Requires(0 < groupId);
+            Contract.Requires(0 < saturation && 1.000 > saturation);
+            Contract.Requires(1000 > time);
+
+            var queryParams = new Dictionary<string, object>
+            {
+                {Constants.QueryParameter.IDX, groupId},
+                {Constants.QueryParameter.SATURATION, saturation}
+            };
+
+            var result = Invoke<OperationResponse>(HttpMethod.Get, Constants.ApiOperation.GROUPSET, queryParams, null, null);
+            return result.ReturnCode == 0;
+        }
+
+        public bool SetGroupSaturation(Group group, float saturation)
+        {
+            return SetGroupSaturation(group.GroupId, saturation);
+        }
+
+        public bool SetGroupSaturation(Group group, float saturation, long time)
+        {
+            return SetGroupSaturation(group.GroupId, saturation, time);
+        }
     }
 }
