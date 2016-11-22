@@ -107,10 +107,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             headers.Add(Constants.HttpHeaders.AUTHORIZATION, UserInformation.SecurityToken);
 
-            var client = new RestCallExecutor();
+            var restCallExecutor = new RestCallExecutor();
             var requestUri = new Uri(BaseUri, requestUriSuffix);
 
-            var result = client.Invoke(httpMethod, requestUri.AbsoluteUri, headers, body ?? "");
+            var result = restCallExecutor.Invoke(httpMethod, requestUri.AbsoluteUri, headers, body ?? "");
             Contract.Assert(!string.IsNullOrWhiteSpace(result));
 
             return result;

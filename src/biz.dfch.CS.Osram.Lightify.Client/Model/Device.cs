@@ -75,13 +75,13 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Model
         public long On { get; set; }
 
         [JsonProperty("brightnessLevel")]
-        public long BrightnessLevel { get; set; }
+        public decimal BrightnessLevel { get; set; }
 
         [JsonProperty("hue")]
-        public long Hue { get; set; }
+        public decimal Hue { get; set; }
 
         [JsonProperty("saturation")]
-        public long Saturation { get; set; }
+        public decimal Saturation { get; set; }
 
         [JsonProperty("temperature")]
         public long Temperature { get; set; }
@@ -90,7 +90,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Model
         public string FirmwareVersion { get; set; }
 
         [JsonProperty("color")]
-        public string Color { get; set; }
+        public string Colour { get; set; }
 
         public Device()
         {

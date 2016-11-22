@@ -21,14 +21,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Model
 {
-    public class Group
+    public class Group : BaseDto
     {
-        public int GroupId { get; set; }
+        [JsonProperty("groupId")]
+        public long GroupId { get; set; }
+
+        [JsonProperty("name")]
         public string Name { get; set; }
-        public List<int> Devices { get; set; }
+
+        [JsonProperty("devices")]
+        public IList<long> Devices { get; set; }
+
+        [JsonProperty("scenes")]
         public Scenes Scenes { get; set; }
     }
 }

@@ -27,20 +27,12 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 {
     public partial class Client
     {
-        internal ICollection<GroupResponse> Groups { get; set; }
-
-        public List<Group> GetGroups()
+        public ICollection<Group> GetGroups()
         {
-            var result = Invoke(HttpMethod.Get, Constants.ApiSuffixes.GROUPS, null, null);
-            Contract.Assert(!string.IsNullOrWhiteSpace(result));
+            var response = Invoke(HttpMethod.Get, Constants.ApiSuffixes.GROUPS, null, null);
+            Contract.Assert(!string.IsNullOrWhiteSpace(response));
 
-            var response = BaseDto.DeserializeObject<ICollection<GroupResponse>>(result);
-            var groups = new List<Group>();
-            foreach (var group in response)
-            {
-                var test = group.GroupId;
-            }
-            return default(List<Group>);
+            return BaseDto.DeserializeObject<ICollection<Group>>(response);
         }
     }
 }
