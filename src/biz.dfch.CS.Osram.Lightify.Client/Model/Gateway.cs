@@ -20,10 +20,19 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace biz.dfch.CS.Osram.Lightify.Client.Model
 {
     public class Gateway : BaseDto
     {
+        [JsonProperty("version")]
+        public string Version { get; set; }
+
+        [JsonProperty("serialNumber")]
+        public string SerialNumber { get; set; }
+
+        [JsonProperty("online")]
+        public bool Online { get; set; }
     }
 }
