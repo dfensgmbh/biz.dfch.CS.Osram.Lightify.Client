@@ -38,5 +38,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public const long IDX_VALUE = 42;
         public const long GROUP_ID = 666;
         public const long DEVICE_ID = 667;
+
+        public const long CTEMP_MIN_VALUE = 1000;
+        public const long CTEMP_MAX_VALUE = 8000;
     }
 }

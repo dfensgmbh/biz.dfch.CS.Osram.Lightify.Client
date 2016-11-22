@@ -151,7 +151,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             // Arrange
 
             // Act
-            Sut.SetDeviceLevel(1, -0.001f);
+            Sut.SetDeviceLevel(TestConstants.DEVICE_ID, -0.001f);
 
             // Assert
         }
@@ -163,7 +163,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             // Arrange
 
             // Act
-            Sut.SetDeviceLevel(1, 1.001f);
+            Sut.SetDeviceLevel(TestConstants.DEVICE_ID, 1.001f);
 
             // Assert
         }
@@ -175,7 +175,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             // Arrange
 
             // Act
-            Sut.SetDeviceLevel(1, 1.000f, -1);
+            Sut.SetDeviceLevel(TestConstants.DEVICE_ID, 1.000f, -1);
 
             // Assert
         }
@@ -228,6 +228,174 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Mock.Assert(RestCallExecutor);
         }
 
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+device")]
+        public void SetDeviceSaturationWithNullDeviceThrowsContractException()
+        {
+            // Arrange
 
+            // Act
+            Sut.SetDeviceSaturation(null, 0.500f, 0);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+id")]
+        public void SetDeviceSaturationWithInvalidIdThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceSaturation(0, 0.500f, 0);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+saturation")]
+        public void SetDeviceSaturationWithSaturationLessThanZeroThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceSaturation(TestConstants.DEVICE_ID, -0.001f, 0);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+saturation")]
+        public void SetDeviceSaturationWithSaturationHigherThan1ThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceSaturation(TestConstants.DEVICE_ID, 1.001f, 0);
+
+            // Assert
+        }
+
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+time")]
+        public void SetDeviceSaturationWithTimeLessThanZeroThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceSaturation(TestConstants.DEVICE_ID, 1.000f, -1);
+
+            // Assert
+        }
+
+        [TestMethod]
+        public void SetDeviceSaturationSucceeds()
+        {
+            // Arrange
+            var device = new Device
+            {
+                DeviceId = TestConstants.DEVICE_ID,
+            };
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICE_SET)), Arg.IsAny<Dictionary<string, string>>(), ""))
+                .IgnoreInstance()
+                .Returns(_successOperationResponse.SerializeObject)
+                .OccursOnce();
+
+            // Act
+            var result = Sut.SetDeviceSaturation(device, 0.1f, 42);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result);
+
+            Mock.Assert(RestCallExecutor);
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+device")]
+        public void SetDeviceCTempWithNullDeviceThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceCTemp(null, TestConstants.CTEMP_MIN_VALUE, 0);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+id")]
+        public void SetDeviceCTempWithInvalidIdThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceCTemp(0, TestConstants.CTEMP_MIN_VALUE, 0);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+ctemp")]
+        public void SetDeviceCTempWithCtempLessThan1000ThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceCTemp(TestConstants.DEVICE_ID, TestConstants.CTEMP_MIN_VALUE - 1, 0);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+ctemp")]
+        public void SetDeviceSaturationWithSaturationHigherThan8000ThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceCTemp(TestConstants.DEVICE_ID, TestConstants.CTEMP_MAX_VALUE + 1, 0);
+
+            // Assert
+        }
+
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+time")]
+        public void SetDeviceCTempWithTimeLessThanZeroThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceCTemp(TestConstants.DEVICE_ID, TestConstants.CTEMP_MIN_VALUE, -1);
+
+            // Assert
+        }
+
+        [TestMethod]
+        public void SetDeviceCTempSucceeds()
+        {
+            // Arrange
+            var device = new Device
+            {
+                DeviceId = TestConstants.DEVICE_ID,
+            };
+
+            Mock.Arrange(() => RestCallExecutor.Invoke(HttpMethod.Get, Arg.Matches<string>(s => s.Contains(Constants.ApiOperation.DEVICE_SET)), Arg.IsAny<Dictionary<string, string>>(), ""))
+                .IgnoreInstance()
+                .Returns(_successOperationResponse.SerializeObject)
+                .OccursOnce();
+
+            // Act
+            var result = Sut.SetDeviceCTemp(device, TestConstants.CTEMP_MIN_VALUE, 42);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result);
+
+            Mock.Assert(RestCallExecutor);
+        }
     }
 }
