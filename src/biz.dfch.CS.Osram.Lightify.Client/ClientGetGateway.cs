@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  
-﻿using biz.dfch.CS.Osram.Lightify.Client.Model;
+ using biz.dfch.CS.Osram.Lightify.Client.Model;
 using biz.dfch.CS.Web.Utilities.Rest;
 using System;
 using System.Collections.Generic;
@@ -29,7 +29,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
     {
         public Gateway GetGateway()
         {
-            return Invoke<Gateway>(HttpMethod.Get, Constants.ApiSuffixes.GATEWAY, null, null);
+            return Invoke<Gateway>(HttpMethod.Get, Constants.ApiOperation.GATEWAY, null, null);
         }
     }
 }

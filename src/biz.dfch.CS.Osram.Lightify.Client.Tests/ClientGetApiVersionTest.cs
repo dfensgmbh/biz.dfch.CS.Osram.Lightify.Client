@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2016 d-fens GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  
-﻿using System;
+ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -47,7 +47,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.VERSION);
+            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.VERSION);
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), Arg.AnyString))
                 .IgnoreInstance()
                 .Returns(apiVersionAsJson)

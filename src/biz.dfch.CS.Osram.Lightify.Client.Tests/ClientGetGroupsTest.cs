@@ -39,7 +39,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 SecurityToken = Constants.SECURITY_TOKEN
             };
 
-            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.GROUPS);
+            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.GROUPS);
 
             string response = @"
                 [{

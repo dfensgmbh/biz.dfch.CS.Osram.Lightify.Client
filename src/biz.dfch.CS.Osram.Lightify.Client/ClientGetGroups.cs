@@ -29,7 +29,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
     {
         public ICollection<Group> GetGroups()
         {
-            var response = Invoke(HttpMethod.Get, Constants.ApiSuffixes.GROUPS, null, null);
+            var response = Invoke(HttpMethod.Get, Constants.ApiOperation.GROUPS, null, null);
             Contract.Assert(!string.IsNullOrWhiteSpace(response));
 
             return BaseDto.DeserializeObject<ICollection<Group>>(response);

@@ -25,7 +25,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 }
             };
             var groupId = 1L;
-            var suffix = string.Format("{0}/{1}", Lightify.Client.Constants.ApiSuffixes.GROUPS, groupId);
+            var suffix = string.Format("{0}/{1}", Lightify.Client.Constants.ApiOperation.GROUPS, groupId);
             var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, suffix);
 
             var response = @"
@@ -96,9 +96,9 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 		
 	            }
             }";
-            var suffix = string.Format("{0}/{1}", Lightify.Client.Constants.ApiSuffixes.GROUPS, 1L);
+            var suffix = string.Format("{0}/{1}", Lightify.Client.Constants.ApiOperation.GROUPS, 1L);
 
-            var requestUriFirstMock = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.GROUPS);
+            var requestUriFirstMock = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.GROUPS);
             var requestUriSecondMock = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, suffix);
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();

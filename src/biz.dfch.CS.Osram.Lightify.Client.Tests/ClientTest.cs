@@ -188,7 +188,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             };
 
             // Act
-            client.Invoke(HttpMethod.Get, Lightify.Client.Constants.ApiSuffixes.SESSION, headers, "");
+            client.Invoke(HttpMethod.Get, Lightify.Client.Constants.ApiOperation.SESSION, headers, "");
 
             // Assert
         }
@@ -221,14 +221,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.SESSION);
+            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.SESSION);
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, ""))
                 .IgnoreInstance()
                 .Returns(json)
                 .OccursOnce();
 
             // Act
-            var responseAsString = client.Invoke(HttpMethod.Get, Lightify.Client.Constants.ApiSuffixes.SESSION, null, null);
+            var responseAsString = client.Invoke(HttpMethod.Get, Lightify.Client.Constants.ApiOperation.SESSION, null, null);
 
             // Assert
             Assert.IsNotNull(responseAsString);
@@ -265,14 +265,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.SESSION);
+            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.SESSION);
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.AnyString))
                 .IgnoreInstance()
                 .Returns(json)
                 .OccursOnce();
 
             // Act
-            var responseAsString = client.Invoke(HttpMethod.Get, Lightify.Client.Constants.ApiSuffixes.SESSION, null, "");
+            var responseAsString = client.Invoke(HttpMethod.Get, Lightify.Client.Constants.ApiOperation.SESSION, null, "");
 
             // Assert
             Assert.IsNotNull(responseAsString);
@@ -309,14 +309,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.SESSION);
+            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.SESSION);
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.AnyString))
                 .IgnoreInstance()
                 .Returns(json)
                 .OccursOnce();
 
             // Act
-            var sessionResponse = client.Invoke<SessionResponse>(HttpMethod.Get, Lightify.Client.Constants.ApiSuffixes.SESSION, null, "");
+            var sessionResponse = client.Invoke<SessionResponse>(HttpMethod.Get, Lightify.Client.Constants.ApiOperation.SESSION, null, "");
 
             // Assert
             Assert.IsNotNull(sessionResponse);

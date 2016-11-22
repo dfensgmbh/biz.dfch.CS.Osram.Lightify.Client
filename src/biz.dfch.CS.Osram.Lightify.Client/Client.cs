@@ -67,7 +67,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
             var body = sut.SerializeObject();
             var client = new RestCallExecutor();
-            var requestUri = new Uri(baseUri, Constants.ApiSuffixes.SESSION);
+            var requestUri = new Uri(baseUri, Constants.ApiOperation.SESSION);
             var result = client.Invoke(HttpMethod.Post, requestUri.AbsoluteUri, null, body);
             Contract.Assert(!string.IsNullOrWhiteSpace(result));
 

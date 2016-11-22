@@ -29,7 +29,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
     {
         public Group GetGroupById(long id)
         {
-            var suffix = string.Format("{0}/{1}", Constants.ApiSuffixes.GROUPS, id);
+            var suffix = string.Format("{0}/{1}", Constants.ApiOperation.GROUPS, id);
             var response = Invoke(HttpMethod.Get, suffix, null, null);
             Contract.Assert(!string.IsNullOrWhiteSpace(response));
 
