@@ -26,8 +26,6 @@ using biz.dfch.CS.Web.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Telerik.JustMock;
 
-using Constants = biz.dfch.CS.Osram.Lightify.Client.Constants;
-
 namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 {
     [TestClass]

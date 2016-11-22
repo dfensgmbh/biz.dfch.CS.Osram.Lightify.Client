@@ -184,11 +184,11 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
             var headers = new Dictionary<string, string>()
             {
-                {Lightify.Client.Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
+                {Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
             };
 
             // Act
-            client.Invoke(HttpMethod.Get, Lightify.Client.Constants.ApiOperation.SESSION, headers, "");
+            client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, headers, "");
 
             // Assert
         }
@@ -217,18 +217,18 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
             var headers = new Dictionary<string, string>()
             {
-                {Lightify.Client.Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
+                {Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.SESSION);
+            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Constants.ApiOperation.SESSION);
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, ""))
                 .IgnoreInstance()
                 .Returns(json)
                 .OccursOnce();
 
             // Act
-            var responseAsString = client.Invoke(HttpMethod.Get, Lightify.Client.Constants.ApiOperation.SESSION, null, null);
+            var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, null, null);
 
             // Assert
             Assert.IsNotNull(responseAsString);
@@ -261,18 +261,18 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
             var headers = new Dictionary<string, string>()
             {
-                {Lightify.Client.Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
+                {Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.SESSION);
+            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Constants.ApiOperation.SESSION);
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.AnyString))
                 .IgnoreInstance()
                 .Returns(json)
                 .OccursOnce();
 
             // Act
-            var responseAsString = client.Invoke(HttpMethod.Get, Lightify.Client.Constants.ApiOperation.SESSION, null, "");
+            var responseAsString = client.Invoke(HttpMethod.Get, Constants.ApiOperation.SESSION, null, "");
 
             // Assert
             Assert.IsNotNull(responseAsString);
@@ -305,18 +305,18 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
             var headers = new Dictionary<string, string>()
             {
-                {Lightify.Client.Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
+                {Constants.HttpHeaders.AUTHORIZATION, TestConstants.SECURITY_TOKEN}
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.SESSION);
+            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Constants.ApiOperation.SESSION);
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.AnyString))
                 .IgnoreInstance()
                 .Returns(json)
                 .OccursOnce();
 
             // Act
-            var sessionResponse = client.Invoke<SessionResponse>(HttpMethod.Get, Lightify.Client.Constants.ApiOperation.SESSION, null, "");
+            var sessionResponse = client.Invoke<SessionResponse>(HttpMethod.Get, Constants.ApiOperation.SESSION, null, "");
 
             // Assert
             Assert.IsNotNull(sessionResponse);
