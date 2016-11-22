@@ -82,10 +82,25 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void TurnGroupOnAndOffSucceeds()
         {
             // Arrange
+            Client.GetToken(IntegrationTestEnvironment.Username, IntegrationTestEnvironment.Password,
+                IntegrationTestEnvironment.SerialNumber);
+
+            var groups = Client.GetGroups();
+            Contract.Assert(null != groups);
+
+            var firstGroup = groups.FirstOrDefault();
+            Contract.Assert(null != firstGroup);
+
+            Client.TurnLightGroupOff(firstGroup);
 
             // Act
+            var succeededOn = Client.TurnLightGroupOn(firstGroup);
+            System.Threading.Thread.Sleep(3000);
+            var succeededOff = Client.TurnLightGroupOff(firstGroup);
 
             // Assert
+            Assert.IsTrue(succeededOff);
+            Assert.IsTrue(succeededOn);
         }
     }
 }
