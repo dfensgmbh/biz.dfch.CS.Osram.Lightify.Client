@@ -114,7 +114,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
             Contract.Requires(0 < groupId);
             Contract.Requires(1.000 >= level && 0 <= level);
-            Contract.Requires(1000 >= time && 0 <= time);
+            Contract.Requires(0 <= time);
 
             var queryParams = new Dictionary<string, object>
             {
@@ -146,7 +146,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
             Contract.Requires(0 < groupId);
             Contract.Requires(0 <= saturation && 1.000 >= saturation);
-            Contract.Requires(1000 >= time && 0 <= time);
+            Contract.Requires(0 <= time);
 
             var queryParams = new Dictionary<string, object>
             {
@@ -191,7 +191,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
             Contract.Requires(0 < groupId);
             Contract.Requires(1000 <= ctemp && 8000 >= ctemp);
-            Contract.Requires(1000 >= time && 0 <= time);
+            Contract.Requires(0 <= time);
 
             var queryParams = new Dictionary<string, object>
             {
