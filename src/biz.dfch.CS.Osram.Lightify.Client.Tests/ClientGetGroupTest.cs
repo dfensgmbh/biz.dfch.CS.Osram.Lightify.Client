@@ -13,20 +13,20 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetGroupByIdSucceeds()
         {
-            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI)
+            var sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI)
             {
                 UserInformation = new UserInformation()
                 {
-                    UserId = Constants.USER_ID,
-                    Username = Constants.USERNAME,
-                    Password = Constants.PASSWORD,
-                    SerialNumber = Constants.SERIAL_NUMBER,
-                    SecurityToken = Constants.SECURITY_TOKEN
+                    UserId = TestConstants.USER_ID,
+                    Username = TestConstants.USERNAME,
+                    Password = TestConstants.PASSWORD,
+                    SerialNumber = TestConstants.SERIAL_NUMBER,
+                    SecurityToken = TestConstants.SECURITY_TOKEN
                 }
             };
             var groupId = 1L;
             var suffix = string.Format("{0}/{1}", Lightify.Client.Constants.ApiOperation.GROUPS, groupId);
-            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, suffix);
+            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, suffix);
 
             var response = @"
                             {
@@ -55,15 +55,15 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         [TestMethod]
         public void GetGroupByNameSucceeds()
         {
-            var sut = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI)
+            var sut = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI)
             {
                 UserInformation = new UserInformation()
                 {
-                    UserId = Constants.USER_ID,
-                    Username = Constants.USERNAME,
-                    Password = Constants.PASSWORD,
-                    SerialNumber = Constants.SERIAL_NUMBER,
-                    SecurityToken = Constants.SECURITY_TOKEN
+                    UserId = TestConstants.USER_ID,
+                    Username = TestConstants.USERNAME,
+                    Password = TestConstants.PASSWORD,
+                    SerialNumber = TestConstants.SERIAL_NUMBER,
+                    SecurityToken = TestConstants.SECURITY_TOKEN
                 }
             };
 
@@ -98,8 +98,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             }";
             var suffix = string.Format("{0}/{1}", Lightify.Client.Constants.ApiOperation.GROUPS, 1L);
 
-            var requestUriFirstMock = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.GROUPS);
-            var requestUriSecondMock = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, suffix);
+            var requestUriFirstMock = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.GROUPS);
+            var requestUriSecondMock = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, suffix);
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUriFirstMock.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), ""))

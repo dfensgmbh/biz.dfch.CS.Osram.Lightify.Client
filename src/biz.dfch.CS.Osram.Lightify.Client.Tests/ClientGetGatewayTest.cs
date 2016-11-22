@@ -41,19 +41,19 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public void GetGatewaySucceedsAndReturnsGateway()
         {
             // Arrange
-            var client = new Client(Constants.OSRAM_LIGHTIFY_BASE_URI);
+            var client = new Client(TestConstants.OSRAM_LIGHTIFY_BASE_URI);
 
             client.UserInformation = new UserInformation()
             {
-                UserId = Constants.USER_ID,
-                Username = Constants.USERNAME,
-                Password = Constants.PASSWORD,
-                SerialNumber = Constants.SERIAL_NUMBER,
-                SecurityToken = Constants.SECURITY_TOKEN
+                UserId = TestConstants.USER_ID,
+                Username = TestConstants.USERNAME,
+                Password = TestConstants.PASSWORD,
+                SerialNumber = TestConstants.SERIAL_NUMBER,
+                SecurityToken = TestConstants.SECURITY_TOKEN
             };
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.GATEWAY);
+            var requestUri = new Uri(TestConstants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiOperation.GATEWAY);
             Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), Arg.AnyString))
                 .IgnoreInstance()
                 .Returns(gatewayAsJson)
