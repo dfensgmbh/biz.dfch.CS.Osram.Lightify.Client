@@ -39,7 +39,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// <summary>
         /// Turns the lights of the specified group on
         /// </summary>
-
         public bool TurnLightGroupOn(long id)
         {
             var queryParams = new Dictionary<string, object>

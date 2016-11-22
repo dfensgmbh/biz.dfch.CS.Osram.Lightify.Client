@@ -33,7 +33,10 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
         public const string PASSWORD = "ArbitraryPassword";
         public const string SERIAL_NUMBER = "OSR42424242";
         public const string GATEWAY_VERSION = "1.1.3.22-1.2.0.68";
+        public const string GROUP_NAME = "ArbitraryGroup";
         
         public const long IDX_VALUE = 42;
+        public const long GROUP_ID = 666;
+        public const long DEVICE_ID = 667;
     }
 }
