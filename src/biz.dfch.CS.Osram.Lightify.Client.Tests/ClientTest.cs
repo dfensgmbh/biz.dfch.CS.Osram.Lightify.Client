@@ -97,8 +97,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             };
             var json = input.SerializeObject();
             
-            var restClient = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restClient.Invoke(Arg.IsAny<HttpMethod>(), Arg.IsAny<string>(), Arg.IsAny<IDictionary<string, string>>(), Arg.IsAny<string>()))
+            var restCallExecutor = Mock.Create<RestCallExecutor>();
+            Mock.Arrange(() => restCallExecutor.Invoke(Arg.IsAny<HttpMethod>(), Arg.IsAny<string>(), Arg.IsAny<IDictionary<string, string>>(), Arg.IsAny<string>()))
                 .IgnoreInstance()
                 .Returns(json);
             
@@ -109,6 +109,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
             // Assert
             Assert.IsFalse(string.IsNullOrWhiteSpace(result));
+
+            Mock.Assert(restCallExecutor);
         }
 
         [TestMethod]
@@ -122,8 +124,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             };
             var json = input.SerializeObject();
 
-            var restClient = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restClient.Invoke(Arg.IsAny<HttpMethod>(), Arg.IsAny<string>(), Arg.IsAny<IDictionary<string, string>>(), Arg.IsAny<string>()))
+            var restCallExecutor = Mock.Create<RestCallExecutor>();
+            Mock.Arrange(() => restCallExecutor.Invoke(Arg.IsAny<HttpMethod>(), Arg.IsAny<string>(), Arg.IsAny<IDictionary<string, string>>(), Arg.IsAny<string>()))
                 .IgnoreInstance()
                 .Returns(json);
 
@@ -140,6 +142,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.AreEqual(PASSWORD, sut.UserInformation.Password);
             Assert.AreEqual(SERIAL_NUMBER, sut.UserInformation.SerialNumber);
             Assert.AreEqual(SECURITY_TOKEN, sut.UserInformation.SecurityToken);
+
+            Mock.Assert(restCallExecutor);
         }
 
         [TestMethod]
@@ -222,9 +226,9 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 {Constants.HttpHeaders.AUTHORIZATION, SECURITY_TOKEN}
             };
 
-            var restClient = Mock.Create<RestCallExecutor>();
+            var restCallExecutor = Mock.Create<RestCallExecutor>();
             var requestUri = new Uri(OSRAM_LIGHTIFY_BASE_URI, Constants.ApiSuffixes.SESSION);
-            Mock.Arrange(() => restClient.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, ""))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, ""))
                 .IgnoreInstance()
                 .Returns(json);
 
@@ -234,6 +238,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             // Assert
             Assert.IsNotNull(responseAsString);
             Assert.IsFalse(string.IsNullOrWhiteSpace(responseAsString));
+
+            Mock.Assert(restCallExecutor);
         }
 
         [TestMethod]
@@ -263,9 +269,9 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 {Constants.HttpHeaders.AUTHORIZATION, SECURITY_TOKEN}
             };
 
-            var restClient = Mock.Create<RestCallExecutor>();
+            var restCallExecutor = Mock.Create<RestCallExecutor>();
             var requestUri = new Uri(OSRAM_LIGHTIFY_BASE_URI, Constants.ApiSuffixes.SESSION);
-            Mock.Arrange(() => restClient.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.IsAny<string>()))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.IsAny<string>()))
                 .IgnoreInstance()
                 .Returns(json);
 
@@ -275,6 +281,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             // Assert
             Assert.IsNotNull(responseAsString);
             Assert.IsFalse(string.IsNullOrWhiteSpace(responseAsString));
+
+            Mock.Assert(restCallExecutor);
         }
 
         [TestMethod]
@@ -304,9 +312,9 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 {Constants.HttpHeaders.AUTHORIZATION, SECURITY_TOKEN}
             };
 
-            var restClient = Mock.Create<RestCallExecutor>();
+            var restCallExecutor = Mock.Create<RestCallExecutor>();
             var requestUri = new Uri(OSRAM_LIGHTIFY_BASE_URI, Constants.ApiSuffixes.SESSION);
-            Mock.Arrange(() => restClient.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.IsAny<string>()))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.IsAny<string>()))
                 .IgnoreInstance()
                 .Returns(json);
 
@@ -318,6 +326,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             Assert.IsTrue(typeof(SessionResponse) == sessionResponse.GetType());
             Assert.IsFalse(string.IsNullOrWhiteSpace(sessionResponse.UserId));
             Assert.IsFalse(string.IsNullOrWhiteSpace(sessionResponse.SecurityToken));
+            Mock.Assert(restCallExecutor);
         }
     }
 }
