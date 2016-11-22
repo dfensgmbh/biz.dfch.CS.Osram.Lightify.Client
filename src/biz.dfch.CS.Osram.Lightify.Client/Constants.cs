@@ -39,6 +39,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
             public const string IDX = "idx";
             public const string ON_OFF = "onoff";
+            public const string LEVEL = "level";
+            public const string TIME = "time";
         }
 
         public static class Messages
