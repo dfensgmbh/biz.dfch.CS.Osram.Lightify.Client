@@ -146,7 +146,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
         [TestMethod]
         [ExpectContractFailure(MessagePattern = "Precondition.+level")]
-        public void SetDeviceLevelWithLevelLowerZeroThrowsContractException()
+        public void SetDeviceLevelWithLevelLessThanZeroThrowsContractException()
         {
             // Arrange
 
@@ -164,6 +164,18 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
             // Act
             Sut.SetDeviceLevel(1, 1.001f);
+
+            // Assert
+        }
+
+        [TestMethod]
+        [ExpectContractFailure(MessagePattern = "Precondition.+time")]
+        public void SetDeviceLevelWithTimeLessThanZeroThrowsContractException()
+        {
+            // Arrange
+
+            // Act
+            Sut.SetDeviceLevel(1, 1.000f, -1);
 
             // Assert
         }
