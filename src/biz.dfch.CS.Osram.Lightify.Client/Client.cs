@@ -86,7 +86,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return response.SecurityToken;
         }
 
-        internal T Invoke<T>(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, object> queryParams, 
+        public T Invoke<T>(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, object> queryParams, 
             Dictionary<string, string> headers, string body)
             where T : BaseDto
         {
@@ -94,7 +94,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return BaseDto.DeserializeObject<T>(result);
         }
 
-        internal string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, object> queryParams, 
+        public string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, object> queryParams, 
             Dictionary<string, string> headers, string body)
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(requestUriSuffix));
@@ -108,14 +108,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             return Invoke(httpMethod, requestUriSuffix, headers, body);
         }
 
-        internal T Invoke<T>(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers, string body) 
+        public T Invoke<T>(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers, string body) 
             where T : BaseDto
         {
             var result = Invoke(httpMethod, requestUriSuffix, headers, body);
             return BaseDto.DeserializeObject<T>(result);
         }
 
-        internal string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers, string body)
+        public string Invoke(HttpMethod httpMethod, string requestUriSuffix, Dictionary<string, string> headers, string body)
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(requestUriSuffix));
             Contract.Requires(null == headers || (null != headers && !headers.ContainsKey(Constants.HttpHeaders.AUTHORIZATION)));
