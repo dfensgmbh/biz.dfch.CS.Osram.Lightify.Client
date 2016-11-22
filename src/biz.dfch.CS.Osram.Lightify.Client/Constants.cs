@@ -31,7 +31,6 @@ namespace biz.dfch.CS.Osram.Lightify.Client
             public const string GROUPS = "groups";
             public const string SESSION = "session";
             public const string VERSION = "version";
-            public const string DEVICE = "device";
             public const string DEVICES = "devices";
             public const string GROUPSET = "group/set";
         }

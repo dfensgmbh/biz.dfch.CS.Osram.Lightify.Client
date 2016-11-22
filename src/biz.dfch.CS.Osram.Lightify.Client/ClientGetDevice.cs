@@ -31,7 +31,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         {
             Contract.Requires(0 < id);
 
-            var requestUri = string.Format("{0}?idx={1}", Constants.ApiOperation.DEVICE, id);
+            var requestUri = string.Format("{0}/{1}", Constants.ApiOperation.DEVICES, id);
 
             try
             {

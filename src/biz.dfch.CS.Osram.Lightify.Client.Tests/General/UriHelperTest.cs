@@ -55,16 +55,15 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests.General
         }
 
         [TestMethod]
-        public void CreateQueryStringWithReturnsQueryParametersAsString()
+        public void CreateQueryStringReturnsQueryParametersAsString()
         {
             // Arrange
-            var expectedQueryString = "maxSize=5&currentPage=1&limit=25";
+            var expectedQueryString = string.Format("?{0}={1}&{2}=true", Constants.QueryParameter.IDX, TestConstants.IDX_VALUE, Constants.QueryParameter.ON_OFF);
 
             var queryParameters = new Dictionary<string, object>()
             {
-                {"maxSize", 5},
-                {"currentPage", 1},
-                {"limit", "25"}
+                {Constants.QueryParameter.IDX, TestConstants.IDX_VALUE},
+                {Constants.QueryParameter.ON_OFF, true}
             };
 
             // Act
