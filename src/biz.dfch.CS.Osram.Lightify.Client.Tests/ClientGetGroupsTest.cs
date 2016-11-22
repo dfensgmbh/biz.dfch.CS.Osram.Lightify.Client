@@ -39,6 +39,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 SecurityToken = Constants.SECURITY_TOKEN
             };
 
+            var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.GROUPS);
+
             string response = @"
                 [{
 	                ""groupId"": 1,
@@ -59,7 +61,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
                 }]";
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, Arg.AnyString, Arg.IsAny<Dictionary<string, string>>(), ""))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, Arg.IsAny<Dictionary<string, string>>(), ""))
                 .IgnoreInstance()
                 .Returns(response)
                 .OccursOnce();
