@@ -90,7 +90,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             var json = input.SerializeObject();
             
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restCallExecutor.Invoke(Arg.IsAny<HttpMethod>(), Arg.IsAny<string>(), Arg.IsAny<IDictionary<string, string>>(), Arg.IsAny<string>()))
+            Mock.Arrange(() => restCallExecutor.Invoke(Arg.IsAny<HttpMethod>(), Arg.IsAny<string>(), Arg.IsAny<IDictionary<string, string>>(), Arg.AnyString))
                 .IgnoreInstance()
                 .Returns(json);
 
@@ -117,7 +117,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
             var json = input.SerializeObject();
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
-            Mock.Arrange(() => restCallExecutor.Invoke(Arg.IsAny<HttpMethod>(), Arg.IsAny<string>(), Arg.IsAny<IDictionary<string, string>>(), Arg.IsAny<string>()))
+            Mock.Arrange(() => restCallExecutor.Invoke(Arg.IsAny<HttpMethod>(), Arg.IsAny<string>(), Arg.IsAny<IDictionary<string, string>>(), Arg.AnyString))
                 .IgnoreInstance()
                 .Returns(json);
 
@@ -263,7 +263,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
             var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.SESSION);
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.IsAny<string>()))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.AnyString))
                 .IgnoreInstance()
                 .Returns(json);
 
@@ -306,7 +306,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client.Tests
 
             var restCallExecutor = Mock.Create<RestCallExecutor>();
             var requestUri = new Uri(Constants.OSRAM_LIGHTIFY_BASE_URI, Lightify.Client.Constants.ApiSuffixes.SESSION);
-            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.IsAny<string>()))
+            Mock.Arrange(() => restCallExecutor.Invoke(HttpMethod.Get, requestUri.AbsoluteUri, headers, Arg.AnyString))
                 .IgnoreInstance()
                 .Returns(json);
 

@@ -27,8 +27,9 @@ namespace biz.dfch.CS.Osram.Lightify.Client
     {
         public static class ApiSuffixes
         {
-            public const string SESSION = "/session";
             public const string GROUPS = "/groups";
+            public const string SESSION = "/session";
+            public const string VERSION = "/groups";
         }
 
         public static class Messages
