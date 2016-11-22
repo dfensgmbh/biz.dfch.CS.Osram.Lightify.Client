@@ -32,6 +32,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// </summary>
         public bool TurnDeviceOn(Device device)
         {
+            Contract.Requires(null != device);
+
             return TurnDeviceOn(device.DeviceId);
         }
 
@@ -40,6 +42,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// </summary>
         public bool TurnDeviceOn(long id)
         {
+            Contract.Requires(0 < id);
+
             var queryParams = new Dictionary<string, object>
             {
                 {Constants.QueryParameter.IDX, id},
@@ -55,6 +59,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// </summary>
         public bool TurnDeviceOff(Device device)
         {
+            Contract.Requires(null != device);
+
             return TurnDeviceOff(device.DeviceId);
         }
 
@@ -63,6 +69,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// </summary>
         public bool TurnDeviceOff(long id)
         {
+            Contract.Requires(0 < id);
+
             var queryParams = new Dictionary<string, object>
             {
                 {Constants.QueryParameter.IDX, id},
@@ -75,11 +83,15 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetDeviceLevel(Device device, float level)
         {
+            Contract.Requires(null != device);
+
             return SetDeviceLevel(device.DeviceId, level);
         }
 
         public bool SetDeviceLevel(long id, float level)
         {
+            Contract.Requires(0 < id);
+
             var queryParams = new Dictionary<string, object>
             {
                 {Constants.QueryParameter.IDX, id},
@@ -92,11 +104,15 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetDeviceLevel(Device device, float level, long time)
         {
+            Contract.Requires(null != device);
+
             return SetDeviceLevel(device.DeviceId, level, time);
         }
 
         public bool SetDeviceLevel(long id, float level, long time)
         {
+            Contract.Requires(0 < id);
+
             var queryParams = new Dictionary<string, object>
             {
                 {Constants.QueryParameter.IDX, id},

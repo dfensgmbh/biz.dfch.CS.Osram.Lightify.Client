@@ -32,6 +32,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// </summary>
         public bool TurnLightGroupOn(Group group)
         {
+            Contract.Requires(null != group);
+
             return TurnLightGroupOn(group.GroupId);
         }
 
@@ -40,6 +42,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// </summary>
         public bool TurnLightGroupOn(long id)
         {
+            Contract.Requires(0 < id);
+
             var queryParams = new Dictionary<string, object>
             {
                 {Constants.QueryParameter.IDX, id},
@@ -55,6 +59,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// </summary>
         public bool TurnLightGroupOff(Group group)
         {
+            Contract.Requires(null != group);
+
             return TurnLightGroupOff(group.GroupId);
         }
 
@@ -63,6 +69,8 @@ namespace biz.dfch.CS.Osram.Lightify.Client
         /// </summary>
         public bool TurnLightGroupOff(long id)
         {
+            Contract.Requires(0 < id);
+
             var queryParams = new Dictionary<string, object>
             {
                 {Constants.QueryParameter.IDX, id},
@@ -75,11 +83,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupLevel(Group group, float level)
         {
+            Contract.Requires(null != group);
+
             return SetGroupLevel(group.GroupId, level);
         }
 
         public bool SetGroupLevel(long groupId, float level)
         {
+            Contract.Requires(0 < groupId);
             Contract.Requires(1.000 > level && 0 < level);
 
             var queryParams = new Dictionary<string, object>
@@ -94,11 +105,14 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupLevel(Group group, float level, long time)
         {
+            Contract.Requires(null != group);
+
             return SetGroupLevel(group.GroupId, level, time);
         }
 
         public bool SetGroupLevel(long groupId, float level, long time)
         {
+            Contract.Requires(0 < groupId);
             Contract.Requires(1.000 > level && 0 < level);
             Contract.Requires(1000 > time && 0 <= time);
 
@@ -115,6 +129,7 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupSaturation(long groupId, float saturation)
         {
+            Contract.Requires(0 < groupId);
             Contract.Requires(0 < groupId);
             Contract.Requires(0 < saturation && 1.000 > saturation);
 
@@ -146,11 +161,15 @@ namespace biz.dfch.CS.Osram.Lightify.Client
 
         public bool SetGroupSaturation(Group group, float saturation)
         {
+            Contract.Requires(null != group);
+
             return SetGroupSaturation(group.GroupId, saturation);
         }
 
         public bool SetGroupSaturation(Group group, float saturation, long time)
         {
+            Contract.Requires(null != group);
+
             return SetGroupSaturation(group.GroupId, saturation, time);
         }
     }
